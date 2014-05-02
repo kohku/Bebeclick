@@ -3,40 +3,29 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+    <div id="__membership">
+        <div id="__social"><img src="~/Content/Images/tw_icon.png" /><img src="~/Content/Images/fb_icon.png" /><img src="~/Content/Images/pt_icon.png" /></div>
+        @Html.Partial("_LoginPartial")
+    </div>
+    <div id="__menu_bar">
+        <div id="__logo"><a class="home" href="/home"></a></div>
+        <a id="_ctrl_home" class="__item __ctrl" href="/home"><span class="title">HOME</span></a>
+        <a id="_ctrl_search" class="__item __ctrl" href="/search"><span class="title">BUSCA</span></a>
+        <a id="_ctrl_recommend" class="__item __ctrl" href="/recommend"><span class="title">RECOMIENDA</span></a>
+        <a id="_ctrl_enterprises" class="__item __ctrl" href="/enterprise"><span class="title">EMPRESAS</span></a>
+        <a id="_ctrl_inspiration" class="__item __ctrl" href="/inspiration"><span class="title">INSPIRACIÓN</span></a>
+        <a id="_ctrl_contact" class="__item __ctrl" href="/contact"><span class="title">CONTACTO</span></a>
+        <div id="__quick_search">
+            <input class="search" type="text" />
+            <input type="button" class="search" />
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
+    @RenderBody()
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
