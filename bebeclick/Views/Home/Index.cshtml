@@ -1,6 +1,25 @@
-﻿@{
+﻿@using Bebeclick.WebClient
+@{
     ViewBag.Title = "Bebeclick";
 }
-
-<div id="__testimonial"></div>
+<div id="__main">
+    <div id="__testimonial"><h3>Idea interior</h3><p>"Remodelamos toda la habitación del bebé. Una increíble atención y unos super precios.<br />Fernanda Rojas"</p></div>
+    <div id="__searchAndRecommend">
+        <div id="__search_title">Busca</div>
+        <div id="__recommend_title">Recomienda</div>
+        <div id="__search">
+            <select id="__state">
+                @foreach(var state in StateProvince.GetAll().Where(m => m.Visible))
+                {
+                    <option value="@state.ID">@state.Name</option>   
+                }
+            </select>
+            <select id="__product"></select>
+            <select id="__service"></select>
+        </div>
+        <div id="__recommend">
+        </div>
+    </div>
+</div>
 <div id="__outstanding"></div>
+

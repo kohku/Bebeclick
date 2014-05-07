@@ -138,18 +138,55 @@ input[type=button].search {
     width: 20px;
 }
 
-#__testimonial {
+#__main {
     width: 1195px;
-    height: 490px;
+    height: 470px;
     margin-left: auto;
     margin-right: auto;
     background-color: #cbcbcd;
+    padding-top: 20px;
+}
+#__testimonial {
+    margin-left: 620px;
+    width: 300px;
+    height: 120px;
 }
 #__searchAndRecommend {
+    margin-top: 80px;
     margin-left: 80px;
     margin-right: 80px;
+    height: 100px;
     background-color: #ffffff;
     opacity: 0.7;
+    border-radius: 5px;
+    padding-left: 25px;
+    padding-top: 10px;
+}
+#__search_title {
+    font-family: OpenSans;
+    font-weight: bold;
+    font-size: 165%;
+    float: left;
+    width: 800px;
+    height: 38px;
+}
+#__search {
+    float: left;
+    width: 800px;
+    height: 38px;
+}
+#__recommend_title {
+    font-family: OpenSans;
+    font-weight: bold;
+    font-size: 165%;
+    float: left;
+    width: 180px;
+    height: 38px;
+}
+#__recommend {
+    float: left;
+    width: 180px;
+    height: 38px;
 }
 #__outstanding {
     width: 1195px;
