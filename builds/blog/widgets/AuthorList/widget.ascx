@@ -1,0 +1,2 @@
+<%@ control language="C#" autoeventwireup="true" inherits="Widgets.AuthorList.Widget, App_Web_k0xtoydu" %>
+<blog:AuthorList ID="AuthorList1" runat="Server" ShowAuthorImg="true" ShowRssIcon="false" AuthorImgSize="32" />

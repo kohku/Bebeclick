@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bebeclick", "bebeclick\bebeclick.csproj", "{DA0FFED6-871E-4334-AE2B-620231506445}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bebeclick.WebClient", "bebeclick.webclient\Bebeclick.WebClient.csproj", "{DA3D48AE-830F-4BAB-9DAC-709DF28F2350}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DA0FFED6-871E-4334-AE2B-620231506445}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA0FFED6-871E-4334-AE2B-620231506445}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA0FFED6-871E-4334-AE2B-620231506445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA3D48AE-830F-4BAB-9DAC-709DF28F2350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA3D48AE-830F-4BAB-9DAC-709DF28F2350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA3D48AE-830F-4BAB-9DAC-709DF28F2350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA3D48AE-830F-4BAB-9DAC-709DF28F2350}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
