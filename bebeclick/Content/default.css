@@ -14,12 +14,18 @@
 }
 #__account {
     float: right;
+    padding-top: 10px;
+    width:300px;
+    text-align: right;
+    padding-right: 8px;
+}
+a.__rbt58b, a:hover.__rbt58b, a.visited.__rbt58b{
     font-family: 'Roboto';
     font-weight: bold;
-    font-size: 90%;
+    font-size: 80%;
     color: #5d89b8;
-    padding-top: 10px;
-    width:200px;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 #__social {
     width: 205px;
@@ -58,24 +64,25 @@
     border-left: solid 1px #87add4;
     border-right: solid 1px #335f90;
 }
-a.__ctrl {
+a.__rbtUpWh {
     display: block;
     height: 100%;
     text-decoration: none;
     font-family: 'Roboto';
     font-weight: bold;
-    font-size: 90%;
+    font-size: 80%;
     color: #ffffff;
     text-align: center;
 }
-a.__ctrl .title {
+.title {
     display:block;
-    padding-top: 45px;
+    text-transform: uppercase;
+    margin-top: 46px;
 }
-a:link.__ctrl, a:visited.__ctrl {
+a:link.__rbtUpWh, a:visited.__rbtUpWh {
     color: #ffffff;
 }
-a:hover.__ctrl {
+a:hover.__rbtUpWh {
     background-color: #71acd4;
     color: #ffffff;
     border-top: solid 3px #a1d510;
@@ -102,7 +109,7 @@ a:hover.__ctrl {
 #__quick_search {
     display: block;
     float:left;
-    padding-top: 35px;
+    padding-top: 42px;
     padding-left: 15px;
 }
 input[type=text].search {
@@ -133,10 +140,16 @@ input[type=button].search {
 
 #__testimonial {
     width: 1195px;
-    height: 500px;
+    height: 490px;
     margin-left: auto;
     margin-right: auto;
     background-color: #cbcbcd;
+}
+#__searchAndRecommend {
+    margin-left: 80px;
+    margin-right: 80px;
+    background-color: #ffffff;
+    opacity: 0.7;
 }
 #__outstanding {
     width: 1195px;

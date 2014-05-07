@@ -6,9 +6,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Owin;
 using System;
-using bebeclick.Models;
+using Bebeclick.Models;
 
-namespace bebeclick
+namespace Bebeclick
 {
     public partial class Startup
     {

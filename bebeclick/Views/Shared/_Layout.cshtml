@@ -13,13 +13,13 @@
         @Html.Partial("_LoginPartial")
     </div>
     <div id="__menu_bar">
-        <div id="__logo"><a class="home" href="/home"></a></div>
-        <a id="_ctrl_home" class="__item __ctrl" href="/home"><span class="title">HOME</span></a>
-        <a id="_ctrl_search" class="__item __ctrl" href="/search"><span class="title">BUSCA</span></a>
-        <a id="_ctrl_recommend" class="__item __ctrl" href="/recommend"><span class="title">RECOMIENDA</span></a>
-        <a id="_ctrl_enterprises" class="__item __ctrl" href="/enterprise"><span class="title">EMPRESAS</span></a>
-        <a id="_ctrl_inspiration" class="__item __ctrl" href="/inspiration"><span class="title">INSPIRACIÓN</span></a>
-        <a id="_ctrl_contact" class="__item __ctrl" href="/contact"><span class="title">CONTACTO</span></a>
+        <div id="__logo"><a class="home" href="@Url.Action("Index", "Home")"></a></div>
+        <a id="_ctrl_home" class="__item __rbtUpWh" href="@Url.Action("Index", "Home")"><span class="title">@Resources.General.HomeLink</span></a>
+        <a id="_ctrl_search" class="__item __rbtUpWh" href="@Url.Action("Index", "Search")"><span class="title">@Resources.General.SearchLink</span></a>
+        <a id="_ctrl_recommend" class="__item __rbtUpWh" href="@Url.Action("Index", "Recommend")"><span class="title">@Resources.General.RecommendLink</span></a>
+        <a id="_ctrl_enterprises" class="__item __rbtUpWh" href="@Url.Action("Index", "Enterprise")"><span class="title">@Resources.General.EnterpriseLink</span></a>
+        <a id="_ctrl_inspiration" class="__item __rbtUpWh" href="@Url.Action("Index", "Inspiration")"><span class="title">@Resources.General.InspirationLink</span></a>
+        <a id="_ctrl_contact" class="__item __rbtUpWh" href="@Url.Action("Index", "Contact")"><span class="title">@Resources.General.ContactLink</span></a>
         <div id="__quick_search">
             <input class="search" type="text" />
             <input type="button" class="search" />

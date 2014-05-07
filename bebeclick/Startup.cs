@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(bebeclick.Startup))]
-namespace bebeclick
+[assembly: OwinStartupAttribute(typeof(Bebeclick.Startup))]
+namespace Bebeclick
 {
     public partial class Startup
     {

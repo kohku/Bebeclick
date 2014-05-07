@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
-using bebeclick.Models;
+using Bebeclick.Models;
 
-namespace bebeclick.Controllers
+namespace Bebeclick.Controllers
 {
     [Authorize]
     public class AccountController : Controller

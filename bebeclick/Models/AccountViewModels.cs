@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace bebeclick.Models
+namespace Bebeclick.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
