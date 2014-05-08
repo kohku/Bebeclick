@@ -9,5 +9,9 @@ namespace Bebeclick.WebClient
     public interface IPortalRepository
     {
         IEnumerable<StateProvince> GetAllStateProvinces();
+
+        IEnumerable<Service> GetServices(Guid productId);
+
+        IEnumerable<Product> GetAllProducts(Guid stateId);
     }
 }

@@ -7,14 +7,54 @@ using System.Threading.Tasks;
 
 namespace Bebeclick.WebClient
 {
-    public class StateProvince :  BusinessBase<StateProvince, Guid>
+    public class Product :  BusinessBase<Product, Guid>
     {
         private string _name;
         private bool _visible;
+        private Guid _stateId;
 
-        public StateProvince() 
+        public Product() 
             : base(Guid.NewGuid())
         {
+        }
+
+        [DataMember]
+        public Guid StateID
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _stateId; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (this._stateId != value)
+                {
+                    this.OnPropertyChanging("StateID");
+                    this.MarkChanged("StateID");
+                }
+
+                this._stateId = value;
+            }
+        }
+
+        private StateProvince _stateProvince;
+
+        /// <summary>
+        /// Lazy loading state
+        /// </summary>
+        public StateProvince StateProvince
+        {
+            get
+            {
+                if (_stateProvince == null)
+                {
+                    lock (syncRoot)
+                    {
+                        _stateProvince = StateProvince.Load(this.StateID);
+                    }
+                }
+
+                return _stateProvince;
+            }
         }
 
         [DataMember]
@@ -53,32 +93,11 @@ namespace Bebeclick.WebClient
             }
         }
 
-        private IEnumerable<Product> _products;
-
-        /// <summary>
-        /// Lazy loading
-        /// </summary>
-        public IEnumerable<Product> Products
-        {
-            get 
-            {
-                if (_products == null)
-                {
-                    lock (syncRoot)
-                    {
-                        _products = Product.GetAll(this.ID);
-                    }
-                }
-
-                return _products;
-            }
-        }
-
         protected override void ValidationRules()
         {
         }
 
-        protected override StateProvince DataSelect(Guid id)
+        protected override Product DataSelect(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -98,9 +117,9 @@ namespace Bebeclick.WebClient
             throw new NotImplementedException();
         }
 
-        public static IEnumerable<StateProvince> GetAll()
+        internal static IEnumerable<Product> GetAll(Guid stateId)
         {
-            return Rainbow.Instance.GetAllStateProvinces();
+            return Rainbow.Instance.GetAllProducts(stateId);
         }
     }
 }

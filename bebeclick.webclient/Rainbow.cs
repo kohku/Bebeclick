@@ -52,5 +52,15 @@ namespace Bebeclick.WebClient
         public void Dispose()
         {
         }
+
+        internal IEnumerable<Service> GetServices(Guid productId)
+        {
+            return container.Resolve<IPortalRepository>().GetServices(productId);
+        }
+
+        internal IEnumerable<Product> GetAllProducts(Guid stateId)
+        {
+            return container.Resolve<IPortalRepository>().GetAllProducts(stateId);
+        }
     }
 }

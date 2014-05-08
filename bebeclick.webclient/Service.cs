@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Bebeclick.WebClient
 {
-    public class StateProvince :  BusinessBase<StateProvince, Guid>
+    public class Service : BusinessBase<Service, Guid>
     {
         private string _name;
         private bool _visible;
 
-        public StateProvince() 
+        public Service() 
             : base(Guid.NewGuid())
         {
         }
@@ -53,32 +53,11 @@ namespace Bebeclick.WebClient
             }
         }
 
-        private IEnumerable<Product> _products;
-
-        /// <summary>
-        /// Lazy loading
-        /// </summary>
-        public IEnumerable<Product> Products
-        {
-            get 
-            {
-                if (_products == null)
-                {
-                    lock (syncRoot)
-                    {
-                        _products = Product.GetAll(this.ID);
-                    }
-                }
-
-                return _products;
-            }
-        }
-
         protected override void ValidationRules()
         {
         }
 
-        protected override StateProvince DataSelect(Guid id)
+        protected override Service DataSelect(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -98,9 +77,9 @@ namespace Bebeclick.WebClient
             throw new NotImplementedException();
         }
 
-        public static IEnumerable<StateProvince> GetAll()
+        public static IEnumerable<Service> GetServices(Guid productId)
         {
-            return Rainbow.Instance.GetAllStateProvinces();
+            return Rainbow.Instance.GetServices(productId);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Bebeclick.WebClient
         where TYPE : BusinessBase<TYPE, KEY>, new()
     {
         private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        private object syncRoot = new object();
+        protected object syncRoot = new object();
 
         /// <summary>
         /// Unique identifier.

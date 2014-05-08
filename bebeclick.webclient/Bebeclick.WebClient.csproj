@@ -52,11 +52,13 @@
   <ItemGroup>
     <Compile Include="BusinessBase.cs" />
     <Compile Include="IPortalRepository.cs" />
+    <Compile Include="Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rainbow.cs" />
     <Compile Include="SaveAction.cs" />
     <Compile Include="SavedEventArgs.cs" />
     <Compile Include="SQL\SqlPortalRepository.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="StateProvince.cs" />
   </ItemGroup>
   <ItemGroup>
