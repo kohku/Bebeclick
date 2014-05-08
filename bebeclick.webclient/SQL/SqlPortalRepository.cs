@@ -23,7 +23,9 @@ namespace Bebeclick.WebClient.SQL
             get { return this._connectionStringName; }
         }
 
-        public IEnumerable<StateProvince> GetAllStateProvinces()
+
+        #region State Province
+        public IEnumerable<StateProvince> GetStateProvinces(Guid? id, string name)
         {
             var provinces = new List<StateProvince>();
 
@@ -31,50 +33,109 @@ namespace Bebeclick.WebClient.SQL
             {
                 connection.Open();
 
+                var command = new SqlCommand("usp_GetStateProvinces", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+
+                if (id.HasValue)
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@ID",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        SqlValue = id.Value
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@Name",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Size = 200,
+                        SqlValue = !name.Contains("%") ? name : "%" + name + "%"
+                    });
+                }
+
+                IDataReader reader = command.ExecuteReader();
+
                 try
                 {
-                    var command = new SqlCommand("usp_GetStateProvince", connection)
+                    while (reader.Read())
                     {
-                        CommandType = System.Data.CommandType.StoredProcedure
-                    };
-
-                    IDataReader reader = command.ExecuteReader();
-
-                    try
-                    {
-                        while (reader.Read())
+                        var item = new StateProvince
                         {
-                            var item = new StateProvince
-                            {
-                                ID = new Guid(reader["ID"].ToString()),
-                                Name = reader["Name"].ToString(),
-                                DateCreated = Convert.ToDateTime(reader["DateCreated"]),
-                                CreatedBy = reader["CreatedBy"].ToString(),
-                                LastUpdated = reader["LastUpdated"] != DBNull.Value ? Convert.ToDateTime(reader["LastUpdated"]) : default(DateTime?),
-                                LastUpdatedBy = reader["LastUpdatedBy"]!= DBNull.Value ? reader["LastUpdatedBy"].ToString() : null,
-                                Visible = Convert.ToBoolean(reader["Visible"])
-                            };
+                            ID = new Guid(reader["ID"].ToString()),
+                            Name = reader["Name"].ToString(),
+                            DateCreated = Convert.ToDateTime(reader["DateCreated"]),
+                            CreatedBy = reader["CreatedBy"].ToString(),
+                            LastUpdated = reader["LastUpdated"] != DBNull.Value ? Convert.ToDateTime(reader["LastUpdated"]) : default(DateTime?),
+                            LastUpdatedBy = reader["LastUpdatedBy"] != DBNull.Value ? reader["LastUpdatedBy"].ToString() : null,
+                            Visible = Convert.ToBoolean(reader["Visible"])
+                        };
 
-                            provinces.Add(item);
-                        }
+                        provinces.Add(item);
                     }
-                    finally 
-                    {
-                        if (!reader.IsClosed)
-                            reader.Close();
-                    }
-
                 }
                 finally
                 {
-                    connection.Close();
+                    if (!reader.IsClosed)
+                        reader.Close();
                 }
             }
 
             return provinces;
         }
 
-        public IEnumerable<Product> GetAllProducts(Guid stateId)
+        public void UpdateStateProvince(StateProvince stateProvince)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_UpdateStateProvince", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        public void InsertStateProvince(StateProvince stateProvince)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_InsertStateProvince", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        public void DeleteStateProvince(StateProvince stateProvince)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_DeleteStateProvince", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        #endregion
+
+        #region Product
+        public IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, string name)
         {
             var products = new List<Product>();
 
@@ -82,60 +143,123 @@ namespace Bebeclick.WebClient.SQL
             {
                 connection.Open();
 
-                try
+                var command = new SqlCommand("usp_GetProducts", connection)
                 {
-                    var command = new SqlCommand("usp_GetProducts", connection)
-                    {
-                        CommandType = System.Data.CommandType.StoredProcedure
-                    };
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
 
+                if (id.HasValue)
+                {
                     command.Parameters.Add(new SqlParameter
                     {
                         Direction = ParameterDirection.Input,
-                        IsNullable = false,
-                        ParameterName = "StateID",
+                        IsNullable = true,
+                        ParameterName = "@ID",
                         SqlDbType = SqlDbType.UniqueIdentifier,
-                        SqlValue = stateId
+                        SqlValue = id.Value
                     });
+                }
 
-                    IDataReader reader = command.ExecuteReader();
-
-                    try
+                if (stateId.HasValue)
+                {
+                    command.Parameters.Add(new SqlParameter
                     {
-                        while (reader.Read())
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@StateID",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        SqlValue = stateId.Value
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@Name",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Size = 200,
+                        SqlValue = !name.Contains("%") ? name : "%" + name + "%"
+                    });
+                }
+
+                IDataReader reader = command.ExecuteReader();
+
+                try
+                {
+                    while (reader.Read())
+                    {
+                        var item = new Product
                         {
-                            var item = new Product
-                            {
-                                ID = new Guid(reader["ID"].ToString()),
-                                Name = reader["Name"].ToString(),
-                                DateCreated = Convert.ToDateTime(reader["DateCreated"]),
-                                CreatedBy = reader["CreatedBy"].ToString(),
-                                LastUpdated = reader["LastUpdated"] != DBNull.Value ? Convert.ToDateTime(reader["LastUpdated"]) : default(DateTime?),
-                                LastUpdatedBy = reader["LastUpdatedBy"] != DBNull.Value ? reader["LastUpdatedBy"].ToString() : null,
-                                Visible = Convert.ToBoolean(reader["Visible"])
-                            };
+                            ID = new Guid(reader["ID"].ToString()),
+                            StateID = new Guid(reader["StateID"].ToString()),
+                            Name = reader["Name"].ToString(),
+                            DateCreated = Convert.ToDateTime(reader["DateCreated"]),
+                            CreatedBy = reader["CreatedBy"].ToString(),
+                            LastUpdated = reader["LastUpdated"] != DBNull.Value ? Convert.ToDateTime(reader["LastUpdated"]) : default(DateTime?),
+                            LastUpdatedBy = reader["LastUpdatedBy"] != DBNull.Value ? reader["LastUpdatedBy"].ToString() : null,
+                            Visible = Convert.ToBoolean(reader["Visible"])
+                        };
 
-                            products.Add(item);
-                        }
+                        products.Add(item);
                     }
-                    finally
-                    {
-                        if (!reader.IsClosed)
-                            reader.Close();
-                    }
-
                 }
                 finally
                 {
-                    connection.Close();
+                    if (!reader.IsClosed)
+                        reader.Close();
                 }
             }
 
             return products;
         }
 
+        public void DeleteProduct(Product product)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
 
-        public IEnumerable<Service> GetServices(Guid productId)
+                var command = new SqlCommand("usp_DeleteProduct", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        public void InsertProduct(Product product)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_InsertProduct", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_UpdateProduct", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        #endregion
+
+        #region Service
+
+        public IEnumerable<Service> GetServices(Guid? id, Guid? productId, string name)
         {
             var services = new List<Service>();
 
@@ -143,56 +267,118 @@ namespace Bebeclick.WebClient.SQL
             {
                 connection.Open();
 
-                try
+                var command = new SqlCommand("usp_GetServices", connection)
                 {
-                    var command = new SqlCommand("usp_GetServices", connection)
-                    {
-                        CommandType = System.Data.CommandType.StoredProcedure
-                    };
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
 
+                if (id.HasValue)
+                {
                     command.Parameters.Add(new SqlParameter
                     {
                         Direction = ParameterDirection.Input,
-                        IsNullable = false,
-                        ParameterName = "ProductID",
+                        IsNullable = true,
+                        ParameterName = "@ID",
                         SqlDbType = SqlDbType.UniqueIdentifier,
-                        SqlValue = productId
+                        SqlValue = id.Value
                     });
+                }
 
-                    IDataReader reader = command.ExecuteReader();
-
-                    try
+                if (productId.HasValue)
+                {
+                    command.Parameters.Add(new SqlParameter
                     {
-                        while (reader.Read())
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@ProductID",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        SqlValue = productId.Value
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@Name",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Size = 200,
+                        SqlValue = !name.Contains("%") ? name : "%" + name + "%"
+                    });
+                }
+
+                IDataReader reader = command.ExecuteReader();
+
+                try
+                {
+                    while (reader.Read())
+                    {
+                        var item = new Service
                         {
-                            var item = new Service
-                            {
-                                ID = new Guid(reader["ID"].ToString()),
-                                Name = reader["Name"].ToString(),
-                                DateCreated = Convert.ToDateTime(reader["DateCreated"]),
-                                CreatedBy = reader["CreatedBy"].ToString(),
-                                LastUpdated = reader["LastUpdated"] != DBNull.Value ? Convert.ToDateTime(reader["LastUpdated"]) : default(DateTime?),
-                                LastUpdatedBy = reader["LastUpdatedBy"] != DBNull.Value ? reader["LastUpdatedBy"].ToString() : null,
-                                Visible = Convert.ToBoolean(reader["Visible"])
-                            };
+                            ID = new Guid(reader["ID"].ToString()),
+                            ProductID = new Guid(reader["ProductID"].ToString()),
+                            Name = reader["Name"].ToString(),
+                            DateCreated = Convert.ToDateTime(reader["DateCreated"]),
+                            CreatedBy = reader["CreatedBy"].ToString(),
+                            LastUpdated = reader["LastUpdated"] != DBNull.Value ? Convert.ToDateTime(reader["LastUpdated"]) : default(DateTime?),
+                            LastUpdatedBy = reader["LastUpdatedBy"] != DBNull.Value ? reader["LastUpdatedBy"].ToString() : null,
+                            Visible = Convert.ToBoolean(reader["Visible"])
+                        };
 
-                            services.Add(item);
-                        }
+                        services.Add(item);
                     }
-                    finally
-                    {
-                        if (!reader.IsClosed)
-                            reader.Close();
-                    }
-
                 }
                 finally
                 {
-                    connection.Close();
+                    if (!reader.IsClosed)
+                        reader.Close();
                 }
             }
 
             return services;
         }
+
+        public void DeleteService(Service service)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_DeleteService", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        public void InsertService(Service service)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_InsertService", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        public void UpdateService(Service service)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_UpdateService", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+            }
+        }
+
+        #endregion
     }
 }

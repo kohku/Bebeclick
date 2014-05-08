@@ -20,8 +20,8 @@ namespace Bebeclick.WebClient
     public abstract class BusinessBase<TYPE, KEY> : INotifyPropertyChanging, INotifyPropertyChanged, IChangeTracking, IDisposable
         where TYPE : BusinessBase<TYPE, KEY>, new()
     {
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        protected object syncRoot = new object();
+        private static PropertyChangingEventArgs emptyChangingEventArgs;
+        protected object syncRoot;
 
         /// <summary>
         /// Unique identifier.
@@ -44,9 +44,13 @@ namespace Bebeclick.WebClient
         /// </summary>
         protected virtual void OnCreated()
         {
+            emptyChangingEventArgs =  new PropertyChangingEventArgs(String.Empty);
+             syncRoot = new object();
             _dateCreated = DateTime.MinValue;
             _changedProperties = new StringCollection();
             _brokenRules = new StringDictionary();
+            _isNew = true;
+            _isChanged = true;
         }
 
         #region Properties
@@ -159,7 +163,7 @@ namespace Bebeclick.WebClient
 
         #region IsNew, IsDeleted, IsChanged
 
-        private bool _isNew = true;
+        private bool _isNew;
         /// <summary>
         /// Gets if this is a new object, False if it is a pre-existing object.
         /// </summary>
@@ -547,7 +551,7 @@ namespace Bebeclick.WebClient
             Save();
         }
 
-        private bool _isChanged = true;
+        private bool _isChanged;
         /// <summary>
         /// Gets if this object's data has been changed.
         /// </summary>

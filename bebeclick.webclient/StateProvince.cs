@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bebeclick.WebClient.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -66,7 +67,7 @@ namespace Bebeclick.WebClient
                 {
                     lock (syncRoot)
                     {
-                        _products = Product.GetAll(this.ID);
+                        _products = Product.GetProducts(this.ID);
                     }
                 }
 
@@ -76,31 +77,46 @@ namespace Bebeclick.WebClient
 
         protected override void ValidationRules()
         {
+            AddRule("EmptyName", ResourceStringLoader.GetResourceString("StateProvince_EmptyName"), 
+                string.IsNullOrEmpty(this.Name));
+            AddRule("MaxNameLength", ResourceStringLoader.GetResourceString("StateProvince_MaxNameLength"),
+                !string.IsNullOrEmpty(this.Name) && this.Name.Length > 100);
+            AddRule("EmptyCreatedBy", ResourceStringLoader.GetResourceString("StateProvince_EmptyCreatedBy"), 
+                string.IsNullOrEmpty(this.CreatedBy));
+            AddRule("MaxCreatedByLength", ResourceStringLoader.GetResourceString("StateProvince_MaxCreatedByLength"), 
+                !string.IsNullOrEmpty(this.CreatedBy) && this.CreatedBy.Length > 256);
+            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("StateProvince_DuplicatedName", this.Name),
+                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name") && StateProvince.GetStateProvinces(this.Name).Count() > 0);
         }
 
         protected override StateProvince DataSelect(Guid id)
         {
-            throw new NotImplementedException();
+            return Rainbow.Instance.GetStateProvinces(id, null).FirstOrDefault();
         }
 
         protected override void DataUpdate()
         {
-            throw new NotImplementedException();
+            Rainbow.Instance.UpdateStateProvince(this);
         }
 
         protected override void DataInsert()
         {
-            throw new NotImplementedException();
+            Rainbow.Instance.InsertStateProvince(this);
         }
 
         protected override void DataDelete()
         {
-            throw new NotImplementedException();
+            Rainbow.Instance.DeleteStateProvince(this);
         }
 
         public static IEnumerable<StateProvince> GetAll()
         {
-            return Rainbow.Instance.GetAllStateProvinces();
+            return Rainbow.Instance.GetStateProvinces(null, null);
+        }
+
+        public static IEnumerable<StateProvince> GetStateProvinces(string name)
+        {
+            return Rainbow.Instance.GetStateProvinces(null, name);
         }
     }
 }

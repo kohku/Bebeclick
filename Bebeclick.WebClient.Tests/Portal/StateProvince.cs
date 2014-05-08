@@ -65,7 +65,57 @@ namespace Bebeclick.WebClient.Tests.Portal
             var results = Bebeclick.WebClient.StateProvince.GetAll();
 
             Assert.IsNotNull(results);
+
+            if (results == null)
+                return;
+
             Assert.IsTrue(results.Count() >= 0);
+        }
+
+        [TestMethod]
+        public void LoadStateProvince()
+        {
+            var provinces = Bebeclick.WebClient.StateProvince.GetAll();
+
+            if (provinces.Count() == 0)
+            {
+                Assert.Inconclusive("There are no provinces to load");
+                return;
+            }
+
+            var item = provinces.First();
+
+            Assert.IsNotNull(item);
+
+            if (item == null)
+                return;
+
+            var loadedById = Bebeclick.WebClient.StateProvince.Load(item.ID);
+
+            Assert.AreEqual(item, loadedById);
+            Assert.AreEqual(item.ID, loadedById.ID);
+            Assert.AreEqual(item.Name, loadedById.Name);
+            Assert.AreEqual(item.Visible, loadedById.Visible);
+            Assert.AreEqual(item.DateCreated, loadedById.DateCreated);
+            Assert.AreEqual(item.CreatedBy, loadedById.CreatedBy);
+            Assert.AreEqual(item.LastUpdated, loadedById.LastUpdated);
+            Assert.AreEqual(item.LastUpdatedBy, loadedById.LastUpdatedBy);
+
+            var loadedByName = Bebeclick.WebClient.StateProvince.GetStateProvinces(loadedById.Name).FirstOrDefault();
+
+            Assert.IsNotNull(loadedByName);
+
+            if (loadedByName == null)
+                return;
+
+            Assert.AreEqual(loadedByName, loadedById);
+            Assert.AreEqual(loadedByName.ID, loadedById.ID);
+            Assert.AreEqual(loadedByName.Name, loadedById.Name);
+            Assert.AreEqual(loadedByName.Visible, loadedById.Visible);
+            Assert.AreEqual(loadedByName.DateCreated, loadedById.DateCreated);
+            Assert.AreEqual(loadedByName.CreatedBy, loadedById.CreatedBy);
+            Assert.AreEqual(loadedByName.LastUpdated, loadedById.LastUpdated);
+            Assert.AreEqual(loadedByName.LastUpdatedBy, loadedById.LastUpdatedBy);
         }
     }
 }

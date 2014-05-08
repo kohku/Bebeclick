@@ -44,23 +44,80 @@ namespace Bebeclick.WebClient
             }
         }
 
-        internal IEnumerable<StateProvince> GetAllStateProvinces()
-        {
-            return container.Resolve<IPortalRepository>().GetAllStateProvinces();
-        }
-
         public void Dispose()
         {
         }
 
-        internal IEnumerable<Service> GetServices(Guid productId)
+        #region State Province
+
+        internal IEnumerable<StateProvince> GetStateProvinces(Guid? id, string name)
         {
-            return container.Resolve<IPortalRepository>().GetServices(productId);
+            return container.Resolve<IPortalRepository>().GetStateProvinces(id, name);
         }
 
-        internal IEnumerable<Product> GetAllProducts(Guid stateId)
+        internal void UpdateStateProvince(StateProvince stateProvince)
         {
-            return container.Resolve<IPortalRepository>().GetAllProducts(stateId);
+            container.Resolve<IPortalRepository>().UpdateStateProvince(stateProvince);
         }
+
+        internal void InsertStateProvince(StateProvince stateProvince)
+        {
+            container.Resolve<IPortalRepository>().InsertStateProvince(stateProvince);
+        }
+
+        internal void DeleteStateProvince(StateProvince stateProvince)
+        {
+            container.Resolve<IPortalRepository>().DeleteStateProvince(stateProvince);
+        }
+
+        #endregion
+
+        #region Products
+
+        internal IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, string name)
+        {
+            return container.Resolve<IPortalRepository>().GetProducts(id, stateId, name);
+        }
+        internal void DeleteProduct(Product product)
+        {
+            container.Resolve<IPortalRepository>().DeleteProduct(product);
+        }
+
+        internal void InsertProduct(Product product)
+        {
+            container.Resolve<IPortalRepository>().InsertProduct(product);
+        }
+
+        internal void UpdateProduct(Product product)
+        {
+            container.Resolve<IPortalRepository>().UpdateProduct(product);
+        }
+
+        #endregion
+
+        #region Services
+
+        internal IEnumerable<Service> GetServices(Guid? id, Guid? productId, string name)
+        {
+            return container.Resolve<IPortalRepository>().GetServices(id, productId, name);
+        }
+
+        internal void DeleteService(Service service)
+        {
+            container.Resolve<IPortalRepository>().DeleteService(service);
+        }
+
+        internal void InsertService(Service service)
+        {
+            container.Resolve<IPortalRepository>().InsertService(service);
+        }
+
+        internal void UpdateService(Service service)
+        {
+            container.Resolve<IPortalRepository>().UpdateService(service);
+        }
+
+        #endregion
+
     }
 }

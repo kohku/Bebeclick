@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bebeclick.WebClient.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -16,6 +17,42 @@ namespace Bebeclick.WebClient
         public Product() 
             : base(Guid.NewGuid())
         {
+        }
+
+        [DataMember]
+        public string Name
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _name; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (this._name != value)
+                {
+                    this.OnPropertyChanging("Name");
+                    this.MarkChanged("Name");
+                }
+
+                this._name = value;
+            }
+        }
+
+        [DataMember]
+        public bool Visible
+        {
+            [System.Diagnostics.DebuggerStepThrough]
+            get { return _visible; }
+            [System.Diagnostics.DebuggerStepThrough]
+            set
+            {
+                if (this._visible != value)
+                {
+                    this.OnPropertyChanging("Visible");
+                    this.MarkChanged("Visible");
+                }
+
+                this._visible = value;
+            }
         }
 
         [DataMember]
@@ -57,69 +94,72 @@ namespace Bebeclick.WebClient
             }
         }
 
-        [DataMember]
-        public string Name
+        private IEnumerable<Service> _services;
+
+        /// <summary>
+        /// Lazy loading services
+        /// </summary>
+        public IEnumerable<Service> Services
         {
-            [System.Diagnostics.DebuggerStepThrough]
-            get { return _name; }
-            [System.Diagnostics.DebuggerStepThrough]
-            set
+            get
             {
-                if (this._name != value)
+                if (_services == null)
                 {
-                    this.OnPropertyChanging("Name");
-                    this.MarkChanged("Name");
+                    lock (syncRoot)
+                    {
+                        if (_services == null)
+                            _services = Service.GetServices(this.ID);
+                    }
                 }
 
-                this._name = value;
-            }
-        }
-
-        [DataMember]
-        public bool Visible
-        {
-            [System.Diagnostics.DebuggerStepThrough]
-            get { return _visible; }
-            [System.Diagnostics.DebuggerStepThrough]
-            set
-            {
-                if (this._visible != value)
-                {
-                    this.OnPropertyChanging("Visible");
-                    this.MarkChanged("Visible");
-                }
-
-                this._visible = value;
+                return _services;
             }
         }
 
         protected override void ValidationRules()
         {
+            AddRule("EmptyName", ResourceStringLoader.GetResourceString("Product_EmptyName"),
+        string.IsNullOrEmpty(this.Name));
+            AddRule("MaxNameLength", ResourceStringLoader.GetResourceString("Product_MaxNameLength"),
+                !string.IsNullOrEmpty(this.Name) && this.Name.Length > 100);
+            AddRule("EmptyCreatedBy", ResourceStringLoader.GetResourceString("Product_EmptyCreatedBy"),
+                string.IsNullOrEmpty(this.CreatedBy));
+            AddRule("MaxCreatedByLength", ResourceStringLoader.GetResourceString("Product_MaxCreatedByLength"),
+                !string.IsNullOrEmpty(this.CreatedBy) && this.CreatedBy.Length > 256);
+            AddRule("NullStateID", ResourceStringLoader.GetResourceString("Product_NullStateID"),
+                this.StateID == null);
+            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("Product_DuplicatedName", this.Name),
+                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name") && Product.GetProducts(this.StateID, this.Name).Count() > 0);
         }
 
         protected override Product DataSelect(Guid id)
         {
-            throw new NotImplementedException();
+            return Rainbow.Instance.GetProducts(id, null, null).FirstOrDefault();
         }
 
         protected override void DataUpdate()
         {
-            throw new NotImplementedException();
+            Rainbow.Instance.UpdateProduct(this);
         }
 
         protected override void DataInsert()
         {
-            throw new NotImplementedException();
+            Rainbow.Instance.InsertProduct(this);
         }
 
         protected override void DataDelete()
         {
-            throw new NotImplementedException();
+            Rainbow.Instance.DeleteProduct(this);
         }
 
-        internal static IEnumerable<Product> GetAll(Guid stateId)
+        public static IEnumerable<Product> GetProducts(Guid stateId)
         {
-            return Rainbow.Instance.GetAllProducts(stateId);
+            return Rainbow.Instance.GetProducts(null, stateId, null);
+        }
+
+        public static IEnumerable<Product> GetProducts(Guid stateId, string name)
+        {
+            return Rainbow.Instance.GetProducts(null, stateId, name);
         }
     }
 }
