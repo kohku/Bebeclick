@@ -8,15 +8,22 @@ namespace Bebeclick.WebClient
 {
     public interface IPortalRepository
     {
-        IEnumerable<StateProvince> GetStateProvinces(Guid? id, string name);
-        void UpdateStateProvince(StateProvince stateProvince);
+        IEnumerable<StateEntity> GetStateEntities(Guid? id, string name);
+        void UpdateStateEntity(StateEntity province);
 
-        void InsertStateProvince(StateProvince stateProvince);
+        void InsertStateEntity(StateEntity province);
 
-        void DeleteStateProvince(StateProvince stateProvince);
+        void DeleteStateEntity(StateEntity province);
 
+        IEnumerable<Province> GetProvinces(Guid? id, Guid? stateId, string name);
 
-        IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, string name);
+        void UpdateProvince(Province province);
+
+        void InsertProvince(Province province);
+
+        void DeleteProvince(Province province);
+
+        IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, Guid? provinceId, string name);
 
         void DeleteProduct(Product product);
 
@@ -31,5 +38,6 @@ namespace Bebeclick.WebClient
         void InsertService(Service service);
 
         void UpdateService(Service service);
+
     }
 }

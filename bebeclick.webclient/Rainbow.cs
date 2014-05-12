@@ -48,35 +48,59 @@ namespace Bebeclick.WebClient
         {
         }
 
-        #region State Province
+        #region State entity
 
-        internal IEnumerable<StateProvince> GetStateProvinces(Guid? id, string name)
+        internal IEnumerable<StateEntity> GetStateEntities(Guid? id, string name)
         {
-            return container.Resolve<IPortalRepository>().GetStateProvinces(id, name);
+            return container.Resolve<IPortalRepository>().GetStateEntities(id, name);
         }
 
-        internal void UpdateStateProvince(StateProvince stateProvince)
+        internal void UpdateStateEntity(StateEntity stateProvince)
         {
-            container.Resolve<IPortalRepository>().UpdateStateProvince(stateProvince);
+            container.Resolve<IPortalRepository>().UpdateStateEntity(stateProvince);
         }
 
-        internal void InsertStateProvince(StateProvince stateProvince)
+        internal void InsertStateEntity(StateEntity stateProvince)
         {
-            container.Resolve<IPortalRepository>().InsertStateProvince(stateProvince);
+            container.Resolve<IPortalRepository>().InsertStateEntity(stateProvince);
         }
 
-        internal void DeleteStateProvince(StateProvince stateProvince)
+        internal void DeleteStateEntity(StateEntity stateProvince)
         {
-            container.Resolve<IPortalRepository>().DeleteStateProvince(stateProvince);
+            container.Resolve<IPortalRepository>().DeleteStateEntity(stateProvince);
+        }
+
+        #endregion
+
+        #region Province
+
+        internal IEnumerable<Province> GetProvinces(Guid? id, Guid? stateId, string name)
+        {
+            return container.Resolve<IPortalRepository>().GetProvinces(id, stateId, name);
+        }
+
+        internal void UpdateProvince(Province province)
+        {
+            container.Resolve<IPortalRepository>().UpdateProvince(province);
+        }
+
+        internal void InsertProvince(Province province)
+        {
+            container.Resolve<IPortalRepository>().InsertProvince(province);
+        }
+
+        internal void DeleteProvince(Province province)
+        {
+            container.Resolve<IPortalRepository>().DeleteProvince(province);
         }
 
         #endregion
 
         #region Products
 
-        internal IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, string name)
+        internal IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, Guid? provinceId, string name)
         {
-            return container.Resolve<IPortalRepository>().GetProducts(id, stateId, name);
+            return container.Resolve<IPortalRepository>().GetProducts(id, stateId, provinceId, name);
         }
         internal void DeleteProduct(Product product)
         {

@@ -23,17 +23,16 @@ namespace Bebeclick.WebClient.SQL
             get { return this._connectionStringName; }
         }
 
-
-        #region State Province
-        public IEnumerable<StateProvince> GetStateProvinces(Guid? id, string name)
+        #region State
+        public IEnumerable<StateEntity> GetStateEntities(Guid? id, string name)
         {
-            var provinces = new List<StateProvince>();
+            var provinces = new List<StateEntity>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
 
-                var command = new SqlCommand("usp_GetStateProvinces", connection)
+                var command = new SqlCommand("usp_GetStateEntities", connection)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
@@ -59,7 +58,7 @@ namespace Bebeclick.WebClient.SQL
                         ParameterName = "@Name",
                         SqlDbType = SqlDbType.NVarChar,
                         Size = 200,
-                        SqlValue = !name.Contains("%") ? name : "%" + name + "%"
+                        SqlValue = name.Contains("%") ? name : "%" + name + "%"
                     });
                 }
 
@@ -69,7 +68,7 @@ namespace Bebeclick.WebClient.SQL
                 {
                     while (reader.Read())
                     {
-                        var item = new StateProvince
+                        var item = new StateEntity
                         {
                             ID = new Guid(reader["ID"].ToString()),
                             Name = reader["Name"].ToString(),
@@ -93,57 +92,148 @@ namespace Bebeclick.WebClient.SQL
             return provinces;
         }
 
-        public void UpdateStateProvince(StateProvince stateProvince)
+        public void UpdateStateEntity(StateEntity state)
         {
+            if (state == null)
+                throw new ArgumentNullException("state");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
 
-                var command = new SqlCommand("usp_UpdateStateProvince", connection)
+                var command = new SqlCommand("usp_UpdateStateEntity", connection)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                FillCommand(command, state);
+
+                command.ExecuteNonQuery();
             }
         }
 
-        public void InsertStateProvince(StateProvince stateProvince)
+        private void FillCommand(SqlCommand command, StateEntity state)
         {
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@ID",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                SqlValue = state.ID
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Name",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 200,
+                SqlValue = state.Name
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@DateCreated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = state.DateCreated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@CreatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = state.CreatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = state.LastUpdated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = state.LastUpdatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Visible",
+                SqlDbType = SqlDbType.Bit,
+                SqlValue = state.Visible
+            });
+        }
+
+        public void InsertStateEntity(StateEntity state)
+        {
+            if (state == null)
+                throw new ArgumentNullException("state");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
 
-                var command = new SqlCommand("usp_InsertStateProvince", connection)
+                var command = new SqlCommand("usp_InsertStateEntity", connection)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                FillCommand(command, state);
+
+                command.ExecuteNonQuery();
             }
         }
 
-        public void DeleteStateProvince(StateProvince stateProvince)
+        public void DeleteStateEntity(StateEntity state)
         {
+            if (state == null)
+                throw new ArgumentNullException("state");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
 
-                var command = new SqlCommand("usp_DeleteStateProvince", connection)
+                var command = new SqlCommand("usp_DeleteStateEntity", connection)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                command.Parameters.Add(new SqlParameter
+                {
+                    Direction = ParameterDirection.Input,
+                    IsNullable = false,
+                    ParameterName = "@ID",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    SqlValue = state.ID
+                });
+
+                command.ExecuteNonQuery();
             }
         }
 
         #endregion
 
-        #region Product
-        public IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, string name)
+        #region Province
+        public IEnumerable<Province> GetProvinces(Guid? id, Guid? stateId, string name)
         {
-            var products = new List<Product>();
+            var provinces = new List<Province>();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
 
-                var command = new SqlCommand("usp_GetProducts", connection)
+                var command = new SqlCommand("usp_GetProvinces", connection)
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
@@ -181,7 +271,241 @@ namespace Bebeclick.WebClient.SQL
                         ParameterName = "@Name",
                         SqlDbType = SqlDbType.NVarChar,
                         Size = 200,
-                        SqlValue = !name.Contains("%") ? name : "%" + name + "%"
+                        SqlValue = name.Contains("%") ? name : "%" + name + "%"
+                    });
+                }
+
+                IDataReader reader = command.ExecuteReader();
+
+                try
+                {
+                    while (reader.Read())
+                    {
+                        var item = new Province
+                        {
+                            ID = new Guid(reader["ID"].ToString()),
+                            StateID = new Guid(reader["StateID"].ToString()),
+                            Name = reader["Name"].ToString(),
+                            DateCreated = Convert.ToDateTime(reader["DateCreated"]),
+                            CreatedBy = reader["CreatedBy"].ToString(),
+                            LastUpdated = reader["LastUpdated"] != DBNull.Value ? Convert.ToDateTime(reader["LastUpdated"]) : default(DateTime?),
+                            LastUpdatedBy = reader["LastUpdatedBy"] != DBNull.Value ? reader["LastUpdatedBy"].ToString() : null,
+                            Visible = Convert.ToBoolean(reader["Visible"])
+                        };
+
+                        provinces.Add(item);
+                    }
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+                }
+            }
+
+            return provinces;
+        }
+
+        public void UpdateProvince(Province province)
+        {
+            if (province == null)
+                throw new ArgumentNullException("province");
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_UpdateProvince", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+
+                FillCommand(command, province);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private void FillCommand(SqlCommand command, Province province)
+        {
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@ID",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                SqlValue = province.ID
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@StateID",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                SqlValue = province.StateID
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Name",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 200,
+                SqlValue = province.Name
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@DateCreated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = province.DateCreated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@CreatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = province.CreatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = province.LastUpdated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = province.LastUpdatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Visible",
+                SqlDbType = SqlDbType.Bit,
+                SqlValue = province.Visible
+            });
+        }
+
+        public void InsertProvince(Province province)
+        {
+            if (province == null)
+                throw new ArgumentNullException("province");
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_InsertProvince", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+
+                FillCommand(command, province);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteProvince(Province province)
+        {
+            if (province == null)
+                throw new ArgumentNullException("province");
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_DeleteProvince", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+
+                command.Parameters.Add(new SqlParameter
+                {
+                    Direction = ParameterDirection.Input,
+                    IsNullable = true,
+                    ParameterName = "@ID",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    SqlValue = province.ID
+                });
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        #endregion
+
+        #region Product
+        public IEnumerable<Product> GetProducts(Guid? id, Guid? stateId, Guid? provinceId, string name)
+        {
+            var products = new List<Product>();
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand("usp_GetProducts", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+
+                if (id.HasValue)
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@ID",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        SqlValue = id.Value
+                    });
+                }
+
+                if (stateId.HasValue)
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@StateID",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        SqlValue = stateId.Value
+                    });
+                }
+
+                if (provinceId.HasValue)
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@ProvinceID",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        SqlValue = provinceId.Value
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    command.Parameters.Add(new SqlParameter
+                    {
+                        Direction = ParameterDirection.Input,
+                        IsNullable = true,
+                        ParameterName = "@Name",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Size = 200,
+                        SqlValue = name.Contains("%") ? name : "%" + name + "%"
                     });
                 }
 
@@ -194,7 +518,6 @@ namespace Bebeclick.WebClient.SQL
                         var item = new Product
                         {
                             ID = new Guid(reader["ID"].ToString()),
-                            StateID = new Guid(reader["StateID"].ToString()),
                             Name = reader["Name"].ToString(),
                             DateCreated = Convert.ToDateTime(reader["DateCreated"]),
                             CreatedBy = reader["CreatedBy"].ToString(),
@@ -218,6 +541,9 @@ namespace Bebeclick.WebClient.SQL
 
         public void DeleteProduct(Product product)
         {
+            if (product == null)
+                throw new ArgumentNullException("product");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
@@ -226,11 +552,25 @@ namespace Bebeclick.WebClient.SQL
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                command.Parameters.Add(new SqlParameter
+                {
+                    Direction = ParameterDirection.Input,
+                    IsNullable = true,
+                    ParameterName = "@ID",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    SqlValue = product.ID
+                });
+
+                command.ExecuteNonQuery();
             }
         }
 
         public void InsertProduct(Product product)
         {
+            if (product == null)
+                throw new ArgumentNullException("product");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
@@ -239,11 +579,81 @@ namespace Bebeclick.WebClient.SQL
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                FillCommand(command, product);
+
+                command.ExecuteNonQuery();
             }
+        }
+
+        private void FillCommand(SqlCommand command, Product product)
+        {
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@ID",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                SqlValue = product.ID
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Name",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 200,
+                SqlValue = product.Name
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@DateCreated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = product.DateCreated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@CreatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = product.CreatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = product.LastUpdated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = product.LastUpdatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Visible",
+                SqlDbType = SqlDbType.Bit,
+                SqlValue = product.Visible
+            });
         }
 
         public void UpdateProduct(Product product)
         {
+            if (product == null)
+                throw new ArgumentNullException("product");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
@@ -252,6 +662,10 @@ namespace Bebeclick.WebClient.SQL
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                FillCommand(command, product);
+
+                command.ExecuteNonQuery();
             }
         }
 
@@ -305,7 +719,7 @@ namespace Bebeclick.WebClient.SQL
                         ParameterName = "@Name",
                         SqlDbType = SqlDbType.NVarChar,
                         Size = 200,
-                        SqlValue = !name.Contains("%") ? name : "%" + name + "%"
+                        SqlValue = name.Contains("%") ? name : "%" + name + "%"
                     });
                 }
 
@@ -342,6 +756,9 @@ namespace Bebeclick.WebClient.SQL
 
         public void DeleteService(Service service)
         {
+            if (service == null)
+                throw new ArgumentNullException("service");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
@@ -350,11 +767,25 @@ namespace Bebeclick.WebClient.SQL
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                command.Parameters.Add(new SqlParameter
+                {
+                    Direction = ParameterDirection.Input,
+                    IsNullable = true,
+                    ParameterName = "@ID",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    SqlValue = service.ID
+                });
+
+                command.ExecuteNonQuery();
             }
         }
 
         public void InsertService(Service service)
         {
+            if (service == null)
+                throw new ArgumentNullException("service");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
@@ -363,11 +794,89 @@ namespace Bebeclick.WebClient.SQL
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                FillCommand(command, service);
+
+                command.ExecuteNonQuery();
             }
+        }
+
+        private void FillCommand(SqlCommand command, Service service)
+        {
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@ID",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                SqlValue = service.ID
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@ProductID",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                SqlValue = service.ProductID
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Name",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 200,
+                SqlValue = service.Name
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@DateCreated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = service.DateCreated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@CreatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = service.CreatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdated",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = service.LastUpdated
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = true,
+                ParameterName = "@LastUpdatedBy",
+                SqlDbType = SqlDbType.NVarChar,
+                Size = 512,
+                SqlValue = service.LastUpdatedBy
+            });
+            command.Parameters.Add(new SqlParameter
+            {
+                Direction = ParameterDirection.Input,
+                IsNullable = false,
+                ParameterName = "@Visible",
+                SqlDbType = SqlDbType.Bit,
+                SqlValue = service.Visible
+            });
         }
 
         public void UpdateService(Service service)
         {
+            if (service == null)
+                throw new ArgumentNullException("service");
+
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.ConnectionStringName].ConnectionString))
             {
                 connection.Open();
@@ -376,6 +885,10 @@ namespace Bebeclick.WebClient.SQL
                 {
                     CommandType = System.Data.CommandType.StoredProcedure
                 };
+
+                FillCommand(command, service);
+
+                command.ExecuteNonQuery();
             }
         }
 

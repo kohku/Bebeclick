@@ -9,7 +9,7 @@
         <div id="__recommend_title">Recomienda</div>
         <div id="__search">
             <select id="__state">
-                @foreach(var state in StateProvince.GetAll().Where(m => m.Visible))
+                @foreach(var state in StateEntity.GetAll().Where(m => m.Visible))
                 {
                     <option value="@state.ID">@state.Name</option>   
                 }

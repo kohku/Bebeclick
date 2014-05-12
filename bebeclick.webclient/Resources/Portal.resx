@@ -123,17 +123,47 @@
   <data name="Product_EmptyCreatedBy" xml:space="preserve">
     <value>Created by property must be set.</value>
   </data>
+  <data name="Product_EmptyLastUpdatedBy" xml:space="preserve">
+    <value>Last updated by property must be set.</value>
+  </data>
   <data name="Product_EmptyName" xml:space="preserve">
     <value>Name property is null or empty.</value>
   </data>
+  <data name="Product_EmptyStateID" xml:space="preserve">
+    <value>State ID must be set.</value>
+  </data>
   <data name="Product_MaxCreatedByLength" xml:space="preserve">
+    <value>Max length for created by is 256 characters.</value>
+  </data>
+  <data name="Product_MaxLastUpdatedByLength" xml:space="preserve">
     <value>Max length for created by is 256 characters.</value>
   </data>
   <data name="Product_MaxNameLength" xml:space="preserve">
     <value>Max length for name is 100 characters.</value>
   </data>
-  <data name="Product_NullStateID" xml:space="preserve">
+  <data name="Province_DuplicatedName" xml:space="preserve">
+    <value>Province "{0}" already exists.</value>
+  </data>
+  <data name="Province_EmptyCreatedBy" xml:space="preserve">
+    <value>Created by property must be set.</value>
+  </data>
+  <data name="Province_EmptyLastUpdatedBy" xml:space="preserve">
+    <value>Last updated by property must be set.</value>
+  </data>
+  <data name="Province_EmptyName" xml:space="preserve">
+    <value>Name property is null or empty.</value>
+  </data>
+  <data name="Province_EmptyStateID" xml:space="preserve">
     <value>State ID must be set.</value>
+  </data>
+  <data name="Province_MaxCreatedByLength" xml:space="preserve">
+    <value>Max length for created by is 256 characters.</value>
+  </data>
+  <data name="Province_MaxLastUpdatedByLength" xml:space="preserve">
+    <value>Max length for created by is 256 characters.</value>
+  </data>
+  <data name="Province_MaxNameLength" xml:space="preserve">
+    <value>Max length for name is 100 characters.</value>
   </data>
   <data name="Service_DuplicatedName" xml:space="preserve">
     <value>Service "{0}" already exists.</value>
@@ -141,31 +171,43 @@
   <data name="Service_EmptyCreatedBy" xml:space="preserve">
     <value>Created by property must be set.</value>
   </data>
+  <data name="Service_EmptyLastUpdatedBy" xml:space="preserve">
+    <value>Last updated by property must be set.</value>
+  </data>
   <data name="Service_EmptyName" xml:space="preserve">
     <value>Name property is null or empty.</value>
   </data>
+  <data name="Service_EmptyProductID" xml:space="preserve">
+    <value>Product ID must be set.</value>
+  </data>
   <data name="Service_MaxCreatedByLength" xml:space="preserve">
+    <value>Max length for created by is 256 characters.</value>
+  </data>
+  <data name="Service_MaxLastUpdatedByLength" xml:space="preserve">
     <value>Max length for created by is 256 characters.</value>
   </data>
   <data name="Service_MaxNameLength" xml:space="preserve">
     <value>Max length for name is 100 characters.</value>
   </data>
-  <data name="Service_NullProductID" xml:space="preserve">
-    <value>Product ID must be set.</value>
-  </data>
-  <data name="StateProvince_DuplicatedName" xml:space="preserve">
+  <data name="StateEntity_DuplicatedName" xml:space="preserve">
     <value>State "{0}" already exists.</value>
   </data>
-  <data name="StateProvince_EmptyCreatedBy" xml:space="preserve">
+  <data name="StateEntity_EmptyCreatedBy" xml:space="preserve">
     <value>Created by property must be set.</value>
   </data>
-  <data name="StateProvince_EmptyName" xml:space="preserve">
+  <data name="StateEntity_EmptyLastUpdatedBy" xml:space="preserve">
+    <value>Last updated by property must be set.</value>
+  </data>
+  <data name="StateEntity_EmptyName" xml:space="preserve">
     <value>Name property is null or empty.</value>
   </data>
-  <data name="StateProvince_MaxCreatedByLength" xml:space="preserve">
+  <data name="StateEntity_MaxCreatedByLength" xml:space="preserve">
     <value>Max length for created by is 256 characters.</value>
   </data>
-  <data name="StateProvince_MaxNameLength" xml:space="preserve">
+  <data name="StateEntity_MaxLastUpdatedByLength" xml:space="preserve">
+    <value>Max length for created by is 256 characters.</value>
+  </data>
+  <data name="StateEntity_MaxNameLength" xml:space="preserve">
     <value>Max length for name is 100 characters.</value>
   </data>
 </root>

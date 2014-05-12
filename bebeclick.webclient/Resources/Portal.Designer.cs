@@ -79,11 +79,29 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last updated by property must be set..
+        /// </summary>
+        internal static string Product_EmptyLastUpdatedBy {
+            get {
+                return ResourceManager.GetString("Product_EmptyLastUpdatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name property is null or empty..
         /// </summary>
         internal static string Product_EmptyName {
             get {
                 return ResourceManager.GetString("Product_EmptyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State ID must be set..
+        /// </summary>
+        internal static string Product_EmptyStateID {
+            get {
+                return ResourceManager.GetString("Product_EmptyStateID", resourceCulture);
             }
         }
         
@@ -97,6 +115,15 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max length for created by is 256 characters..
+        /// </summary>
+        internal static string Product_MaxLastUpdatedByLength {
+            get {
+                return ResourceManager.GetString("Product_MaxLastUpdatedByLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max length for name is 100 characters..
         /// </summary>
         internal static string Product_MaxNameLength {
@@ -106,11 +133,74 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Province &quot;{0}&quot; already exists..
+        /// </summary>
+        internal static string Province_DuplicatedName {
+            get {
+                return ResourceManager.GetString("Province_DuplicatedName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created by property must be set..
+        /// </summary>
+        internal static string Province_EmptyCreatedBy {
+            get {
+                return ResourceManager.GetString("Province_EmptyCreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last updated by property must be set..
+        /// </summary>
+        internal static string Province_EmptyLastUpdatedBy {
+            get {
+                return ResourceManager.GetString("Province_EmptyLastUpdatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name property is null or empty..
+        /// </summary>
+        internal static string Province_EmptyName {
+            get {
+                return ResourceManager.GetString("Province_EmptyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State ID must be set..
         /// </summary>
-        internal static string Product_NullStateID {
+        internal static string Province_EmptyStateID {
             get {
-                return ResourceManager.GetString("Product_NullStateID", resourceCulture);
+                return ResourceManager.GetString("Province_EmptyStateID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max length for created by is 256 characters..
+        /// </summary>
+        internal static string Province_MaxCreatedByLength {
+            get {
+                return ResourceManager.GetString("Province_MaxCreatedByLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max length for created by is 256 characters..
+        /// </summary>
+        internal static string Province_MaxLastUpdatedByLength {
+            get {
+                return ResourceManager.GetString("Province_MaxLastUpdatedByLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max length for name is 100 characters..
+        /// </summary>
+        internal static string Province_MaxNameLength {
+            get {
+                return ResourceManager.GetString("Province_MaxNameLength", resourceCulture);
             }
         }
         
@@ -133,11 +223,29 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last updated by property must be set..
+        /// </summary>
+        internal static string Service_EmptyLastUpdatedBy {
+            get {
+                return ResourceManager.GetString("Service_EmptyLastUpdatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name property is null or empty..
         /// </summary>
         internal static string Service_EmptyName {
             get {
                 return ResourceManager.GetString("Service_EmptyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product ID must be set..
+        /// </summary>
+        internal static string Service_EmptyProductID {
+            get {
+                return ResourceManager.GetString("Service_EmptyProductID", resourceCulture);
             }
         }
         
@@ -151,6 +259,15 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max length for created by is 256 characters..
+        /// </summary>
+        internal static string Service_MaxLastUpdatedByLength {
+            get {
+                return ResourceManager.GetString("Service_MaxLastUpdatedByLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max length for name is 100 characters..
         /// </summary>
         internal static string Service_MaxNameLength {
@@ -160,56 +277,65 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Product ID must be set..
-        /// </summary>
-        internal static string Service_NullProductID {
-            get {
-                return ResourceManager.GetString("Service_NullProductID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to State &quot;{0}&quot; already exists..
         /// </summary>
-        internal static string StateProvince_DuplicatedName {
+        internal static string StateEntity_DuplicatedName {
             get {
-                return ResourceManager.GetString("StateProvince_DuplicatedName", resourceCulture);
+                return ResourceManager.GetString("StateEntity_DuplicatedName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Created by property must be set..
         /// </summary>
-        internal static string StateProvince_EmptyCreatedBy {
+        internal static string StateEntity_EmptyCreatedBy {
             get {
-                return ResourceManager.GetString("StateProvince_EmptyCreatedBy", resourceCulture);
+                return ResourceManager.GetString("StateEntity_EmptyCreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last updated by property must be set..
+        /// </summary>
+        internal static string StateEntity_EmptyLastUpdatedBy {
+            get {
+                return ResourceManager.GetString("StateEntity_EmptyLastUpdatedBy", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Name property is null or empty..
         /// </summary>
-        internal static string StateProvince_EmptyName {
+        internal static string StateEntity_EmptyName {
             get {
-                return ResourceManager.GetString("StateProvince_EmptyName", resourceCulture);
+                return ResourceManager.GetString("StateEntity_EmptyName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Max length for created by is 256 characters..
         /// </summary>
-        internal static string StateProvince_MaxCreatedByLength {
+        internal static string StateEntity_MaxCreatedByLength {
             get {
-                return ResourceManager.GetString("StateProvince_MaxCreatedByLength", resourceCulture);
+                return ResourceManager.GetString("StateEntity_MaxCreatedByLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max length for created by is 256 characters..
+        /// </summary>
+        internal static string StateEntity_MaxLastUpdatedByLength {
+            get {
+                return ResourceManager.GetString("StateEntity_MaxLastUpdatedByLength", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Max length for name is 100 characters..
         /// </summary>
-        internal static string StateProvince_MaxNameLength {
+        internal static string StateEntity_MaxNameLength {
             get {
-                return ResourceManager.GetString("StateProvince_MaxNameLength", resourceCulture);
+                return ResourceManager.GetString("StateEntity_MaxNameLength", resourceCulture);
             }
         }
     }

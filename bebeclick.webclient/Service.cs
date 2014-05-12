@@ -102,10 +102,15 @@ namespace Bebeclick.WebClient
                 string.IsNullOrEmpty(this.CreatedBy));
             AddRule("MaxCreatedByLength", ResourceStringLoader.GetResourceString("Service_MaxCreatedByLength"),
                 !string.IsNullOrEmpty(this.CreatedBy) && this.CreatedBy.Length > 256);
-            AddRule("NullStateID", ResourceStringLoader.GetResourceString("Service_NullProductID"),
-                this.ProductID == null);
-            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("Service_DuplicatedName", this.Name),
-                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name") && Service.GetServices(this.ProductID, this.Name).Count() > 0);
+            AddRule("EmptyProductID", ResourceStringLoader.GetResourceString("Service_EmptyProductID"),
+                this.ProductID == Guid.Empty);
+            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("Service_DuplicatedName", new { this.Name }),
+                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name") 
+                && Service.GetServices(this.ProductID, this.Name).Where(m => m.ID != this.ID).Count() > 0);
+            AddRule("EmptyLastUpdatedBy", ResourceStringLoader.GetResourceString("Service_EmptyLastUpdatedBy"),
+                !this.IsNew && this.IsChanged && string.IsNullOrEmpty(this.LastUpdatedBy));
+            AddRule("MaxLastUpdatedByLength", ResourceStringLoader.GetResourceString("Service_MaxLastUpdatedByLength"),
+                !this.IsNew && this.IsChanged && !string.IsNullOrEmpty(this.LastUpdatedBy) && this.LastUpdatedBy.Length > 256);
         }
 
         protected override Service DataSelect(Guid id)
@@ -126,6 +131,11 @@ namespace Bebeclick.WebClient
         protected override void DataDelete()
         {
             Rainbow.Instance.DeleteService(this);
+        }
+
+        public static IEnumerable<Service> GetAll()
+        {
+            return Rainbow.Instance.GetServices(null, null, null);
         }
 
         public static IEnumerable<Service> GetServices(Guid productId)

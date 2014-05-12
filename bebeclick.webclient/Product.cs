@@ -12,7 +12,6 @@ namespace Bebeclick.WebClient
     {
         private string _name;
         private bool _visible;
-        private Guid _stateId;
 
         public Product() 
             : base(Guid.NewGuid())
@@ -55,45 +54,6 @@ namespace Bebeclick.WebClient
             }
         }
 
-        [DataMember]
-        public Guid StateID
-        {
-            [System.Diagnostics.DebuggerStepThrough]
-            get { return _stateId; }
-            [System.Diagnostics.DebuggerStepThrough]
-            set
-            {
-                if (this._stateId != value)
-                {
-                    this.OnPropertyChanging("StateID");
-                    this.MarkChanged("StateID");
-                }
-
-                this._stateId = value;
-            }
-        }
-
-        private StateProvince _stateProvince;
-
-        /// <summary>
-        /// Lazy loading state
-        /// </summary>
-        public StateProvince StateProvince
-        {
-            get
-            {
-                if (_stateProvince == null)
-                {
-                    lock (syncRoot)
-                    {
-                        _stateProvince = StateProvince.Load(this.StateID);
-                    }
-                }
-
-                return _stateProvince;
-            }
-        }
-
         private IEnumerable<Service> _services;
 
         /// <summary>
@@ -119,22 +79,25 @@ namespace Bebeclick.WebClient
         protected override void ValidationRules()
         {
             AddRule("EmptyName", ResourceStringLoader.GetResourceString("Product_EmptyName"),
-        string.IsNullOrEmpty(this.Name));
+                string.IsNullOrEmpty(this.Name));
             AddRule("MaxNameLength", ResourceStringLoader.GetResourceString("Product_MaxNameLength"),
                 !string.IsNullOrEmpty(this.Name) && this.Name.Length > 100);
             AddRule("EmptyCreatedBy", ResourceStringLoader.GetResourceString("Product_EmptyCreatedBy"),
                 string.IsNullOrEmpty(this.CreatedBy));
             AddRule("MaxCreatedByLength", ResourceStringLoader.GetResourceString("Product_MaxCreatedByLength"),
                 !string.IsNullOrEmpty(this.CreatedBy) && this.CreatedBy.Length > 256);
-            AddRule("NullStateID", ResourceStringLoader.GetResourceString("Product_NullStateID"),
-                this.StateID == null);
-            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("Product_DuplicatedName", this.Name),
-                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name") && Product.GetProducts(this.StateID, this.Name).Count() > 0);
+            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("Product_DuplicatedName", new { this.Name }),
+                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name")
+                && Product.GetProducts(this.Name).Where(m => m.ID != this.ID).Count() > 0);
+            AddRule("EmptyLastUpdatedBy", ResourceStringLoader.GetResourceString("Product_EmptyLastUpdatedBy"),
+                !this.IsNew && this.IsChanged && string.IsNullOrEmpty(this.LastUpdatedBy));
+            AddRule("MaxLastUpdatedByLength", ResourceStringLoader.GetResourceString("Product_MaxLastUpdatedByLength"),
+                !this.IsNew && this.IsChanged && !string.IsNullOrEmpty(this.LastUpdatedBy) && this.LastUpdatedBy.Length > 256);
         }
 
         protected override Product DataSelect(Guid id)
         {
-            return Rainbow.Instance.GetProducts(id, null, null).FirstOrDefault();
+            return Rainbow.Instance.GetProducts(id, null, null, null).FirstOrDefault();
         }
 
         protected override void DataUpdate()
@@ -152,14 +115,34 @@ namespace Bebeclick.WebClient
             Rainbow.Instance.DeleteProduct(this);
         }
 
+        public static IEnumerable<Product> GetAll()
+        {
+            return Rainbow.Instance.GetProducts(null, null, null, null);
+        }
+
+        public static IEnumerable<Product> GetProducts(string name)
+        {
+            return Rainbow.Instance.GetProducts(null, null, null, name);
+        }
+
         public static IEnumerable<Product> GetProducts(Guid stateId)
         {
-            return Rainbow.Instance.GetProducts(null, stateId, null);
+            return Rainbow.Instance.GetProducts(null, stateId, null, null);
         }
 
         public static IEnumerable<Product> GetProducts(Guid stateId, string name)
         {
-            return Rainbow.Instance.GetProducts(null, stateId, name);
+            return Rainbow.Instance.GetProducts(null, stateId, null, name);
+        }
+
+        public static IEnumerable<Product> GetProducts(Guid stateId, Guid provinceId)
+        {
+            return Rainbow.Instance.GetProducts(null, stateId, provinceId, null);
+        }
+
+        public static IEnumerable<Product> GetProducts(Guid stateId, Guid provinceId, string name)
+        {
+            return Rainbow.Instance.GetProducts(null, stateId, provinceId, name);
         }
     }
 }

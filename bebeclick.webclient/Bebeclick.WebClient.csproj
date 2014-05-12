@@ -64,7 +64,9 @@
     <Compile Include="SavedEventArgs.cs" />
     <Compile Include="SQL\SqlPortalRepository.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="StateProvince.cs" />
+    <Compile Include="Province.cs" />
+    <Compile Include="StateEntity.cs" />
+    <Compile Include="Utilities\DateTime.cs" />
     <Compile Include="Utilities\ResourceStringLoader.cs" />
   </ItemGroup>
   <ItemGroup>

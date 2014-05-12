@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Bebeclick.WebClient
 {
-    public class StateProvince :  BusinessBase<StateProvince, Guid>
+    public class StateEntity :  BusinessBase<StateEntity, Guid>
     {
         private string _name;
         private bool _visible;
 
-        public StateProvince() 
+        public StateEntity() 
             : base(Guid.NewGuid())
         {
         }
@@ -54,6 +54,23 @@ namespace Bebeclick.WebClient
             }
         }
 
+        private IEnumerable<Province> _provinces;
+
+        public IEnumerable<Province> Provinces
+        {
+            get
+            {
+                if (_provinces == null)
+                {
+                    lock(_provinces)
+                    {
+                        _provinces = Province.GetProvinces(this.ID);
+                    }
+                }
+                return _provinces;
+            }
+        }
+
         private IEnumerable<Product> _products;
 
         /// <summary>
@@ -77,46 +94,51 @@ namespace Bebeclick.WebClient
 
         protected override void ValidationRules()
         {
-            AddRule("EmptyName", ResourceStringLoader.GetResourceString("StateProvince_EmptyName"), 
+            AddRule("EmptyName", ResourceStringLoader.GetResourceString("StateEntity_EmptyName"), 
                 string.IsNullOrEmpty(this.Name));
-            AddRule("MaxNameLength", ResourceStringLoader.GetResourceString("StateProvince_MaxNameLength"),
+            AddRule("MaxNameLength", ResourceStringLoader.GetResourceString("StateEntity_MaxNameLength"),
                 !string.IsNullOrEmpty(this.Name) && this.Name.Length > 100);
-            AddRule("EmptyCreatedBy", ResourceStringLoader.GetResourceString("StateProvince_EmptyCreatedBy"), 
+            AddRule("EmptyCreatedBy", ResourceStringLoader.GetResourceString("StateEntity_EmptyCreatedBy"), 
                 string.IsNullOrEmpty(this.CreatedBy));
-            AddRule("MaxCreatedByLength", ResourceStringLoader.GetResourceString("StateProvince_MaxCreatedByLength"), 
+            AddRule("MaxCreatedByLength", ResourceStringLoader.GetResourceString("StateEntity_MaxCreatedByLength"), 
                 !string.IsNullOrEmpty(this.CreatedBy) && this.CreatedBy.Length > 256);
-            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("StateProvince_DuplicatedName", this.Name),
-                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name") && StateProvince.GetStateProvinces(this.Name).Count() > 0);
+            AddRule("DuplicatedName", ResourceStringLoader.GetResourceString("StateEntity_DuplicatedName", new { this.Name }),
+                !string.IsNullOrEmpty(this.Name) && this.ChangedProperties.Contains("Name") 
+                && StateEntity.GetStateEntities(this.Name).Where(m => m.ID != this.ID).Count() > 0);
+            AddRule("EmptyLastUpdatedBy", ResourceStringLoader.GetResourceString("StateEntity_EmptyLastUpdatedBy"),
+                !this.IsNew && this.IsChanged && string.IsNullOrEmpty(this.LastUpdatedBy));
+            AddRule("MaxLastUpdatedByLength", ResourceStringLoader.GetResourceString("StateEntity_MaxLastUpdatedByLength"),
+                !this.IsNew && this.IsChanged && !string.IsNullOrEmpty(this.LastUpdatedBy) && this.LastUpdatedBy.Length > 256);
         }
 
-        protected override StateProvince DataSelect(Guid id)
+        protected override StateEntity DataSelect(Guid id)
         {
-            return Rainbow.Instance.GetStateProvinces(id, null).FirstOrDefault();
+            return Rainbow.Instance.GetStateEntities(id, null).FirstOrDefault();
         }
 
         protected override void DataUpdate()
         {
-            Rainbow.Instance.UpdateStateProvince(this);
+            Rainbow.Instance.UpdateStateEntity(this);
         }
 
         protected override void DataInsert()
         {
-            Rainbow.Instance.InsertStateProvince(this);
+            Rainbow.Instance.InsertStateEntity(this);
         }
 
         protected override void DataDelete()
         {
-            Rainbow.Instance.DeleteStateProvince(this);
+            Rainbow.Instance.DeleteStateEntity(this);
         }
 
-        public static IEnumerable<StateProvince> GetAll()
+        public static IEnumerable<StateEntity> GetAll()
         {
-            return Rainbow.Instance.GetStateProvinces(null, null);
+            return Rainbow.Instance.GetStateEntities(null, null);
         }
 
-        public static IEnumerable<StateProvince> GetStateProvinces(string name)
+        public static IEnumerable<StateEntity> GetStateEntities(string name)
         {
-            return Rainbow.Instance.GetStateProvinces(null, name);
+            return Rainbow.Instance.GetStateEntities(null, name);
         }
     }
 }
