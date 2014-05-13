@@ -121,9 +121,9 @@ namespace Bebeclick.WebClient
 
         #region Services
 
-        internal IEnumerable<Service> GetServices(Guid? id, Guid? productId, string name)
+        internal IEnumerable<Service> GetServices(Guid? id, Guid? productId, Guid? stateId, Guid? provinceId, string name)
         {
-            return container.Resolve<IPortalRepository>().GetServices(id, productId, name);
+            return container.Resolve<IPortalRepository>().GetServices(id, productId, stateId, provinceId, name);
         }
 
         internal void DeleteService(Service service)

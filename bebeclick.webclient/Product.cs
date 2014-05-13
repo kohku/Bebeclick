@@ -59,6 +59,7 @@ namespace Bebeclick.WebClient
         /// <summary>
         /// Lazy loading services
         /// </summary>
+        [IgnoreDataMember]
         public IEnumerable<Service> Services
         {
             get

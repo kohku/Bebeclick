@@ -115,7 +115,7 @@ namespace Bebeclick.WebClient
 
         protected override Service DataSelect(Guid id)
         {
-            return Rainbow.Instance.GetServices(id, null, null).FirstOrDefault();
+            return Rainbow.Instance.GetServices(id, null, null, null, null).FirstOrDefault();
         }
 
         protected override void DataUpdate()
@@ -135,17 +135,27 @@ namespace Bebeclick.WebClient
 
         public static IEnumerable<Service> GetAll()
         {
-            return Rainbow.Instance.GetServices(null, null, null);
+            return Rainbow.Instance.GetServices(null, null, null, null, null);
         }
 
         public static IEnumerable<Service> GetServices(Guid productId)
         {
-            return Rainbow.Instance.GetServices(null, productId, null);
+            return Rainbow.Instance.GetServices(null, productId, null, null, null);
         }
 
         public static IEnumerable<Service> GetServices(Guid productId, string name)
         {
-            return Rainbow.Instance.GetServices(null, productId, name);
+            return Rainbow.Instance.GetServices(null, productId, null, null, name);
+        }
+
+        public static IEnumerable<Service> GetServices(Guid productId, Guid stateId, string name)
+        {
+            return Rainbow.Instance.GetServices(null, productId, stateId, null, name);
+        }
+
+        public static IEnumerable<Service> GetServices(Guid productId, Guid stateId, Guid provinceId, string name)
+        {
+            return Rainbow.Instance.GetServices(null, productId, stateId, provinceId, name);
         }
     }
 }

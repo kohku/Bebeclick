@@ -31,7 +31,7 @@ namespace Bebeclick.WebClient
 
         void UpdateProduct(Product product);
 
-        IEnumerable<Service> GetServices(Guid? id, Guid? productId, string name);
+        IEnumerable<Service> GetServices(Guid? id, Guid? productId, Guid? stateId, Guid? provinceId, string name);
 
         void DeleteService(Service service);
 

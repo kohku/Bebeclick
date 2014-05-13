@@ -673,7 +673,7 @@ namespace Bebeclick.WebClient.SQL
 
         #region Service
 
-        public IEnumerable<Service> GetServices(Guid? id, Guid? productId, string name)
+        public IEnumerable<Service> GetServices(Guid? id, Guid? productId, Guid? stateId, Guid? provinceId, string name)
         {
             var services = new List<Service>();
 
