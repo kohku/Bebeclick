@@ -1,0 +1,115 @@
+﻿#__main {
+    width: 1195px;
+    height: 470px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #cbcbcd;
+    background-image: url(images/cuarto.jpg); 
+    background-size: cover; /* TODO: Remove workaround for current example */
+    background-position: 0px -200px; /* TODO: Remove workaround for current example */
+    padding-top: 20px;
+}
+#__testimonial {
+    color: #ffffff;
+    font-size: 90%;
+    font-style:italic;
+    font-weight:bold;
+    height: 120px;
+    margin-left: 620px;
+    width: 300px;
+    text-shadow: 2px 2px rgba(0,0,0,.7);
+}
+#__search_recommend {
+    margin-top: 80px;
+    margin-left: 80px;
+    margin-right: 80px;
+    height: 100px;
+    padding-left: 25px;
+    padding-top: 10px;
+    position: relative;
+    z-index: 20;
+}
+#__search_recommend_background {
+    background-color: #ffffff;
+    border-radius: 5px;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+    height: 100px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: -110px;
+    position: relative;
+    opacity: 0.8;
+    z-index: 10;
+}
+#__search_title {
+    font-family: OpenSans;
+    font-weight: bold;
+    font-size: 165%;
+    float: left;
+    width: 800px;
+    height: 38px;
+}
+#__recommend_title {
+    font-family: OpenSans;
+    font-weight: bold;
+    font-size: 165%;
+    float: left;
+    width: 180px;
+    height: 38px;
+}
+#__search {
+    float: left;
+    width: 800px;
+    height: 38px;
+}
+select.search{
+    display: block;
+    float: left;
+    background-color: #73c7f5;
+    box-shadow: inset 0 1px 3px #ddd;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 90%;
+    margin-right: 8px;
+    padding: .5em .6em;
+    text-transform: none;
+    vertical-align: baseline;
+    -moz-box-sizing: border-box;
+}
+input[type=button].go{
+    display: block;
+    float: left;
+    background-color: #E6E6E6;
+    border: 0 rgba(0,0,0,0);
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: rgba(0,0,0,.8);
+    cursor: pointer;
+    font-size: 100%;
+    line-height: normal;
+    padding: .5em 1em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    vertical-align: baseline;
+    white-space: nowrap;
+    zoom: 1;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-box-sizing: border-box;
+}
+#__recommend {
+    float: left;
+    width: 180px;
+    height: 38px;
+}
+
+#__outstanding {
+    width: 1195px;
+    height: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+}

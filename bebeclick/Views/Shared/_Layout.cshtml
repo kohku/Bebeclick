@@ -6,6 +6,10 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @if (IsSectionDefined("AddToHead"))
+    {
+        @RenderSection("AddToHead", required: false)
+    }
 </head>
 <body>
     <div id="__membership">
@@ -21,8 +25,8 @@
         <a id="_ctrl_inspiration" class="__item __rbtUpWh" href="@Url.Action("Index", "Inspiration")"><span class="title">@Resources.General.InspirationLink</span></a>
         <a id="_ctrl_contact" class="__item __rbtUpWh" href="@Url.Action("Index", "Contact")"><span class="title">@Resources.General.ContactLink</span></a>
         <div id="__quick_search">
-            <input class="search" type="text" />
-            <input type="button" class="search" />
+            <input class="search" name="searchText" type="text" placeholder="@Resources.General.SearchPlaceHolder" />
+            <input type="button" name="quickSearch" class="search" />
         </div>
     </div>
     @RenderBody()

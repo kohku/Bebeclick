@@ -1,22 +1,29 @@
 ﻿@model Bebeclick.Models.HomeIndexViewModel
+@section AddToHead{
+    <link href="@Url.Content("~/Content/homeIndex.css")" rel="stylesheet" type="text/css" />
+}
 @{
     ViewBag.Title = "Bebeclick";
 }
-@using (Html.BeginForm()) { 
-<div id="__main">
-    <div id="__testimonial"><h3>Idea interior</h3><p>"Remodelamos toda la habitación del bebé. Una increíble atención y unos super precios.<br />Fernanda Rojas"</p></div>
-    <div id="__searchAndRecommend">
-        <div id="__search_title">Busca</div>
-        <div id="__recommend_title">Recomienda</div>
-        <div id="__search">
-            @Html.DropDownList("states", Model.State, "Select a state...", new { id = "__state" })
-            <select id="__products"></select>
-            <select id="__service"></select>
+@using (Html.BeginForm())
+{
+    <div id="__main">
+        <div id="__testimonial"><h3>Idea interior</h3><p>"Remodelamos toda la habitación del bebé. Una increíble atención y unos super precios".<br />Fernanda Rojas</p></div>
+        <div id="__search_recommend">
+            <div id="__search_title">@Resources.General.SearchTitle</div>
+            <div id="__recommend_title">@Resources.General.RecommendTitle</div>
+            <div id="__search">
+                @Html.DropDownList("states", Model.States, "ESTADO", new { id = "__states", @class = "search" })
+                @Html.DropDownList("states", Model.Products, "PRODUCTO", new { id = "__products", @class = "search" })
+                @Html.DropDownList("states", Model.Services, "SERVICIO", new { id = "__services", @class = "search" })
+                <input type="button" id="__search_button" class="go" name="search" value="@Resources.General.GoButton" />
+            </div>
+            <div id="__recommend">
+                <input type="button" class="go" name="recommend" value="@Resources.General.RecommendButton" />
+            </div>
         </div>
-        <div id="__recommend">
-        </div>
+        <div id="__search_recommend_background"></div>
     </div>
-</div>
 }
 <div id="__outstanding"></div>
 

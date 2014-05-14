@@ -123,6 +123,9 @@
   <data name="EnterpriseLink" xml:space="preserve">
     <value>Enterprise</value>
   </data>
+  <data name="GoButton" xml:space="preserve">
+    <value>Go</value>
+  </data>
   <data name="HomeLink" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -132,13 +135,25 @@
   <data name="LoginLink" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="RecommendButton" xml:space="preserve">
+    <value>Recommend</value>
+  </data>
   <data name="RecommendLink" xml:space="preserve">
+    <value>Recommend</value>
+  </data>
+  <data name="RecommendTitle" xml:space="preserve">
     <value>Recommend</value>
   </data>
   <data name="RegisterLink" xml:space="preserve">
     <value>Register</value>
   </data>
   <data name="SearchLink" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchPlaceHolder" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchTitle" xml:space="preserve">
     <value>Search</value>
   </data>
 </root>

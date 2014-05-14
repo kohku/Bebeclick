@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go.
+        /// </summary>
+        internal static string GoButton {
+            get {
+                return ResourceManager.GetString("GoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string HomeLink {
@@ -108,9 +117,27 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Recommend.
         /// </summary>
+        internal static string RecommendButton {
+            get {
+                return ResourceManager.GetString("RecommendButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recommend.
+        /// </summary>
         internal static string RecommendLink {
             get {
                 return ResourceManager.GetString("RecommendLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recommend.
+        /// </summary>
+        internal static string RecommendTitle {
+            get {
+                return ResourceManager.GetString("RecommendTitle", resourceCulture);
             }
         }
         
@@ -129,6 +156,24 @@ namespace Resources {
         internal static string SearchLink {
             get {
                 return ResourceManager.GetString("SearchLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string SearchPlaceHolder {
+            get {
+                return ResourceManager.GetString("SearchPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string SearchTitle {
+            get {
+                return ResourceManager.GetString("SearchTitle", resourceCulture);
             }
         }
     }
