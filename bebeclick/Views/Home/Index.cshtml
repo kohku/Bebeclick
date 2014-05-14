@@ -1,7 +1,13 @@
 ﻿@model Bebeclick.Models.HomeIndexViewModel
+
+@{
+    ViewBag.Title = "Bebeclick";
+}
+
 @section AddToHead{
     <link href="@Url.Content("~/Content/homeIndex.css")" rel="stylesheet" type="text/css" />
 }
+
 @using (Html.BeginForm())
 {
     <div id="__main">
