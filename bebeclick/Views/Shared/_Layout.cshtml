@@ -12,24 +12,32 @@
     }
 </head>
 <body>
-    <div id="__membership">
-        <div id="__social"><img src="~/Content/Images/tw_icon.png" /><img src="~/Content/Images/fb_icon.png" /><img src="~/Content/Images/pt_icon.png" /></div>
-        @Html.Partial("_LoginPartial")
-    </div>
-    <div id="__menu_bar">
-        <div id="__logo"><a class="home" href="@Url.Action("Index", "Home")"></a></div>
-        <a id="_ctrl_home" class="__item __rbtUpWh" href="@Url.Action("Index", "Home")"><span class="title">@Resources.General.HomeLink</span></a>
-        <a id="_ctrl_search" class="__item __rbtUpWh" href="@Url.Action("Index", "Search")"><span class="title">@Resources.General.SearchLink</span></a>
-        <a id="_ctrl_recommend" class="__item __rbtUpWh" href="@Url.Action("Index", "Recommend")"><span class="title">@Resources.General.RecommendLink</span></a>
-        <a id="_ctrl_enterprises" class="__item __rbtUpWh" href="@Url.Action("Index", "Enterprise")"><span class="title">@Resources.General.EnterpriseLink</span></a>
-        <a id="_ctrl_inspiration" class="__item __rbtUpWh" href="@Url.Action("Index", "Inspiration")"><span class="title">@Resources.General.InspirationLink</span></a>
-        <a id="_ctrl_contact" class="__item __rbtUpWh" href="@Url.Action("Index", "Contact")"><span class="title">@Resources.General.ContactLink</span></a>
-        <div id="__quick_search">
-            <input class="search" name="searchText" type="text" placeholder="@Resources.General.SearchPlaceHolder" />
-            <input type="button" name="quickSearch" class="search" />
+    <div id="__container">
+        <div id="__membership">
+            <div id="__social"><img src="~/Content/Images/tw_icon.png" /><img src="~/Content/Images/fb_icon.png" /><img src="~/Content/Images/pt_icon.png" /></div>
+            @Html.Partial("_LoginPartial")
+        </div>
+        <div id="__menu_bar">
+            <div id="__logo"><a class="home" href="@Url.Action("Index", "Home")"></a></div>
+            <a id="_ctrl_home" class="__item __rbtUpWh" href="@Url.Action("Index", "Home")"><span class="title">@Resources.General.HomeLink</span></a>
+            <a id="_ctrl_search" class="__item __rbtUpWh" href="@Url.Action("Index", "Search")"><span class="title">@Resources.General.SearchLink</span></a>
+            <a id="_ctrl_recommend" class="__item __rbtUpWh" href="@Url.Action("Index", "Recommend")"><span class="title">@Resources.General.RecommendLink</span></a>
+            <a id="_ctrl_enterprises" class="__item __rbtUpWh" href="@Url.Action("Index", "Enterprise")"><span class="title">@Resources.General.EnterpriseLink</span></a>
+            <a id="_ctrl_inspiration" class="__item __rbtUpWh" href="@Url.Action("Index", "Inspiration")"><span class="title">@Resources.General.InspirationLink</span></a>
+            <a id="_ctrl_contact" class="__item __rbtUpWh" href="@Url.Action("Contact", "Home")"><span class="title">@Resources.General.ContactLink</span></a>
+            <div id="__quick_search">
+                <input class="search" name="searchText" type="text" placeholder="@Resources.General.SearchPlaceHolder" />
+                <input type="button" name="quickSearch" class="search" />
+            </div>
+        </div>
+        @RenderBody()
+        <div id="__footer">
+            <div class="inner">
+                <span id="__copyright">Bebeclick. Todos los derechos reservados 2014.</span>
+                <span id="__terms"><a id="__terms_condition" href="@Url.Action("Terms", "Home")">Términos y condiciones</a></span>
+            </div>
         </div>
     </div>
-    @RenderBody()
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

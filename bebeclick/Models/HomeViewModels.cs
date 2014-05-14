@@ -57,4 +57,19 @@ namespace Bebeclick.Models
             }
         }
     }
+
+    public class HomeContactViewModel
+    {
+        
+    }
+
+    public class HomeAboutViewModel
+    {
+        
+    }
+
+    public class HomeTermsViewModel
+    {
+        
+    }
 }

@@ -11,21 +11,32 @@ namespace Bebeclick.Controllers
     {
         public ActionResult Index()
         {
-            return View(new HomeIndexViewModel());
+            var model = new HomeIndexViewModel();
+
+            ViewBag.Title = "Bebeclick";
+
+            return View(model);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var model = new HomeAboutViewModel();
 
-            return View();
+            return View(model);
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            var model = new HomeContactViewModel();
 
-            return View();
+            return View(model);
+        }
+
+        public ActionResult Terms()
+        {
+            var model = new HomeTermsViewModel();
+
+            return View(model);
         }
     }
 }
