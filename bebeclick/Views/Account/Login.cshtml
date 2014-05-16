@@ -11,28 +11,29 @@
 }
 
 <div id="__log_in">
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "pure-form pure-form-stacked", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <fieldset>
-        <h3>Iniciar Sesión</h3>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email, new { type = "email", placeholder = "someone@example.com" })
-        @Html.ValidationMessageFor(m => m.Email, "")
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password, new { type = "password", placeholder = "Password" })
-        @Html.ValidationMessageFor(m => m.Password, "")
-        @Html.CheckBoxFor(m => m.RememberMe, new { id="__remember_me", @class = "pure-checkbox" })
-        @Html.LabelFor(m => m.RememberMe, new { id = "__remember_label" })
-        <input type="submit" value="Log in" class="pure-button pure-button-primary" />
-    </fieldset>
-    @Html.ActionLink("Register as a new user", "Register")
-    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-}
-</div>
-<div id="__socialLoginForm">
-    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "pure-form pure-form-stacked", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            <h3>Iniciar sesión</h3>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { id = "__email", type = "email", placeholder = "someone@example.com" })
+            @Html.ValidationMessageFor(m => m.Email, "")
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { id = "__password", type = "password", placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password, "")
+            <label id="__remember" for="__remember_me" class="pure-checkbox">
+                <input id="__remember_me" value="remember" type="checkbox" />Remember me
+            </label>
+            @Html.ActionLink("Forgot your password?", "ForgotPassword", null, new { id = "__forgot_password" })
+            <input id="__log_in_button" type="submit" value="Log in" class="pure-button pure-button-primary" />
+        </fieldset>
+    }
+    <div id="__register_socialLoginForm">
+        @Html.ActionLink("Register as a new user", "Register", "Account", null, new { id = "__register_user" })
+        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+    </div>
 </div>
 
 @section Scripts {
