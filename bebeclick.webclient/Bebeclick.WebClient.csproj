@@ -52,6 +52,16 @@
   <ItemGroup>
     <Compile Include="BusinessBase.cs" />
     <Compile Include="IPortalRepository.cs" />
+    <Compile Include="Resources\Account.es.Designer.cs">
+      <DependentUpon>Account.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Account.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Account.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Portal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +85,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Account.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Account.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Account.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Account.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Portal.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Portal.Designer.cs</LastGenOutput>

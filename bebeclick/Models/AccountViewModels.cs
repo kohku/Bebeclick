@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bebeclick.Models
 {
@@ -37,22 +38,35 @@ namespace Bebeclick.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "InvalidEmail", ErrorMessage = "")]
         public string Email { get; set; }
 
-        [Required]
+        [Display(Name = "Password", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "PasswordRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Display(Name = "BirthDate")]
+        public DateTime? BirthDate { get; set; }
+
+        public string Gender { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -68,6 +82,7 @@ namespace Bebeclick.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
     }
 
     public class ResetPasswordViewModel

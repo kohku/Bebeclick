@@ -14,6 +14,16 @@ h3{
     font-weight: bold;
     font-size: 160%;
 }
+.__control_label{
+    float: left;
+}
+.field-validation-error {
+    display: block;
+    float: left;
+    color: #c09853;
+    margin: .25em .5em;
+    font-family: 'OpenSans'
+}
 #__email{
     width: 400px;
 }
@@ -31,7 +41,7 @@ h3{
     display: block;
     float: right;
     margin: .5em 0;
-    width: 200px;
+    min-width: 200px;
     color: #000000;
     font-family: Roboto;
     font-weight: bold;
@@ -51,7 +61,7 @@ h3{
 }
 #__register_user, #__register_user:hover, #__register_user:visited, #__register_user:active {
     display: block;
-    margin: .5em .5em 1em auto;
+    margin: .5em .25em 1em 0;
     float: left;
     color: #000000;
     font-family: Roboto;
@@ -61,7 +71,7 @@ h3{
 }
 #__external_login{
     display: block;
-    margin: .7em .5em 1em auto;
+    margin: .65em .25em 1em;
     float: left;
     font-family: 'OpenSans'
 }

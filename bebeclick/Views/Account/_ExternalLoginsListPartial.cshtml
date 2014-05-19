@@ -1,26 +1,21 @@
 ﻿@using Bebeclick.Models
+@using Bebeclick.WebClient.Resources
+
 @model ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0)
+    if (loginProviders.Count() > 0)
     {
-        <div>
-            <p>There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
-            for details on setting up this ASP.NET application to support logging in via external services.</p>
-        </div>
-    }
-    else
-    {
-        <div id="__external_login">or</div>
+        <div id="__external_login">@Account.OrRegisterWithExternal</div>
         using (Html.BeginForm(Model.Action, "Account", new { ReturnUrl = Model.ReturnUrl }))
         {
             @Html.AntiForgeryToken()
             <div id="__socialLoginList">
                 @foreach (AuthenticationDescription p in loginProviders)
                 {
-                    <button type="submit" class="pure-button" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Login with @p.AuthenticationType</button>
+                    <button type="submit" class="pure-button" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="@string.Format(Account.LoginExternalTitle, p.Caption)">@string.Format(Account.LoginExternalText, p.AuthenticationType)</button>
                 }
             </div>
         }
