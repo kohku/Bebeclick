@@ -1,6 +1,7 @@
 ﻿@model Bebeclick.Models.RegisterViewModel
+@using Bebeclick.WebClient.Resources
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = Account.RegisterTitle;
 }
 
 @section AddToHead{
@@ -12,29 +13,23 @@
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "pure-form pure-form-stacked", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <h1>Create a new account</h1>
-        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <h1>@Account.RegisterTitle</h1>
         <fieldset>
-            @Html.LabelFor(m => m.FirstName, new { @class = "__control_label" })
-            @Html.TextBoxFor(m => m.FirstName, new { id = "__name", required = "required" })
             @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
-            @Html.TextBoxFor(m => m.Email, new { @class = "__email", required = "required" })
+            @Html.ValidationMessageFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { id = "__email", required = "required" })
             @Html.LabelFor(m => m.Password, new { @class = "__control_label" })
-            @Html.PasswordFor(m => m.Password, new { @class = "__password", required = "required" })
-        </fieldset>
-        <fieldset>
-            @Html.LabelFor(m => m.LastName, new { @class = "__control_label" })
-            @Html.TextBoxFor(m => m.LastName, new { id = "__last_name", required = "required" })
-            @Html.LabelFor(m => m.BirthDate, new { @class = "__control_label" })
-            @Html.TextBoxFor(m => m.BirthDate, new { id = "__birth_date", required = "required" })
+            @Html.ValidationMessageFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { id = "__password", required = "required" })
             @Html.LabelFor(m => m.ConfirmPassword, new { @class = "__control_label" })
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "__confirm_password", required = "required" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword, new { id = "__confirm_password", required = "required" })
+            <input id="__register_button" type="submit" value="@Account.RegisterNewUser" class="pure-button pure-button-primary" />
+            @Html.ValidationMessage("RegisterResult", new { id = "__register_result" })
         </fieldset>
-
-
-        <input type="submit" class="btn btn-default" value="Register" />
     }
 </div>
+<!-- TODO: Aviso de privacidad y términos de uso -->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

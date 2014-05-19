@@ -135,6 +135,9 @@
   <data name="LoginLink" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="LogoutLink" xml:space="preserve">
+    <value>Log out</value>
+  </data>
   <data name="RecommendButton" xml:space="preserve">
     <value>Recommend</value>
   </data>

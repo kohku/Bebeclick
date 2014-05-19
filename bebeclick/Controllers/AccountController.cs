@@ -489,7 +489,7 @@ namespace Bebeclick.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError("RegisterResult", error);
             }
         }
 

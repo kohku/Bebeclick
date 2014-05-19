@@ -1,19 +1,23 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Resources
 
 
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+<div id="__account">
+    @if (Request.IsAuthenticated)
     {
-        @Html.AntiForgeryToken()
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "__logout_form" }))
+        {
+            @Html.AntiForgeryToken()
 
-        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-        <div id="__account">
-            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-        </div>
+            @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { id = "__manage_account", title = "Manage", @class = "__rbt58b" })
+            <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <a class="__rbt58b" href="javascript:document.getElementById('__logout_form').submit()">@General.LogoutLink</a>
+        }
     }
-}
-else
-{
-    <div id="__account">@Html.ActionLink(Resources.General.RegisterLink, "Register", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })<span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>@Html.ActionLink(Resources.General.LoginLink, "Login", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })</div>
-}
+    else
+    {
+        @Html.ActionLink(Resources.General.RegisterLink, "Register", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })
+        <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        @Html.ActionLink(Resources.General.LoginLink, "Login", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })
+    }
+</div>

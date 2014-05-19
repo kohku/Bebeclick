@@ -6,11 +6,38 @@
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
-    width: 75%;
+    width: 400px;
 }
 h1{
     color: #000000;
     font-family: Roboto;
     font-weight: bold;
     font-size: 300%;
+}
+.__control_label{
+    float: left;
+}
+.field-validation-error {
+    display: block;
+    float: left;
+    color: #c09853;
+    margin: .25em .5em;
+    font-family: 'OpenSans'
+}
+#__email{
+    width: 400px;
+}
+#__password {
+    width: 400px;
+}
+#__confirm_password{
+    width: 400px;
+}
+#__register_button{
+    display:block;
+    float: none;
+    clear: both;
+    margin-bottom: 20px;
+}
+#__register_result {
 }

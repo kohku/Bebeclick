@@ -39,7 +39,7 @@ namespace Bebeclick.Models
     public class LoginViewModel
     {
         [Display(Name = "Email", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
-        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired")]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired", ErrorMessage = "")]
         [EmailAddress(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "InvalidEmail", ErrorMessage = "")]
         public string Email { get; set; }
 
@@ -54,33 +54,20 @@ namespace Bebeclick.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [Display(Name = "FirstName")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "LastName")]
-        public string LastName { get; set; }
-
-        [Display(Name = "BirthDate")]
-        public DateTime? BirthDate { get; set; }
-
-        public string Gender { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired", ErrorMessage = "")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "InvalidEmail", ErrorMessage = "")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Password", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "PasswordRequired", ErrorMessage = "")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [StringLength(100, ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "PasswordLength", ErrorMessage = "", MinimumLength = 6)]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "ConfirmPasswordRequired", ErrorMessage = "")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "ComparePassword", ErrorMessage = "")]
         public string ConfirmPassword { get; set; }
 
     }

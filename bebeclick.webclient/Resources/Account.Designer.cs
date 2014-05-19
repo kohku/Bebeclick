@@ -61,6 +61,33 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password and confirmation password do not match..
+        /// </summary>
+        public static string ComparePassword {
+            get {
+                return ResourceManager.GetString("ComparePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Required field..
+        /// </summary>
+        public static string ConfirmPasswordRequired {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -160,6 +187,15 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The {0} must be at least {2} characters long..
+        /// </summary>
+        public static string PasswordLength {
+            get {
+                return ResourceManager.GetString("PasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string PasswordPlaceHolder {
@@ -183,6 +219,15 @@ namespace Bebeclick.WebClient.Resources {
         public static string RegisterNewUser {
             get {
                 return ResourceManager.GetString("RegisterNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new account.
+        /// </summary>
+        public static string RegisterTitle {
+            get {
+                return ResourceManager.GetString("RegisterTitle", resourceCulture);
             }
         }
         
