@@ -79,6 +79,7 @@ namespace Bebeclick.Controllers
         public ActionResult Register()
         {
             var model = new RegisterViewModel();
+
             return View(model);
         }
 
@@ -338,15 +339,16 @@ namespace Bebeclick.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+
             if (loginInfo == null)
-            {
                 return RedirectToAction("Login");
-            }
 
             // Sign in the user with this external login provider if the user already has a login
             var user = await UserManager.FindAsync(loginInfo.Login);
+
             if (user != null)
             {
+                await StoreFacebookAuthToken(user);
                 await SignInAsync(user, isPersistent: false);
                 return RedirectToLocal(returnUrl);
             }
@@ -355,6 +357,7 @@ namespace Bebeclick.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+
                 return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
@@ -394,25 +397,27 @@ namespace Bebeclick.Controllers
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToAction("Manage");
-            }
 
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+
                 if (info == null)
-                {
                     return View("ExternalLoginFailure");
-                }
+
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+
                 IdentityResult result = await UserManager.CreateAsync(user);
+
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
+
                     if (result.Succeeded)
                     {
+                        await StoreFacebookAuthToken(user);
                         await SignInAsync(user, isPersistent: false);
                         
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -429,6 +434,36 @@ namespace Bebeclick.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        private async Task StoreFacebookAuthToken(ApplicationUser user)
+        {
+            var claimsIdentity = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+
+            if (claimsIdentity != null)
+            {
+                // Retrieve the existing claims to the user and add the FacebookAccessTokenClaim
+                var currentClaims = await UserManager.GetClaimsAsync(user.Id);
+
+                //foreach (var item in claimsIdentity.Claims)
+                //{
+                //    if (currentClaims.Where(c => c.Type == item.Type).Count() == 0)
+                //    {
+                //        await UserManager.AddClaimAsync(user.Id, item);
+                //    }
+                //}
+
+                var authenticationType = claimsIdentity.FindAll("AuthenticationType").FirstOrDefault();
+                var facebookAccessToken = claimsIdentity.FindAll("FacebookAccessToken").FirstOrDefault();
+                var facebookId = claimsIdentity.FindAll("FacebookID").FirstOrDefault();
+
+                if (currentClaims.Count() == 0)
+                {
+                    await UserManager.AddClaimAsync(user.Id, authenticationType);
+                    await UserManager.AddClaimAsync(user.Id, facebookAccessToken);
+                    await UserManager.AddClaimAsync(user.Id, facebookId);
+                }
+            }
         }
 
         //

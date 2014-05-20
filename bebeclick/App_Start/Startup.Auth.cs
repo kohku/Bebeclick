@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Owin;
 using System;
 using Bebeclick.Models;
+using System.Configuration;
 
 namespace Bebeclick
 {
@@ -44,24 +45,23 @@ namespace Bebeclick
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerS$DCR612q
-#if DEBUG
-            app.UseFacebookAuthentication(
-               appId: "770000323020014",
-               appSecret: "1a3c82df9d64007bc20ec26bc524d9ec");
-#else
-            app.UseFacebookAuthentication(
-               appId: "806277869438073",
-               appSecret: "dc813df21288180a87d066390acfb244");
-#endif
-#if DEBUG
+
+            var facebookOptions = new Microsoft.Owin.Security.Facebook.FacebookAuthenticationOptions()
+            {
+                AppId = ConfigurationManager.AppSettings["Facebook:AppId"],
+                AppSecret = ConfigurationManager.AppSettings["Facebook:AppSecret"],
+                Provider = new Microsoft.Owin.Security.Facebook.FacebookAuthenticationProvider()
+                {
+                    OnAuthenticated = Bebeclick.Controllers.FacebookController.AddBasicDetailsAsClaims
+                },
+                SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie
+            };
+
+            app.UseFacebookAuthentication(facebookOptions);              
+
             app.UseGoogleAuthentication(
-                clientId: "676333113969-qmannacftg8aoe2rhl0e01o2jpa1ku88.apps.googleusercontent.com",
-                clientSecret: "w4KoCgadkbzR7v9sepgGdVjt");
-#else
-            app.UseGoogleAuthentication(
-                clientId: "1080722520326-jadofdikkua6lruhiv3lnarmhsk5ilo8.apps.googleusercontent.com",
-                clientSecret: "W1Tpe0r59bQFeygaFVWq83Vo");
-#endif
+                clientId: ConfigurationManager.AppSettings["Google:ClientId"],
+                clientSecret: ConfigurationManager.AppSettings["Google:ClientSecret"]);
         }
     }
 }
