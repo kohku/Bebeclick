@@ -56,6 +56,7 @@ namespace Bebeclick
                 },
                 SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie
             };
+            facebookOptions.Scope.Add("email");
 
             app.UseFacebookAuthentication(facebookOptions);              
 

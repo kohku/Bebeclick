@@ -10,28 +10,14 @@ namespace Bebeclick.Controllers
 {
     public class FacebookController
     {
+        const string XmlSchemaString = "http://www.w3.org/2001/XMLSchema#string";
         public static Task AddBasicDetailsAsClaims(FacebookAuthenticatedContext context)
         {
             if (context == null)
                 throw new InvalidOperationException("context");
 
-            context.Identity.AddClaim(new Claim("AuthenticationType", context.Identity.AuthenticationType));
-            context.Identity.AddClaim(new Claim("FacebookAccessToken", context.AccessToken));
-            context.Identity.AddClaim(new Claim("FacebookID", context.Id));
-
-            //if (!string.IsNullOrEmpty(context.Name))
-            //    context.Identity.AddClaim(new Claim("FacebookName", context.Name));
-            //if (!string.IsNullOrEmpty(context.Email))
-            //    context.Identity.AddClaim(new Claim("FacebookEmail", context.Email));
-
-            //dynamic user = context.User;
-
-            //if (user.gender != null && !string.IsNullOrEmpty(user.gender.ToString()))
-            //    context.Identity.AddClaim(new Claim("FacebookGender", user.gender.ToString()));
-            //if (user.first_name != null && !string.IsNullOrEmpty(user.first_name.ToString()))
-            //    context.Identity.AddClaim(new Claim("FacebookFirstName", user.first_name.ToString()));
-            //if (user.last_name != null && !string.IsNullOrEmpty(user.last_name.ToString()))
-            //    context.Identity.AddClaim(new Claim("FacebookLastName", user.last_name.ToString()));
+            if (!context.Identity.HasClaim("urn:facebook:access_token", context.AccessToken))
+                context.Identity.AddClaim(new Claim("urn:facebook:access_token", context.AccessToken, XmlSchemaString, "Facebook"));
 
             return Task.FromResult(0);
         }

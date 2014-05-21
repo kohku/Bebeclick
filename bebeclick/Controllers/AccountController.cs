@@ -28,7 +28,8 @@ namespace Bebeclick.Controllers
             UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -58,6 +59,7 @@ namespace Bebeclick.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.Email, model.Password);
+
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -93,7 +95,9 @@ namespace Bebeclick.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
@@ -121,7 +125,7 @@ namespace Bebeclick.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null) 
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
@@ -181,13 +185,13 @@ namespace Bebeclick.Controllers
         {
             return View();
         }
-	
+
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (code == null) 
+            if (code == null)
             {
                 return View("Error");
             }
@@ -348,7 +352,6 @@ namespace Bebeclick.Controllers
 
             if (user != null)
             {
-                await StoreFacebookAuthToken(user);
                 await SignInAsync(user, isPersistent: false);
                 return RedirectToLocal(returnUrl);
             }
@@ -417,15 +420,15 @@ namespace Bebeclick.Controllers
 
                     if (result.Succeeded)
                     {
-                        await StoreFacebookAuthToken(user);
+                        //await StoreFacebookAuthToken(user);
                         await SignInAsync(user, isPersistent: false);
-                        
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -434,36 +437,6 @@ namespace Bebeclick.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
-        }
-
-        private async Task StoreFacebookAuthToken(ApplicationUser user)
-        {
-            var claimsIdentity = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
-
-            if (claimsIdentity != null)
-            {
-                // Retrieve the existing claims to the user and add the FacebookAccessTokenClaim
-                var currentClaims = await UserManager.GetClaimsAsync(user.Id);
-
-                //foreach (var item in claimsIdentity.Claims)
-                //{
-                //    if (currentClaims.Where(c => c.Type == item.Type).Count() == 0)
-                //    {
-                //        await UserManager.AddClaimAsync(user.Id, item);
-                //    }
-                //}
-
-                var authenticationType = claimsIdentity.FindAll("AuthenticationType").FirstOrDefault();
-                var facebookAccessToken = claimsIdentity.FindAll("FacebookAccessToken").FirstOrDefault();
-                var facebookId = claimsIdentity.FindAll("FacebookID").FirstOrDefault();
-
-                if (currentClaims.Count() == 0)
-                {
-                    await UserManager.AddClaimAsync(user.Id, authenticationType);
-                    await UserManager.AddClaimAsync(user.Id, facebookAccessToken);
-                    await UserManager.AddClaimAsync(user.Id, facebookId);
-                }
-            }
         }
 
         //
@@ -517,7 +490,40 @@ namespace Bebeclick.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
+
+            // Extracted the part that has been changed in SignInAsync for clarity.
+            await SetExternalProperties(user);
+
+            var identity = await user.GenerateUserIdentityAsync(UserManager);
+
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+        }
+
+        private async Task SetExternalProperties(ApplicationUser user)
+        {
+            // get external claims captured in Startup.ConfigureAuth
+            ClaimsIdentity external = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+
+            var claims = await UserManager.GetClaimsAsync(user.Id);
+
+            if (external != null)
+            {
+                var ignoreClaim = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims";
+
+                // add external claims to identity
+                foreach (var claim in external.Claims)
+                {
+                    if (!claim.Type.StartsWith(ignoreClaim))
+                    {
+                        var found = claims.FirstOrDefault(c => c.Type == claim.Type);
+
+                        if (found != null)
+                            await UserManager.RemoveClaimAsync(user.Id, found);
+
+                        await UserManager.AddClaimAsync(user.Id, claim);
+                    }
+                }
+            }
         }
 
         private void AddErrors(IdentityResult result)
@@ -565,7 +571,8 @@ namespace Bebeclick.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

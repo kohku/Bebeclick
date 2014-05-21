@@ -1,12 +1,18 @@
 
+use bebeclickstorage
+
+select *
+from AspNetUsers
 
 select *
 from AspNetUserClaims
 
 select *
-from AspNetUsers
+from AspNetUserLogins
+
+select *
+from AspNetUserRoles
 
 /*
 delete AspNetUsers
-where id = 'bff1c30a-a301-4874-8eb2-3628c10dc09b'
 */
