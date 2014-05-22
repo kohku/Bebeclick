@@ -362,11 +362,6 @@ namespace Bebeclick.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
 
-                foreach (var claim in loginInfo.ExternalIdentity.Claims)
-                {
-                    System.Diagnostics.Trace.WriteLine(string.Format("{0} {1}", claim.Type, claim.Value));
-                }
-
                 ExternalLoginConfirmationViewModel model = null;
 
                 if (loginInfo.Login.LoginProvider == "Facebook")

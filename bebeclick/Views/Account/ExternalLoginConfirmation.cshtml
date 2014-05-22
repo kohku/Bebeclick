@@ -8,6 +8,7 @@
 @section AddToHead{
     <link href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/account/externalLogin.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")" rel="stylesheet" type="text/javascript" />
 }
 
 <div id="__register">
@@ -26,7 +27,7 @@
                 @Html.TextBoxFor(m => m.FirstName, new { id = "__firstName", required = "required" })
                 @Html.LabelFor(m => m.BirthDay, new { @class = "__control_label" })
                 @Html.ValidationMessageFor(m => m.BirthDay)
-                @Html.TextBoxFor(m => m.BirthDay, new { id = "__birthDay", required = "required" })
+                @Html.TextBox("BirthDay", String.Format("{0:d}", Model.BirthDay.ToShortDateString()), new { id = "__birthDay", type = "date", required = "required" })
                 @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
                 @Html.ValidationMessageFor(m => m.Email)
                 @Html.TextBoxFor(m => m.Email, new { id = "__email", type = "email", required = "required" })
@@ -45,10 +46,6 @@
                 @Html.ValidationMessageFor(m => m.City)
                 @Html.TextBoxFor(m => m.City, new { id = "__city", required = "required" })
             </div>
-
-
-
-
             <input id="__register_button" type="submit" value="@Account.Register" class="pure-button pure-button-primary" />
             @Html.ValidationSummary(true, Account.ExternalLoginValidationSummary, new { @class = "validation_summary" })
         </fieldset>
@@ -57,4 +54,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryUI")
 }

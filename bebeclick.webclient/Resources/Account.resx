@@ -151,7 +151,7 @@
     <value>Associate your {0} account.</value>
   </data>
   <data name="ExternalLoginTitle" xml:space="preserve">
-    <value>Registro</value>
+    <value>Register</value>
   </data>
   <data name="ExternalLoginValidationSummary" xml:space="preserve">
     <value>Register failure.</value>

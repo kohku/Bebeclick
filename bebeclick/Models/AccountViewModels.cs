@@ -19,13 +19,14 @@ namespace Bebeclick.Models
         [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "GenderRequired", ErrorMessage = "")]
         public string Gender { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "BirthDay", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
         [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "BirthDayRequired", ErrorMessage = "")]
         public DateTime BirthDay { get; set; }
 
         [Display(Name = "Email", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
-        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired", ErrorMessage = "")]
         [EmailAddress(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "InvalidEmail", ErrorMessage = "")]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired", ErrorMessage = "")]
         public string Email { get; set; }
 
         [Display(Name = "City", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]

@@ -160,7 +160,7 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Registro.
+        ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string ExternalLoginTitle {
             get {
