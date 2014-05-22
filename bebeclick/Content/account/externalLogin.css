@@ -1,0 +1,33 @@
+﻿#__register{
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+#__register_button{
+    display:block;
+    float: none;
+    clear: both;
+    margin-bottom: 20px;
+}
+.left{
+    float: left;
+    width:50%;
+}
+.right{
+    float: left;
+    width:50%;
+}
+#__firstName{
+    width: 300px;
+}
+#__lastName{
+    width: 300px;
+}
+#__email{
+    width: 300px;
+}

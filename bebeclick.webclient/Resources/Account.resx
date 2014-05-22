@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BirthDay" xml:space="preserve">
+    <value>Birth date</value>
+  </data>
+  <data name="BirthDayRequired" xml:space="preserve">
+    <value>* Required field.</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="CityRequired" xml:space="preserve">
+    <value>* Required field.</value>
+  </data>
   <data name="ComparePassword" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
   </data>
@@ -135,11 +147,41 @@
   <data name="EmailRequired" xml:space="preserve">
     <value>* Required field.</value>
   </data>
+  <data name="ExternalLoginSubtitle" xml:space="preserve">
+    <value>Associate your {0} account.</value>
+  </data>
+  <data name="ExternalLoginTitle" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="ExternalLoginValidationSummary" xml:space="preserve">
+    <value>Register failure.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>* Required field.</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot password?</value>
   </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GenderRequired" xml:space="preserve">
+    <value>* Required field.</value>
+  </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>* Invalid email.</value>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Invalid username or password.</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>* Required field.</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Log in</value>
@@ -152,6 +194,9 @@
   </data>
   <data name="LoginTitle" xml:space="preserve">
     <value>Log in</value>
+  </data>
+  <data name="LoginValidationSummary" xml:space="preserve">
+    <value>Login failure.</value>
   </data>
   <data name="OrRegisterWithExternal" xml:space="preserve">
     <value>or</value>
@@ -168,6 +213,9 @@
   <data name="PasswordRequired" xml:space="preserve">
     <value>* Required field.</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
   <data name="RegisterNewUser" xml:space="preserve">
     <value>Register new user</value>
   </data>
@@ -176,5 +224,11 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me?</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="StateRequired" xml:space="preserve">
+    <value>* Required field.</value>
   </data>
 </root>

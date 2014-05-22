@@ -8,22 +8,6 @@
     margin-right: auto;
     width: 400px;
 }
-h3{
-    color: #000000;
-    font-family: Roboto;
-    font-weight: bold;
-    font-size: 160%;
-}
-.__control_label{
-    float: left;
-}
-.field-validation-error {
-    display: block;
-    float: left;
-    color: #c09853;
-    margin: .25em .5em;
-    font-family: 'OpenSans'
-}
 #__email{
     width: 400px;
 }
@@ -81,7 +65,7 @@ h3{
     width: 400px;
 }
 #Google{
-    background-image: url(images/google.png);
+    background-image: url(../images/google.png);
     background-repeat: no-repeat;
     background-color: #357ae8;
     background-position: 8px 4px;
@@ -92,7 +76,7 @@ h3{
     filter: 80;
 }
 #Facebook {
-    background-image: url(images/facebook.png);
+    background-image: url(../images/facebook.png);
     background-color: #3b5998;
     background-position: -8px -4px;
     background-repeat: no-repeat;

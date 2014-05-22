@@ -5,10 +5,36 @@ namespace Bebeclick.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        public string Name { get; set; }
+
+        [Display(Name = "FirstName", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "FirstNameRequired", ErrorMessage = "")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "LastName", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "LastNameRequired", ErrorMessage = "")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Gender", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "GenderRequired", ErrorMessage = "")]
+        public string Gender { get; set; }
+
+        [Display(Name = "BirthDay", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "BirthDayRequired", ErrorMessage = "")]
+        public DateTime BirthDay { get; set; }
+
+        [Display(Name = "Email", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired", ErrorMessage = "")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "InvalidEmail", ErrorMessage = "")]
         public string Email { get; set; }
+
+        [Display(Name = "City", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "CityRequired", ErrorMessage = "")]
+        public string City { get; set; }
+
+        [Display(Name = "State", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "StateRequired", ErrorMessage = "")]
+        public string State { get; set; }
     }
 
     public class ExternalLoginListViewModel

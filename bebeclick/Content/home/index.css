@@ -4,7 +4,7 @@
     margin-left: auto;
     margin-right: auto;
     background-color: #cbcbcd;
-    background-image: url(images/cuarto.jpg); 
+    background-image: url(../images/cuarto.jpg); 
     background-size: cover; /* TODO: Remove workaround for current example */
     background-position: 0px -200px; /* TODO: Remove workaround for current example */
     padding-top: 20px;

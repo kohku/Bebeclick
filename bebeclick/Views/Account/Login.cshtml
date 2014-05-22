@@ -9,7 +9,7 @@
 
 @section AddToHead{
     <link href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/accountLogin.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/account/login.css")" rel="stylesheet" type="text/css" />
 }
 
 <div id="__log_in">
@@ -17,7 +17,7 @@
     {
         @Html.AntiForgeryToken()
         <fieldset>
-            <h3>@Account.LoginTitle</h3>
+            <h3 class="bebeclick">@Account.LoginTitle</h3>
             @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
             @Html.ValidationMessageFor(m => m.Email)
             @Html.TextBoxFor(m => m.Email, new { id = "__email", type = "email", placeholder = Account.EmailPlaceHolder, required = "required" })
@@ -30,6 +30,7 @@
             </label>
             @Html.ActionLink(@Account.ForgotPassword, "ForgotPassword", null, new { id = "__forgot_password" })
             <input id="__log_in_button" type="submit" value="@Account.LogIn" class="pure-button pure-button-primary" />
+            @Html.ValidationSummary(true, Account.LoginValidationSummary, new { @class = "validation_summary" })
         </fieldset>
     }
     <div id="__register_socialLoginForm">

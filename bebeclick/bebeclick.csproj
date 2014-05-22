@@ -194,7 +194,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EnterpriseController.cs" />
-    <Compile Include="Controllers\FacebookController.cs" />
+    <Compile Include="Helpers\FacebookHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspirationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -203,6 +203,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201405192114496_InitialCreate.cs" />
+    <Compile Include="Migrations\201405192114496_InitialCreate.Designer.cs">
+      <DependentUpon>201405192114496_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405221857277_Init.cs" />
+    <Compile Include="Migrations\201405221857277_Init.Designer.cs">
+      <DependentUpon>201405221857277_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EnterpriseViewModels.cs" />
     <Compile Include="Models\HomeViewModels.cs" />
@@ -215,8 +224,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\accountRegister.css" />
-    <Content Include="Content\accountLogin.css" />
+    <Content Include="Content\account\externalLogin.css" />
+    <Content Include="Content\account\register.css" />
+    <Content Include="Content\account\login.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\default.css" />
@@ -234,7 +244,7 @@
     <Content Include="Content\images\pt_icon.png" />
     <Content Include="Content\images\shop.png" />
     <Content Include="Content\images\tw_icon.png" />
-    <Content Include="Content\homeIndex.css" />
+    <Content Include="Content\home\index.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\opensans-bold-webfont.svg" />
     <Content Include="Content\fonts\opensans-bolditalic-webfont.svg" />
@@ -449,6 +459,14 @@
       <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201405192114496_InitialCreate.resx">
+      <DependentUpon>201405192114496_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405221857277_Init.resx">
+      <DependentUpon>201405221857277_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

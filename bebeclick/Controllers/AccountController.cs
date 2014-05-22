@@ -46,6 +46,7 @@ namespace Bebeclick.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
             return View();
         }
 
@@ -67,7 +68,7 @@ namespace Bebeclick.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError(string.Empty, Bebeclick.WebClient.Resources.Account.InvalidUserName);
                 }
             }
 
@@ -361,7 +362,19 @@ namespace Bebeclick.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
 
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                foreach (var claim in loginInfo.ExternalIdentity.Claims)
+                {
+                    System.Diagnostics.Trace.WriteLine(string.Format("{0} {1}", claim.Type, claim.Value));
+                }
+
+                ExternalLoginConfirmationViewModel model = null;
+
+                if (loginInfo.Login.LoginProvider == "Facebook")
+                {
+                    model = Bebeclick.Helpers.FacebookHelper.CreateModel(loginInfo);
+                }
+
+                return View("ExternalLoginConfirmation", model ?? new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
 
@@ -410,7 +423,15 @@ namespace Bebeclick.Controllers
                 if (info == null)
                     return View("ExternalLoginFailure");
 
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser() 
+                { 
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Gender = model.Gender,
+                    BirthDay = model.BirthDay
+                };
 
                 IdentityResult result = await UserManager.CreateAsync(user);
 
@@ -420,7 +441,6 @@ namespace Bebeclick.Controllers
 
                     if (result.Succeeded)
                     {
-                        //await StoreFacebookAuthToken(user);
                         await SignInAsync(user, isPersistent: false);
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -502,7 +522,7 @@ namespace Bebeclick.Controllers
         private async Task SetExternalProperties(ApplicationUser user)
         {
             // get external claims captured in Startup.ConfigureAuth
-            ClaimsIdentity external = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+            var external = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
 
             var claims = await UserManager.GetClaimsAsync(user.Id);
 

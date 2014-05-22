@@ -52,11 +52,15 @@ namespace Bebeclick
                 AppSecret = ConfigurationManager.AppSettings["Facebook:AppSecret"],
                 Provider = new Microsoft.Owin.Security.Facebook.FacebookAuthenticationProvider()
                 {
-                    OnAuthenticated = Bebeclick.Controllers.FacebookController.AddBasicDetailsAsClaims
+                    OnAuthenticated = Bebeclick.Helpers.FacebookHelper.AddBasicDetailsAsClaims
                 },
                 SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie
             };
-            facebookOptions.Scope.Add("email");
+
+            foreach (string item in Bebeclick.Helpers.FacebookHelper.Scopes)
+            {
+                facebookOptions.Scope.Add(item);
+            }
 
             app.UseFacebookAuthentication(facebookOptions);              
 

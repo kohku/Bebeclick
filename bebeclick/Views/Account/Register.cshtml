@@ -6,15 +6,15 @@
 
 @section AddToHead{
     <link href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/accountRegister.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/account/register.css")" rel="stylesheet" type="text/css" />
 }
 
 <div id="__register">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "pure-form pure-form-stacked", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <h1>@Account.RegisterTitle</h1>
         <fieldset>
+            <h1 class="bebeclick">@Account.RegisterTitle</h1>
             @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
             @Html.ValidationMessageFor(m => m.Email)
             @Html.TextBoxFor(m => m.Email, new { id = "__email", required = "required" })
@@ -30,7 +30,6 @@
     }
 </div>
 <!-- TODO: Aviso de privacidad y términos de uso -->
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
