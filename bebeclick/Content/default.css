@@ -210,7 +210,7 @@ h4.bebeclick{
 .__control_label{
     float: left;
 }
-input[type=text]{
+input[type=text], input[type=email]{
     clear: both;
 }
 /* error handling */
