@@ -5,6 +5,27 @@
     <link type="text/css" rel="stylesheet" href="Content/fonts.css" />
     <link type="text/css" rel="stylesheet" href="Content/default.css" />
     <link type="text/css" rel="stylesheet" href="Content/home/index.css" />
+    <link type="text/css" rel="stylesheet" href="Content/account/externalLogin.css" />
+    <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-datepicker-es.js"></script>
+    <script type="text/javascript" src="Scripts/modernizr-2.6.2.js"></script>
+    <script type="text/javascript">
+            /* localizing calendar content to spanish language */
+            $(document).ready(function () {
+                var datefields = $("input[type='date']");
+
+                if (!Modernizr.inputtypes.date) {
+                    datefields
+                        .datepicker()
+                        .each(function () {
+                            this.type = "text";
+                        });
+                }
+
+                $('#__birthDay').datepicker($.datepicker.regional["es"]);
+            });
+    </script>
 </head>
 <body>
     <div id="__container">
@@ -41,6 +62,11 @@
                 </div>
             </div>
             <div id="__search_recommend_background"></div>
+        </div>
+        <div id="examples">
+            <form class="pure-form pure-form-stacked">
+                <input type="date" id="__birthday" class=".__control_label" />
+            </form>
         </div>
         <div id="__footer">
             <div class="inner">

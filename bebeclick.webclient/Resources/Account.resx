@@ -129,6 +129,9 @@
   <data name="CityRequired" xml:space="preserve">
     <value>* Required field.</value>
   </data>
+  <data name="CitySelect" xml:space="preserve">
+    <value>Select a city</value>
+  </data>
   <data name="ComparePassword" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
   </data>
@@ -230,5 +233,8 @@
   </data>
   <data name="StateRequired" xml:space="preserve">
     <value>* Required field.</value>
+  </data>
+  <data name="StateSelect" xml:space="preserve">
+    <value>Select a state</value>
   </data>
 </root>

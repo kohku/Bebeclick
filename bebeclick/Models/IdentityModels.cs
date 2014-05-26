@@ -12,6 +12,10 @@ namespace Bebeclick.Models
         public string LastName { get; set; }
         public string Gender { get; set; }
 
+        public System.Guid StateID { get; set; }
+
+        public System.Guid ProvinceID { get; set; }
+
         public System.DateTime? BirthDay { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

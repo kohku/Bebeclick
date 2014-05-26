@@ -97,6 +97,15 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a city.
+        /// </summary>
+        public static string CitySelect {
+            get {
+                return ResourceManager.GetString("CitySelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password and confirmation password do not match..
         /// </summary>
         public static string ComparePassword {
@@ -399,6 +408,15 @@ namespace Bebeclick.WebClient.Resources {
         public static string StateRequired {
             get {
                 return ResourceManager.GetString("StateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a state.
+        /// </summary>
+        public static string StateSelect {
+            get {
+                return ResourceManager.GetString("StateSelect", resourceCulture);
             }
         }
     }

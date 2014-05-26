@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using Bebeclick.Models;
+using Bebeclick.WebClient;
 
 namespace Bebeclick.Controllers
 {
@@ -373,6 +374,15 @@ namespace Bebeclick.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public ActionResult GetCities(Guid stateId)
+        {
+            var cities = from province in Province.GetProvinces(stateId)
+                         select new { value = province.ID, text = province.Name };
+
+            return Json(cities, JsonRequestBehavior.AllowGet);
+        }
+
         //
         // POST: /Account/LinkLogin
         [HttpPost]
@@ -425,7 +435,9 @@ namespace Bebeclick.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Gender = model.Gender,
-                    BirthDay = model.BirthDay
+                    BirthDay = model.BirthDay,
+                    StateID = model.State,
+                    ProvinceID = model.City
                 };
 
                 IdentityResult result = await UserManager.CreateAsync(user);

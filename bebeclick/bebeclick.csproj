@@ -203,17 +203,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201405192114496_InitialCreate.cs" />
-    <Compile Include="Migrations\201405192114496_InitialCreate.Designer.cs">
-      <DependentUpon>201405192114496_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405221857277_Init.cs" />
-    <Compile Include="Migrations\201405221857277_Init.Designer.cs">
-      <DependentUpon>201405221857277_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201405221906349_Init1.cs" />
-    <Compile Include="Migrations\201405221906349_Init1.Designer.cs">
-      <DependentUpon>201405221906349_Init1.cs</DependentUpon>
+    <Compile Include="Migrations\201405261752409_InitialCreate.cs" />
+    <Compile Include="Migrations\201405261752409_InitialCreate.Designer.cs">
+      <DependentUpon>201405261752409_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -531,14 +523,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201405192114496_InitialCreate.resx">
-      <DependentUpon>201405192114496_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405221857277_Init.resx">
-      <DependentUpon>201405221857277_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201405221906349_Init1.resx">
-      <DependentUpon>201405221906349_Init1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201405261752409_InitialCreate.resx">
+      <DependentUpon>201405261752409_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

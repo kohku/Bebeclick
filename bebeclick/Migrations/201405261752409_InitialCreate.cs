@@ -35,6 +35,12 @@ namespace Bebeclick.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        Gender = c.String(),
+                        StateID = c.Guid(nullable: false),
+                        ProvinceID = c.Guid(nullable: false),
+                        BirthDay = c.DateTime(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),

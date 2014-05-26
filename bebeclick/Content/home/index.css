@@ -62,6 +62,9 @@
     width: 800px;
     height: 38px;
 }
+#__states, #__products, #__services {
+    clear: none;
+}
 select.search{
     display: block;
     float: left;

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Bebeclick.WebClient;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Bebeclick.Models
 {
@@ -31,11 +34,49 @@ namespace Bebeclick.Models
 
         [Display(Name = "City", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
         [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "CityRequired", ErrorMessage = "")]
-        public string City { get; set; }
+        public Guid City { get; set; }
 
         [Display(Name = "State", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
         [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "StateRequired", ErrorMessage = "")]
-        public string State { get; set; }
+        public Guid State { get; set; }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> Genders
+        {
+            get
+            {
+                var genders = new List<GenderDistinction>();
+
+                genders.Add(new GenderDistinction { Id = "male", Name = "male" });
+                genders.Add(new GenderDistinction { Id = "female", Name = "female" });
+
+                return genders.Select(gender => new System.Web.Mvc.SelectListItem
+                            {
+                                    Value = gender.Id,
+                                    Text = gender.Name
+                            });
+            }
+        }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> States
+        {
+            get
+            {
+                var states = from state in StateEntity.GetAll()
+                             select new System.Web.Mvc.SelectListItem
+                             {
+                                 Value = state.ID.ToString(),
+                                 Text = state.Name
+                             };
+
+                return states;
+            }
+        }
+
+        public class GenderDistinction
+        {
+            public string Id { get; set; }
+            public string Name { get; set; }
+        }
     }
 
     public class ExternalLoginListViewModel
