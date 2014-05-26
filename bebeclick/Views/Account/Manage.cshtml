@@ -1,29 +1,37 @@
-﻿@using Bebeclick.Models;
-@using Microsoft.AspNet.Identity;
+﻿@using Bebeclick.Models
+@using Microsoft.AspNet.Identity
+
+@model ManageUserViewModel
+
 @{
-    ViewBag.Title = "Manage Account";
+    ViewBag.Title = Resources.General.ManageTitle;
 }
 
-<h2>@ViewBag.Title.</h2>
+@section AddToHead{
+    <link href="@Url.Content("~/Content/account/manage.css")" rel="stylesheet" type="text/css" />
+}
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <div class="col-md-12">
-        @if (ViewBag.HasLocalPassword)
-        {
-            @Html.Partial("_ChangePasswordPartial")
-        }
-        else
-        {
-            @Html.Partial("_SetPasswordPartial")
-        }
+<div id="__manage">
+    @if (Model.UserDetails != null && Model.UserDetails.Provider == "Facebook")
+    {
+        <img src="@string.Format("{0}?type=large", Model.UserDetails.Picture)" alt="@Model.UserDetails.Name" />
+    }
 
-        <section id="externalLogins">
-            @Html.Action("RemoveAccountList")
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+    @if (ViewBag.HasLocalPassword)
+    {
+        @Html.Partial("_ChangePasswordPartial")
+    }
+    else
+    {
+        @Html.Partial("_SetPasswordPartial")
+    }
+
+    <section id="externalLogins">
+        @Html.Action("RemoveAccountList")
+        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })
+    </section>
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

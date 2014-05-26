@@ -1,6 +1,8 @@
 ﻿using Bebeclick.Models;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
+using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using Facebook;
 
 namespace Bebeclick.Helpers
 {
@@ -72,6 +75,80 @@ namespace Bebeclick.Helpers
             claim = loginInfo.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == "urn:facebook:birthday");
             if (claim != null && DateTime.TryParseExact(claim.Value, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDay))
                 model.BirthDay = birthDay;
+
+            return model;
+        }
+
+        public static UserDetailsViewMode GetExternalUserDetails()
+        {
+            if (HttpContext.Current == null)
+                throw new InvalidOperationException("Invalid HttpContext");
+
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                return null;
+
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+
+            var logins = userManager.GetLogins(userId);
+
+            var loginInfo = logins.FirstOrDefault(l => l.LoginProvider == "Facebook");
+
+            if (loginInfo == null)
+                return null;
+
+            var claims = userManager.GetClaims(userId);
+
+            var accessToken = claims.FirstOrDefault(t => t.Type == "urn:facebook:access_token");
+            var name = claims.FirstOrDefault(t => t.Type == "urn:facebook:name");
+            var firstName = claims.FirstOrDefault(t => t.Type == "urn:facebook:first_name");
+
+            //var fb = new FacebookClient(accessToken.Value);
+
+            var model = new UserDetailsViewMode
+            {
+                Name = name.Value,
+                FirstName = firstName.Value,
+                Picture = new Uri(string.Format("https://graph.facebook.com/{0}/picture", loginInfo.ProviderKey)),
+                Provider = "Facebook"
+            };
+
+            return model;
+        }
+
+        public static async Task<UserDetailsViewMode> GetExternalUserDetailsAsyc()
+        {
+            if (HttpContext.Current == null)
+                throw new InvalidOperationException("Invalid HttpContext");
+
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                return null;
+
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+
+            var logins = await userManager.GetLoginsAsync(userId);
+
+            var loginInfo = logins.FirstOrDefault(l => l.LoginProvider == "Facebook");
+
+            if (loginInfo == null)
+                return null;
+
+            var claims = await userManager.GetClaimsAsync(userId);
+
+            var accessToken = claims.FirstOrDefault(t => t.Type == "urn:facebook:access_token");
+            var name = claims.FirstOrDefault(t => t.Type == "urn:facebook:name");
+            var firstName = claims.FirstOrDefault(t => t.Type == "urn:facebook:first_name");
+
+            //var fb = new FacebookClient(accessToken.Value);
+
+            var model = new UserDetailsViewMode
+            {
+                Name = name.Value,
+                FirstName = firstName.Value,
+                Picture = new Uri(string.Format("https://graph.facebook.com/{0}/picture", loginInfo.ProviderKey)),
+                Provider = "Facebook"
+            };
 
             return model;
         }

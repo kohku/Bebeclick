@@ -182,11 +182,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>General.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\HomeResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HomeResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -221,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\account\externalLogin.css" />
+    <Content Include="Content\account\manage.css" />
     <Content Include="Content\account\register.css" />
     <Content Include="Content\account\login.css" />
     <Content Include="Content\bootstrap.css" />
@@ -485,6 +481,7 @@
     <Content Include="Views\Inspiration\Index.cshtml" />
     <Content Include="Views\Enterprise\Index.cshtml" />
     <Content Include="Views\Home\Terms.cshtml" />
+    <Content Include="Views\Account\UserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -512,13 +509,6 @@
     <Content Include="App_GlobalResources\General.es.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>General.es.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\HomeResources.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </Content>
   </ItemGroup>

@@ -129,6 +129,9 @@
   <data name="HomeLink" xml:space="preserve">
     <value>Inicio</value>
   </data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>Bebeclick</value>
+  </data>
   <data name="InspirationLink" xml:space="preserve">
     <value>Inspiración</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="LogoutLink" xml:space="preserve">
     <value>Salir</value>
+  </data>
+  <data name="ManageTitle" xml:space="preserve">
+    <value>Administra tu cuenta</value>
   </data>
   <data name="RecommendButton" xml:space="preserve">
     <value>Recomienda</value>

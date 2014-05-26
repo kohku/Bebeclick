@@ -262,7 +262,7 @@ namespace Bebeclick.Controllers
 
         //
         // GET: /Account/Manage
-        public ActionResult Manage(ManageMessageId? message)
+        public async Task<ActionResult> Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -272,7 +272,31 @@ namespace Bebeclick.Controllers
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+
+            var model = new ManageUserViewModel();
+
+            var externalDetails = await Bebeclick.Helpers.FacebookHelper.GetExternalUserDetailsAsyc();
+
+            if (externalDetails != null)
+            { 
+                model.UserDetails = externalDetails;
+            }
+
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [ChildActionOnly]
+        public ActionResult UserDetails()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var model = Bebeclick.Helpers.FacebookHelper.GetExternalUserDetails();
+
+                return PartialView(model ?? new UserDetailsViewMode());
+            }
+
+            return PartialView(new UserDetailsViewMode());
         }
 
         //
@@ -489,7 +513,7 @@ namespace Bebeclick.Controllers
         {
             var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());
             ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
-            return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
+            return PartialView("_RemoveAccountPartial", linkedAccounts);
         }
 
         protected override void Dispose(bool disposing)

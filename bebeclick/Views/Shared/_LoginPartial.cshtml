@@ -1,15 +1,16 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Bebeclick.Models
+@using Microsoft.AspNet.Identity
 @using Resources
-
 
 <div id="__account">
     @if (Request.IsAuthenticated)
     {
+        Html.RenderAction("UserDetails", "Account");
+
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "__logout_form" }))
         {
-            @Html.AntiForgeryToken()
-
-            @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { id = "__manage_account", title = "Manage", @class = "__rbt58b" })
+            Html.AntiForgeryToken();
+            Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { id = "__manage_account", title = "Manage", @class = "__rbt58b" });
             <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             <a class="__rbt58b" href="javascript:document.getElementById('__logout_form').submit()">@General.LogoutLink</a>
         }

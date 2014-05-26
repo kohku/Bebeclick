@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bebeclick.
+        /// </summary>
+        internal static string HomeTitle {
+            get {
+                return ResourceManager.GetString("HomeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inspiration.
         /// </summary>
         internal static string InspirationLink {
@@ -120,6 +129,15 @@ namespace Resources {
         internal static string LogoutLink {
             get {
                 return ResourceManager.GetString("LogoutLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage your account.
+        /// </summary>
+        internal static string ManageTitle {
+            get {
+                return ResourceManager.GetString("ManageTitle", resourceCulture);
             }
         }
         
