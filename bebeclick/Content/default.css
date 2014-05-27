@@ -59,18 +59,36 @@
 }
 #__account {
     float: right;
-    padding-top: 10px;
-    width:300px;
+    padding-top: 4px;
+    width:400px;
     text-align: right;
     padding-right: 8px;
 }
-a.__rbt58b, a:hover.__rbt58b, a.visited.__rbt58b{
+#__account .__avatar{
+    display: block;
+    float: right;
+    height: 28px;
+    width: 28px;
+    margin-top: 2px;
+}
+#__account .__settings{
+    display: block;
+    float: right;
+    height: 28px;
+    width: 33px;
+    margin-top: 2px;
+}
+.__rbt58b, a.__rbt58b, a:hover.__rbt58b, a.visited.__rbt58b{
+    display: block;
+    float: right;
     font-family: 'Roboto';
     font-weight: bold;
     font-size: 80%;
     color: #5d89b8;
     text-decoration: none;
     text-transform: uppercase;
+    margin-top: 8px;
+    padding-top: 4px;
 }
 #__social {
     width: 205px;

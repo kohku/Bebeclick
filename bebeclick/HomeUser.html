@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="Content/fonts.css" />
+    <link type="text/css" rel="stylesheet" href="Content/default.css" />
+    <link type="text/css" rel="stylesheet" href="Content/home/index.css" />
+    <link type="text/css" rel="stylesheet" href="Content/account/externalLogin.css" />
+    <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-ui-datepicker-es.js"></script>
+    <script type="text/javascript" src="Scripts/modernizr-2.6.2.js"></script>
+    <script type="text/javascript">
+            /* localizing calendar content to spanish language */
+            $(document).ready(function () {
+                var datefields = $("input[type='date']");
+
+                if (!Modernizr.inputtypes.date) {
+                    datefields
+                        .datepicker()
+                        .each(function () {
+                            this.type = "text";
+                        });
+                }
+
+                $('#__birthDay').datepicker($.datepicker.regional["es"]);
+            });
+    </script>
+</head>
+<body>
+    <div id="__container">
+        <div id="__membership">
+            <div id="__social"><img src="Content/Images/tw_icon.png" /><img src="Content/Images/fb_icon.png" /><img src="Content/Images/pt_icon.png" /></div>
+            <div id="__account">
+                <img class="__settings" src="Content/images/config_icon.png" alt="Daniel" />
+                <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <img class="__avatar" src="Content/images/usuario_icon.jpg" Alt="Daniel" />
+                <a class="__rbt58b">Daniel</a>
+            </div>
+        </div>
+        <div id="__menu_bar">
+            <div id="__logo"><a class="home" href="/default" target="_blank"></a></div>
+            <a id="_ctrl_home" class="__item __rbtUpWh" href="/home"><span class="title">HOME</span></a>
+            <a id="_ctrl_search" class="__item __rbtUpWh" href="/search"><span class="title">BUSCA</span></a>
+            <a id="_ctrl_recommend" class="__item __rbtUpWh" href="/recommend"><span class="title">RECOMIENDA</span></a>
+            <a id="_ctrl_enterprises" class="__item __rbtUpWh" href="/enterprise"><span class="title">EMPRESAS</span></a>
+            <a id="_ctrl_inspiration" class="__item __rbtUpWh" href="/inspiration"><span class="title">INSPIRACIÓN</span></a>
+            <a id="_ctrl_contact" class="__item __rbtUpWh" href="/contact"><span class="title">CONTACTO</span></a>
+            <div id="__quick_search">
+                <input class="search" type="text" />
+                <input type="button" class="search" />
+            </div>
+        </div>
+        <div id="__main">
+            <div id="__testimonial"><h3>Idea interior</h3><p>"Remodelamos toda la habitación del bebé. Una increíble atención y unos super precios.<br />Fernanda Rojas"</p></div>
+            <div id="__search_recommend">
+                <div id="__search_title">Busca</div>
+                <div id="__recommend_title">Recomienda</div>
+                <div id="__search">
+                    <select id="__states" class="search"></select>
+                    <select id="__products" class="search"></select>
+                    <select id="__services" class="search"></select>
+                    <input type="button" id="__search_button" class="go" name="search" value="Ir" />
+                </div>
+                <div id="__recommend">
+                    <input type="button" class="go" name="recommend" value="Recomendar" />
+                </div>
+            </div>
+            <div id="__search_recommend_background"></div>
+        </div>
+        <div id="examples">
+            <form class="pure-form pure-form-stacked">
+                <input type="date" id="__birthday" class=".__control_label" />
+            </form>
+        </div>
+        <div id="__footer">
+            <div class="inner">
+                <span id="__copyright">Bebeclick. Todos los derechos reservados 2014.</span>
+                <span id="__terms">Términos y condiciones</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

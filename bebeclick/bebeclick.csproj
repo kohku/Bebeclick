@@ -223,6 +223,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\fonts.css" />
+    <Content Include="Content\images\config_icon.png" />
     <Content Include="Content\images\corazon.png" />
     <Content Include="Content\images\cuarto.jpg" />
     <Content Include="Content\images\facebook.png" />
@@ -237,6 +238,7 @@
     <Content Include="Content\images\shop.png" />
     <Content Include="Content\images\tw_icon.png" />
     <Content Include="Content\home\index.css" />
+    <Content Include="Content\images\usuario_icon.jpg" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -445,7 +447,8 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Static.html" />
+    <Content Include="HomeUser.html" />
+    <Content Include="HomeAnonymous.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -475,7 +478,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Recommend\Index.cshtml" />
     <Content Include="Views\Inspiration\Index.cshtml" />

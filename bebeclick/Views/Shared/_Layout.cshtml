@@ -15,7 +15,9 @@
     <div id="__container">
         <div id="__membership">
             <div id="__social"><img src="~/Content/Images/tw_icon.png" /><img src="~/Content/Images/fb_icon.png" /><img src="~/Content/Images/pt_icon.png" /></div>
-            @Html.Partial("_LoginPartial")
+            <div id="__account">
+                @{Html.RenderAction("UserDetails", "Account");}
+            </div>
         </div>
         <div id="__menu_bar">
             <div id="__logo"><a class="home" href="@Url.Action("Index", "Home")"></a></div>
