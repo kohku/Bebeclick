@@ -12,9 +12,9 @@
 }
 
 <div id="__manage">
-    @if (Model.UserDetails != null && Model.UserDetails.Provider == "Facebook")
+    @foreach (var login in Model.Logins)
     {
-        <img src="@string.Format("{0}?type=large", Model.UserDetails.Picture)" alt="@Model.UserDetails.Name" />
+        <img src="@string.Format("{0}?type=large", login.Picture)" alt="@login.Name" />
     }
 
     @if (ViewBag.HasLocalPassword)

@@ -85,7 +85,13 @@ namespace Bebeclick.Models
         public string ReturnUrl { get; set; }
     }
 
-    public class UserDetailsViewMode
+
+    public class LoginPartialViewMode
+    {
+        public IEnumerable<LoginDetailViewMode> Logins { get; set; }
+    }
+
+    public class LoginDetailViewMode
     {
         public string Name { get; set; }
 
@@ -114,7 +120,7 @@ namespace Bebeclick.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public UserDetailsViewMode UserDetails { get; set; }
+        public IEnumerable<LoginDetailViewMode> Logins { get; set; }
     }
 
     public class LoginViewModel

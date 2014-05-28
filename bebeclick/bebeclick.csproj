@@ -189,6 +189,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EnterpriseController.cs" />
+    <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Helpers\FacebookHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspirationController.cs" />
@@ -483,7 +484,7 @@
     <Content Include="Views\Inspiration\Index.cshtml" />
     <Content Include="Views\Enterprise\Index.cshtml" />
     <Content Include="Views\Home\Terms.cshtml" />
-    <Content Include="Views\Account\UserDetails.cshtml" />
+    <Content Include="Views\Account\LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

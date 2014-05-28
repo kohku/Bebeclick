@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Facebook;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Bebeclick.Helpers
 {
@@ -79,44 +80,12 @@ namespace Bebeclick.Helpers
             return model;
         }
 
-        public static UserDetailsViewMode GetExternalUserDetails()
+        public static LoginDetailViewMode GetExternalUserDetails()
         {
-            if (HttpContext.Current == null)
-                throw new InvalidOperationException("Invalid HttpContext");
-
-            if (!HttpContext.Current.User.Identity.IsAuthenticated)
-                return null;
-
-            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var userId = HttpContext.Current.User.Identity.GetUserId();
-
-            var logins = userManager.GetLogins(userId);
-
-            var loginInfo = logins.FirstOrDefault(l => l.LoginProvider == "Facebook");
-
-            if (loginInfo == null)
-                return null;
-
-            var claims = userManager.GetClaims(userId);
-
-            var accessToken = claims.FirstOrDefault(t => t.Type == "urn:facebook:access_token");
-            var name = claims.FirstOrDefault(t => t.Type == "urn:facebook:name");
-            var firstName = claims.FirstOrDefault(t => t.Type == "urn:facebook:first_name");
-
-            //var fb = new FacebookClient(accessToken.Value);
-
-            var model = new UserDetailsViewMode
-            {
-                Name = name.Value,
-                FirstName = firstName.Value,
-                Picture = new Uri(string.Format("https://graph.facebook.com/{0}/picture", loginInfo.ProviderKey)),
-                Provider = "Facebook"
-            };
-
-            return model;
+            return AsyncHelper.RunSync<LoginDetailViewMode>(() => FacebookHelper.GetExternalUserDetailsAsyc());
         }
 
-        public static async Task<UserDetailsViewMode> GetExternalUserDetailsAsyc()
+        public static async Task<LoginDetailViewMode> GetExternalUserDetailsAsyc()
         {
             if (HttpContext.Current == null)
                 throw new InvalidOperationException("Invalid HttpContext");
@@ -124,17 +93,27 @@ namespace Bebeclick.Helpers
             if (!HttpContext.Current.User.Identity.IsAuthenticated)
                 return null;
 
-            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var userId = HttpContext.Current.User.Identity.GetUserId();
 
-            var logins = await userManager.GetLoginsAsync(userId);
+            var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+
+            IList<UserLoginInfo> logins = null;
+
+            // Creating our own ApplicationUserManager instance.
+            // We shouldn't persisting changes back to the database and changes made in another
+            // instance are not reflected here.
+            using (var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            {
+                logins = await userManager.GetLoginsAsync(userId);
+            }
 
             var loginInfo = logins.FirstOrDefault(l => l.LoginProvider == "Facebook");
 
             if (loginInfo == null)
                 return null;
 
-            var claims = await userManager.GetClaimsAsync(userId);
+            var claims = from c in authenticationManager.User.Claims
+                         select c;
 
             var accessToken = claims.FirstOrDefault(t => t.Type == "urn:facebook:access_token");
             var name = claims.FirstOrDefault(t => t.Type == "urn:facebook:name");
@@ -142,7 +121,7 @@ namespace Bebeclick.Helpers
 
             //var fb = new FacebookClient(accessToken.Value);
 
-            var model = new UserDetailsViewMode
+            var model = new LoginDetailViewMode
             {
                 Name = name.Value,
                 FirstName = firstName.Value,

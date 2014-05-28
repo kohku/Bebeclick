@@ -275,28 +275,41 @@ namespace Bebeclick.Controllers
 
             var model = new ManageUserViewModel();
 
-            var externalDetails = await Bebeclick.Helpers.FacebookHelper.GetExternalUserDetailsAsyc();
+            var logins = new List<LoginDetailViewMode>();
 
-            if (externalDetails != null)
-            { 
-                model.UserDetails = externalDetails;
+            var facebook = await Bebeclick.Helpers.FacebookHelper.GetExternalUserDetailsAsyc();
+
+            if (facebook != null)
+            {
+                logins.Add(facebook);
             }
+
+            model.Logins = logins;
 
             return View(model);
         }
 
         [AllowAnonymous]
         [ChildActionOnly]
-        public ActionResult UserDetails()
+        public ActionResult LoginPartial()
         {
+            var model = new LoginPartialViewMode();
+
             if (User.Identity.IsAuthenticated)
             {
-                var model = Bebeclick.Helpers.FacebookHelper.GetExternalUserDetails();
+                var logins = new List<LoginDetailViewMode>();
 
-                return PartialView(model ?? new UserDetailsViewMode());
+                var facebook = Bebeclick.Helpers.FacebookHelper.GetExternalUserDetails();
+
+                if (facebook != null)
+                {
+                    logins.Add(facebook);
+                }
+
+                model.Logins = logins;
             }
 
-            return PartialView(new UserDetailsViewMode());
+            return PartialView(model);
         }
 
         //
