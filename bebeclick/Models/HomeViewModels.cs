@@ -9,53 +9,30 @@ namespace Bebeclick.Models
 {
     public class HomeIndexViewModel
     {
-        public SelectList States
+        public IEnumerable<System.Web.Mvc.SelectListItem> States
         {
             get
             {
-                var query = from s in StateEntity.GetAll()
-                            where s.Visible
-                            select new 
-                            {
-                                ID = s.ID,
-                                Name = s.Name
-                            };
+                var states = from state in StateEntity.GetAll()
+                             select new System.Web.Mvc.SelectListItem
+                             {
+                                 Value = state.ID.ToString(),
+                                 Text = state.Name
+                             };
 
-                return new SelectList(query.ToArray(), "ID", "Name");
+                return states;
             }
         }
 
-        public SelectList Products
-        {
-            get
-            {
-                var query = from p in Product.GetAll()
-                            where p.Visible
-                            select new
-                            {
-                                ID = p.ID,
-                                Name = p.Name
-                            };
+        public Guid CityID { get; set; }
 
-                return new SelectList(query.ToArray(), "ID", "Name");
-            }
-        }
+        public Guid StateID { get; set; }
 
-        public SelectList Services
-        {
-            get
-            {
-                var query = from s in Service.GetAll()
-                            where s.Visible
-                            select new
-                            {
-                                ID = s.ID,
-                                Name = s.Name
-                            };
+        public Guid ProductID { get; set; }
 
-                return new SelectList(query.ToArray(), "ID", "Name");
-            }
-        }
+        public Guid ServiceID { get; set; }
+
+        public string Background { get; set; }
     }
 
     public class HomeContactViewModel

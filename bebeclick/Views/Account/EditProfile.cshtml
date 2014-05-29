@@ -1,0 +1,90 @@
+﻿@using Bebeclick.Models
+@using Bebeclick.WebClient.Resources
+@using System.Globalization
+@using System.Linq;
+
+@model EditProfilelViewModel
+
+@{
+    ViewBag.Title = @Account.EditProfileTitle;
+}
+
+@section AddToHead{
+    <link href="@Url.Content("~/Content/account/editProfile.css")" rel="stylesheet" type="text/css" />
+}
+
+<div id="__register">
+    @using (Html.BeginForm("EditProfile", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "pure-form pure-form-stacked", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            <h1 class="bebeclick">@Account.EditProfileTitle</h1>
+            <p>
+                En esta comunidad nos basamos en relaciones personales. Ayuda a otros usuarios a conocerte un poco mejor.
+            </p>
+            <div class="left">
+                @Html.LabelFor(m => m.FirstName, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, new { id = "__firstName", required = "required" })
+                @Html.LabelFor(m => m.BirthDay, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.BirthDay)
+                @Html.TextBoxFor(m => m.BirthDay, String.Format("{0:d}", Model.BirthDay.ToShortDateString()), new { id = "__birthDay", type = "date", required = "required" })
+                @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { id = "__email", type = "email", required = "required" })
+            </div>
+            <div class="right">
+                @Html.LabelFor(m => m.LastName, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, new { id = "__lastName", required = "required" })
+                @Html.LabelFor(m => m.Gender, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.Gender)
+                @Html.DropDownListFor(m => m.Gender, Model.Genders, new { id = "__gender", required = "required" })
+                @Html.LabelFor(m => m.StateID, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.StateID)
+                @Html.DropDownListFor(m => m.StateID, Model.States, Resources.General.StateSelect, new { id = "__state", required = "required" })
+                @Html.LabelFor(m => m.CityID, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.CityID)
+                @Html.DropDownListFor(m => m.CityID, Enumerable.Empty<SelectListItem>(), Resources.General.CitySelect, new { id = "__city", required = "required" })
+            </div>
+            <input id="__register_button" type="submit" value="@Account.EditProfile" class="pure-button pure-button-primary" />
+            @Html.ValidationSummary(true, Account.EditProfileValidationSummary, new { @class = "validation_summary" })
+        </fieldset>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryUI")
+    @Scripts.Render("~/Scripts/Account/externalLoginConfirmation.js")
+    @if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "es")
+    {
+        <script type="text/javascript">
+            /* localizing calendar content to spanish language */
+            $(document).ready(function () {
+                $('#__birthDay').datepicker($.datepicker.regional["@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName"]);
+
+                $('#__state').change(function () {
+                    var selectedState = $(this).val();
+                    if (selectedState != null && selectedState != '00000000-0000-0000-0000-000000000000') {
+                        $.getJSON('@Url.Action("GetCities")', { stateId: selectedState }, function (cities) {
+                            var citiesSelect = $('#__city');
+                            citiesSelect.empty();
+                            citiesSelect.append($('<option/>', {
+                                value: '00000000-0000-0000-0000-000000000000',
+                                text: '@Resources.General.CitySelect'
+                            }));
+                            $.each(cities, function (index, city) {
+                                citiesSelect.append($('<option/>', {
+                                    value : city.value,
+                                    text: city.text
+                                }));
+                            });
+                        });
+                    }
+                });
+            });
+        </script>
+    }
+}
+

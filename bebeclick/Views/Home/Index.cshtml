@@ -1,4 +1,6 @@
-﻿@model Bebeclick.Models.HomeIndexViewModel
+﻿@using Bebeclick.WebClient.Resources
+
+@model Bebeclick.Models.HomeIndexViewModel
 
 @{
     ViewBag.Title = Resources.General.HomeTitle;
@@ -10,15 +12,16 @@
 
 @using (Html.BeginForm())
 {
-    <div id="__main">
+    <div id="__main" style="background-image: url('@Url.Content(Model.Background)'">
         <div id="__testimonial"><h4 class="bebeclick">Idea interior</h4><p>"Remodelamos toda la habitación del bebé. Una increíble atención y unos super precios".<br />Fernanda Rojas</p></div>
         <div id="__search_recommend">
             <div id="__search_title">@Resources.General.SearchTitle</div>
             <div id="__recommend_title">@Resources.General.RecommendTitle</div>
             <div id="__search">
-                @Html.DropDownList("states", Model.States, "ESTADO", new { id = "__states", @class = "search" })
-                @Html.DropDownList("states", Model.Products, "PRODUCTO", new { id = "__products", @class = "search" })
-                @Html.DropDownList("states", Model.Services, "SERVICIO", new { id = "__services", @class = "search" })
+                @Html.DropDownListFor(m => m.StateID, Model.States, Resources.General.StateSelect, new { id = "__states", @class = "search", required = "required" })
+                @Html.DropDownListFor(m => m.CityID, Enumerable.Empty<SelectListItem>(), Resources.General.CitySelect, new { id = "__cities", @class = "search", required = "required" })
+                @Html.DropDownListFor(m => m.ProductID, Enumerable.Empty<SelectListItem>(), Resources.General.ProductSelect, new { id = "__products", @class = "search", required = "required" })
+                @Html.DropDownListFor(m => m.ServiceID, Enumerable.Empty<SelectListItem>(), Resources.General.ServiceSelect, new { id = "__services", @class = "search", required = "required" })
                 <input type="button" id="__search_button" class="go" name="search" value="@Resources.General.GoButton" />
             </div>
             <div id="__recommend">
@@ -30,3 +33,67 @@
 }
 <div id="__outstanding"></div>
 
+@section Scripts {
+<script type="text/javascript">
+            /* localizing calendar content to spanish language */
+            $(document).ready(function () {
+                $('#__states').change(function () {
+                    var selected = $(this).val();
+                    if (selected != null && selected != '00000000-0000-0000-0000-000000000000') {
+                        $.getJSON('@Url.Action("GetCities")', { stateId: selected }, function (cities) {
+                            var cascade = $('#__cities');
+                            cascade.empty();
+                            cascade.append($('<option/>', {
+                                value: '00000000-0000-0000-0000-000000000000',
+                                text: '@Resources.General.CitySelect'
+                            }));
+                            $.each(cities, function (index, city) {
+                                cascade.append($('<option/>', {
+                                    value : city.value,
+                                    text: city.text
+                                }));
+                            });
+                        });
+                    }
+                });
+                $('#__cities').change(function () {
+                    var selected = $(this).val();
+                    if (selected != null && selected != '00000000-0000-0000-0000-000000000000') {
+                        $.getJSON('@Url.Action("GetProducts")', { cityId: selected }, function (products) {
+                            var cascade = $('#__products');
+                            cascade.empty();
+                            cascade.append($('<option/>', {
+                                value: '00000000-0000-0000-0000-000000000000',
+                                text: '@Resources.General.ProductSelect'
+                            }));
+                            $.each(products, function (index, product) {
+                                cascade.append($('<option/>', {
+                                    value: product.value,
+                                    text: product.text
+                                }));
+                            });
+                        });
+                    }
+                });
+                $('#__products').change(function () {
+                    var selected = $(this).val();
+                    if (selected != null && selected != '00000000-0000-0000-0000-000000000000') {
+                        $.getJSON('@Url.Action("GetServices")', { productId: selected }, function (services) {
+                            var cascade = $('#__services');
+                            cascade.empty();
+                            cascade.append($('<option/>', {
+                                value: '00000000-0000-0000-0000-000000000000',
+                                text: '@Resources.General.ServiceSelect'
+                            }));
+                            $.each(services, function (index, service) {
+                                cascade.append($('<option/>', {
+                                    value: service.value,
+                                    text: service.text
+                                }));
+                            });
+                        });
+                    }
+                });
+            });
+</script>
+}

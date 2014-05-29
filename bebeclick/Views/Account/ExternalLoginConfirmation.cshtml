@@ -41,12 +41,12 @@
                     @Html.LabelFor(m => m.Gender, new { @class = "__control_label" })
                     @Html.ValidationMessageFor(m => m.Gender)
                     @Html.DropDownListFor(m => m.Gender, Model.Genders, new { id = "__gender", required = "required" })
-                    @Html.LabelFor(m => m.State, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.State)
-                    @Html.DropDownListFor(m => m.State, Model.States, Account.StateSelect, new { id = "__state", required = "required" })
-                    @Html.LabelFor(m => m.City, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.City)
-                    @Html.DropDownListFor(m => m.City, Enumerable.Empty<SelectListItem>(), Account.CitySelect, new { id = "__city", required = "required" })
+                    @Html.LabelFor(m => m.StateID, new { @class = "__control_label" })
+                    @Html.ValidationMessageFor(m => m.StateID)
+                    @Html.DropDownListFor(m => m.StateID, Model.States, Resources.General.StateSelect, new { id = "__states", required = "required" })
+                    @Html.LabelFor(m => m.CityID, new { @class = "__control_label" })
+                    @Html.ValidationMessageFor(m => m.CityID)
+                    @Html.DropDownListFor(m => m.CityID, Enumerable.Empty<SelectListItem>(), Resources.General.CitySelect, new { id = "__cities", required = "required" })
                 </div>
                 <input id="__register_button" type="submit" value="@Account.Register" class="pure-button pure-button-primary" />
                 @Html.ValidationSummary(true, Account.ExternalLoginValidationSummary, new { @class = "validation_summary" })
@@ -64,15 +64,15 @@
             $(document).ready(function () {
                 $('#__birthDay').datepicker($.datepicker.regional["@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName"]);
 
-                $('#__state').change(function () {
+                $('#__states').change(function () {
                     var selectedState = $(this).val();
                     if (selectedState != null && selectedState != '00000000-0000-0000-0000-000000000000') {
                         $.getJSON('@Url.Action("GetCities")', { stateId: selectedState }, function (cities) {
-                            var citiesSelect = $('#__city');
+                            var citiesSelect = $('#__cities');
                             citiesSelect.empty();
                             citiesSelect.append($('<option/>', {
                                 value: '00000000-0000-0000-0000-000000000000',
-                                text: '@Account.CitySelect'
+                                text: '@Resources.General.CitySelect'
                             }));
                             $.each(cities, function (index, city) {
                                 citiesSelect.append($('<option/>', {

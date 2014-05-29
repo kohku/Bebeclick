@@ -78,6 +78,7 @@
     <Compile Include="AccessControl.cs" />
     <Compile Include="StateEntity.cs" />
     <Compile Include="Utilities\DateTime.cs" />
+    <Compile Include="Utilities\RandomExtensions.cs" />
     <Compile Include="Utilities\ResourceStringLoader.cs" />
   </ItemGroup>
   <ItemGroup>

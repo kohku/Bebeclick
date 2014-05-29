@@ -34,11 +34,11 @@ namespace Bebeclick.Models
 
         [Display(Name = "City", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
         [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "CityRequired", ErrorMessage = "")]
-        public Guid City { get; set; }
+        public Guid CityID { get; set; }
 
         [Display(Name = "State", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
         [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "StateRequired", ErrorMessage = "")]
-        public Guid State { get; set; }
+        public Guid StateID { get; set; }
 
         public IEnumerable<System.Web.Mvc.SelectListItem> Genders
         {
@@ -54,6 +54,79 @@ namespace Bebeclick.Models
                                     Value = gender.Id,
                                     Text = gender.Name
                             });
+            }
+        }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> States
+        {
+            get
+            {
+                var states = from state in StateEntity.GetAll()
+                             select new System.Web.Mvc.SelectListItem
+                             {
+                                 Value = state.ID.ToString(),
+                                 Text = state.Name
+                             };
+
+                return states;
+            }
+        }
+
+        public class GenderDistinction
+        {
+            public string Id { get; set; }
+            public string Name { get; set; }
+        }
+    }
+
+    public class EditProfilelViewModel
+    {
+        public string Name { get; set; }
+
+        [Display(Name = "FirstName", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "FirstNameRequired", ErrorMessage = "")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "LastName", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "LastNameRequired", ErrorMessage = "")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Gender", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "GenderRequired", ErrorMessage = "")]
+        public string Gender { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "BirthDay", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "BirthDayRequired", ErrorMessage = "")]
+        public DateTime BirthDay { get; set; }
+
+        [Display(Name = "Email", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [EmailAddress(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "InvalidEmail", ErrorMessage = "")]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "EmailRequired", ErrorMessage = "")]
+        public string Email { get; set; }
+
+        [Display(Name = "City", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "CityRequired", ErrorMessage = "")]
+        public Guid CityID { get; set; }
+
+        [Display(Name = "State", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
+        [Required(ErrorMessageResourceType = typeof(Bebeclick.WebClient.Resources.Account), ErrorMessageResourceName = "StateRequired", ErrorMessage = "")]
+        public Guid StateID { get; set; }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> Genders
+        {
+            get
+            {
+                var genders = new List<GenderDistinction>();
+
+                genders.Add(new GenderDistinction { Id = "male", Name = "male" });
+                genders.Add(new GenderDistinction { Id = "female", Name = "female" });
+
+                return genders.Select(gender => new System.Web.Mvc.SelectListItem
+                {
+                    Value = gender.Id,
+                    Text = gender.Name
+                });
             }
         }
 

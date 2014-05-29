@@ -12,6 +12,7 @@ using Microsoft.Owin.Security;
 using Owin;
 using Bebeclick.Models;
 using Bebeclick.WebClient;
+using Bebeclick.Helpers;
 
 namespace Bebeclick.Controllers
 {
@@ -144,6 +145,58 @@ namespace Bebeclick.Controllers
             }
         }
 
+        public ActionResult EditProfile()
+        {
+            var model = new EditProfilelViewModel();
+
+            var userId = User.Identity.GetUserId();
+
+            var user = UserManager.FindById(userId);
+
+            if (user != null)
+            {
+                model.FirstName = user.FirstName;
+                model.LastName = user.LastName;
+                model.Email = user.Email;
+                model.BirthDay = user.BirthDay.HasValue ? user.BirthDay.Value : DateTime.Now;
+                model.StateID = user.StateID;                     
+                model.CityID = user.ProvinceID;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile(EditProfilelViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+
+                var user = await UserManager.FindByIdAsync(userId);
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.FirstName;
+                user.Gender = model.Gender;
+                user.BirthDay = model.BirthDay;
+
+                var result = await UserManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
@@ -273,18 +326,10 @@ namespace Bebeclick.Controllers
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
 
-            var model = new ManageUserViewModel();
-
-            var logins = new List<LoginDetailViewMode>();
-
-            var facebook = await Bebeclick.Helpers.FacebookHelper.GetExternalUserDetailsAsyc();
-
-            if (facebook != null)
+            var model = new ManageUserViewModel
             {
-                logins.Add(facebook);
-            }
-
-            model.Logins = logins;
+                Logins = await LoginDetailsHelper.BuildAsync()
+            };
 
             return View(model);
         }
@@ -297,16 +342,7 @@ namespace Bebeclick.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                var logins = new List<LoginDetailViewMode>();
-
-                var facebook = Bebeclick.Helpers.FacebookHelper.GetExternalUserDetails();
-
-                if (facebook != null)
-                {
-                    logins.Add(facebook);
-                }
-
-                model.Logins = logins;
+                model.Logins = LoginDetailsHelper.Build();
             }
 
             return PartialView(model);
@@ -404,7 +440,7 @@ namespace Bebeclick.Controllers
 
                 if (loginInfo.Login.LoginProvider == "Facebook")
                 {
-                    model = Bebeclick.Helpers.FacebookHelper.CreateModel(loginInfo);
+                    model = FacebookHelper.CreateModel(loginInfo);
                 }
 
                 return View("ExternalLoginConfirmation", model ?? new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
@@ -473,8 +509,8 @@ namespace Bebeclick.Controllers
                     LastName = model.LastName,
                     Gender = model.Gender,
                     BirthDay = model.BirthDay,
-                    StateID = model.State,
-                    ProvinceID = model.City
+                    StateID = model.StateID,
+                    ProvinceID = model.CityID
                 };
 
                 IdentityResult result = await UserManager.CreateAsync(user);

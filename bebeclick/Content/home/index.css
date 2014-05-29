@@ -3,10 +3,10 @@
     height: 470px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #cbcbcd;
-    background-image: url(../images/cuarto.jpg); 
-    background-size: cover; /* TODO: Remove workaround for current example */
-    background-position: 0px -200px; /* TODO: Remove workaround for current example */
+    /*background-color: #cbcbcd;*/
+    /*background-image: url(../images/cuarto.jpg); */
+    /*background-size: cover;*/ /* TODO: Remove workaround for current example */
+    /*background-position: 0px -200px;*/ /* TODO: Remove workaround for current example */
     padding-top: 20px;
 }
 #__testimonial {
@@ -21,8 +21,8 @@
 }
 #__search_recommend {
     margin-top: 80px;
-    margin-left: 80px;
-    margin-right: 80px;
+    margin-left: 30px;
+    margin-right: 30px;
     height: 100px;
     padding-left: 25px;
     padding-top: 10px;
@@ -34,8 +34,8 @@
     border-radius: 5px;
     filter: alpha(opacity=80); /* For IE8 and earlier */
     height: 100px;
-    margin-left: 80px;
-    margin-right: 80px;
+    margin-left: 30px;
+    margin-right: 30px;
     margin-top: -110px;
     position: relative;
     opacity: 0.8;
@@ -46,7 +46,7 @@
     font-weight: bold;
     font-size: 165%;
     float: left;
-    width: 800px;
+    width: 900px;
     height: 38px;
 }
 #__recommend_title {
@@ -59,11 +59,12 @@
 }
 #__search {
     float: left;
-    width: 800px;
+    width: 900px;
     height: 38px;
 }
-#__states, #__products, #__services {
+#__states, #__cities, #__products, #__services {
     clear: none;
+    width: 200px;
 }
 select.search{
     display: block;
@@ -84,11 +85,11 @@ select.search{
 input[type=button].go{
     display: block;
     float: left;
-    background-color: #E6E6E6;
+    background-color: #73c7f5;
     border: 0 rgba(0,0,0,0);
     border-radius: 2px;
     box-sizing: border-box;
-    color: rgba(0,0,0,.8);
+    color: #ffffff;
     cursor: pointer;
     font-size: 100%;
     line-height: normal;

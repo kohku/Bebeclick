@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CitySelect" xml:space="preserve">
+    <value>Select a city</value>
+  </data>
   <data name="ContactLink" xml:space="preserve">
     <value>Contact</value>
   </data>
@@ -144,6 +147,9 @@
   <data name="ManageTitle" xml:space="preserve">
     <value>Manage your account</value>
   </data>
+  <data name="ProductSelect" xml:space="preserve">
+    <value>Select a product</value>
+  </data>
   <data name="RecommendButton" xml:space="preserve">
     <value>Recommend</value>
   </data>
@@ -164,5 +170,11 @@
   </data>
   <data name="SearchTitle" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="ServiceSelect" xml:space="preserve">
+    <value>Select a service</value>
+  </data>
+  <data name="StateSelect" xml:space="preserve">
+    <value>Select a state</value>
   </data>
 </root>

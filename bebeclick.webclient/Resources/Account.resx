@@ -129,9 +129,6 @@
   <data name="CityRequired" xml:space="preserve">
     <value>* Required field.</value>
   </data>
-  <data name="CitySelect" xml:space="preserve">
-    <value>Select a city</value>
-  </data>
   <data name="ComparePassword" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
   </data>
@@ -140,6 +137,15 @@
   </data>
   <data name="ConfirmPasswordRequired" xml:space="preserve">
     <value>* Required field.</value>
+  </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="EditProfileTitle" xml:space="preserve">
+    <value>Complete your profile.</value>
+  </data>
+  <data name="EditProfileValidationSummary" xml:space="preserve">
+    <value>Update failed.</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -233,8 +239,5 @@
   </data>
   <data name="StateRequired" xml:space="preserve">
     <value>* Required field.</value>
-  </data>
-  <data name="StateSelect" xml:space="preserve">
-    <value>Select a state</value>
   </data>
 </root>

@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a city.
+        /// </summary>
+        internal static string CitySelect {
+            get {
+                return ResourceManager.GetString("CitySelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string ContactLink {
@@ -142,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a product.
+        /// </summary>
+        internal static string ProductSelect {
+            get {
+                return ResourceManager.GetString("ProductSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recommend.
         /// </summary>
         internal static string RecommendButton {
@@ -201,6 +219,24 @@ namespace Resources {
         internal static string SearchTitle {
             get {
                 return ResourceManager.GetString("SearchTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a service.
+        /// </summary>
+        internal static string ServiceSelect {
+            get {
+                return ResourceManager.GetString("ServiceSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a state.
+        /// </summary>
+        internal static string StateSelect {
+            get {
+                return ResourceManager.GetString("StateSelect", resourceCulture);
             }
         }
     }
