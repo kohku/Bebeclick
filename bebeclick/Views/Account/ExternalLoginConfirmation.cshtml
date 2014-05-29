@@ -13,78 +13,110 @@
     <link href="@Url.Content("~/Content/account/externalLogin.css")" rel="stylesheet" type="text/css" />
 }
 
-    <div id="__register">
-        @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "pure-form pure-form-stacked", role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-            <fieldset>
-                <h1 class="bebeclick">@Account.ExternalLoginTitle</h1>
-                <h3 class="bebeclick">@string.Format(Account.ExternalLoginSubtitle, ViewBag.LoginProvider)</h3>
-                <p>
-                    Has sido autenticado exitósamente con tu cuenta de <strong>@ViewBag.LoginProvider</strong>. En esta comunidad nos basamos en relaciones personales. Ayuda a otros usuarios a conocerte un poco mejor.
-                </p>
-                <div class="left">
-                    @Html.LabelFor(m => m.FirstName, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.FirstName)
-                    @Html.TextBoxFor(m => m.FirstName, new { id = "__firstName", required = "required" })
-                    @Html.LabelFor(m => m.BirthDay, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.BirthDay)
-                    @Html.TextBoxFor(m => m.BirthDay, String.Format("{0:d}", Model.BirthDay.ToShortDateString()), new { id = "__birthDay", type = "date", required = "required" })
-                    @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.Email)
-                    @Html.TextBoxFor(m => m.Email, new { id = "__email", type = "email", required = "required" })
-                </div>
-                <div class="right">
-                    @Html.LabelFor(m => m.LastName, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.LastName)
-                    @Html.TextBoxFor(m => m.LastName, new { id = "__lastName", required = "required" })
-                    @Html.LabelFor(m => m.Gender, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.Gender)
-                    @Html.DropDownListFor(m => m.Gender, Model.Genders, new { id = "__gender", required = "required" })
-                    @Html.LabelFor(m => m.StateID, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.StateID)
-                    @Html.DropDownListFor(m => m.StateID, Model.States, Resources.General.StateSelect, new { id = "__states", required = "required" })
-                    @Html.LabelFor(m => m.CityID, new { @class = "__control_label" })
-                    @Html.ValidationMessageFor(m => m.CityID)
-                    @Html.DropDownListFor(m => m.CityID, Enumerable.Empty<SelectListItem>(), Resources.General.CitySelect, new { id = "__cities", required = "required" })
-                </div>
-                <input id="__register_button" type="submit" value="@Account.Register" class="pure-button pure-button-primary" />
-                @Html.ValidationSummary(true, Account.ExternalLoginValidationSummary, new { @class = "validation_summary" })
-            </fieldset>
-        }
-    </div>
+<div id="__register">
+    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "pure-form pure-form-stacked", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            <h1 class="bebeclick">@Account.ExternalLoginTitle</h1>
+            <h3 class="bebeclick">@string.Format(Account.ExternalLoginSubtitle, ViewBag.LoginProvider)</h3>
+            <p>
+                Has sido autenticado exitósamente con tu cuenta de <strong>@ViewBag.LoginProvider</strong>. En esta comunidad nos basamos en relaciones personales. Ayuda a otros usuarios a conocerte un poco mejor.
+            </p>
+            <div class="left">
+                @Html.LabelFor(m => m.FirstName, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, new { id = "__firstName", required = "required" })
+                @Html.LabelFor(m => m.BirthDay, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.BirthDay)
+                @Html.TextBoxFor(m => m.BirthDay, String.Format("{0:yyyy-MM-dd}", Model.BirthDay), new { id = "__birthDay", type = "date", required = "required" })
+                @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { id = "__email", type = "email", required = "required" })
+            </div>
+            <div class="right">
+                @Html.LabelFor(m => m.LastName, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, new { id = "__lastName", required = "required" })
+                @Html.LabelFor(m => m.Gender, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.Gender)
+                @Html.DropDownListFor(m => m.Gender, Model.Genders, Resources.General.GenderSelect, new { id = "__gender", required = "required" })
+                @Html.LabelFor(m => m.StateID, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.StateID)
+                @Html.DropDownListFor(m => m.StateID, Model.States, Resources.General.StateSelect, new { id = "__states", required = "required" })
+                @Html.LabelFor(m => m.CityID, new { @class = "__control_label" })
+                @Html.ValidationMessageFor(m => m.CityID)
+                @Html.DropDownListFor(m => m.CityID, Enumerable.Empty<SelectListItem>(), Resources.General.CitySelect, new { id = "__cities", required = "required" })
+            </div>
+            <input id="__register_button" type="submit" value="@Account.Register" class="pure-button pure-button-primary" />
+            @Html.ValidationSummary(true, Account.ExternalLoginValidationSummary, new { @class = "validation_summary" })
+        </fieldset>
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryUI")
-    @Scripts.Render("~/Scripts/Account/externalLoginConfirmation.js")
-    @if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "es") { 
+    @Scripts.Render("~/bundles/modernizr")
+    @if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "es")
+    {
+        @Scripts.Render("~/Scripts/jquery-ui-datepicker-es.js");
         <script type="text/javascript">
-            /* localizing calendar content to spanish language */
             $(document).ready(function () {
+                /* localizing calendar content to spanish language */
                 $('#__birthDay').datepicker($.datepicker.regional["@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName"]);
-
-                $('#__states').change(function () {
-                    var selectedState = $(this).val();
-                    if (selectedState != null && selectedState != '00000000-0000-0000-0000-000000000000') {
-                        $.getJSON('@Url.Action("GetCities")', { stateId: selectedState }, function (cities) {
-                            var citiesSelect = $('#__cities');
-                            citiesSelect.empty();
-                            citiesSelect.append($('<option/>', {
-                                value: '00000000-0000-0000-0000-000000000000',
-                                text: '@Resources.General.CitySelect'
-                            }));
-                            $.each(cities, function (index, city) {
-                                citiesSelect.append($('<option/>', {
-                                    value : city.value,
-                                    text: city.text
-                                })); 
-                            });
-                        });
-                    }
-                });
             });
         </script>
     }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var datefields = $("input[type='date']");
+
+            if (!Modernizr.inputtypes.date) {
+                datefields
+                    .datepicker()
+                    .each(function () {
+                        // Turn ISO 8601 date string into US date string
+                        var dateParts = this.value.split("-"),
+                            date = $.map(dateParts, function (el) {
+                                return !isNaN(parseInt(el, 10)) ? el : null;
+                            }).length === 3
+                                ? new Date(dateParts[0], dateParts[1], dateParts[2])
+                                : null;
+                        this.type = "text";
+                        this.value = !date ? "" :
+                        @if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "es")
+                        {
+                            @:date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+                                                                    }
+                        else
+                        {
+                            @:date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+                                                                    }
+                    });
+            }
+
+            $('#__states').change(function () {
+                var selected = $(this).val();
+                if (selected != null && selected != '00000000-0000-0000-0000-000000000000') {
+                    $.getJSON('@Url.Action("GetCities")', { stateId: selected }, function (cities) {
+                        var cascade = $('#__cities');
+                        cascade.empty();
+                        cascade.append($('<option/>', {
+                            value: '00000000-0000-0000-0000-000000000000',
+                            text: '@Resources.General.CitySelect'
+                        }));
+                        $.each(cities, function (index, city) {
+                            cascade.append($('<option/>', {
+                                value: city.value,
+                                text: city.text
+                            }));
+                        });
+                    });
+                }
+            });
+        });
+    </script>
 }
 

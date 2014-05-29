@@ -341,7 +341,6 @@
     <Content Include="Content\fonts\robotocondensed-regular-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\Account\externalLoginConfirmation.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\opensans-bold-webfont.eot" />
@@ -494,6 +493,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Account\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>

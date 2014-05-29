@@ -180,12 +180,14 @@ namespace Bebeclick.Controllers
                 user.LastName = model.FirstName;
                 user.Gender = model.Gender;
                 user.BirthDay = model.BirthDay;
+                user.StateID = model.StateID;
+                user.ProvinceID = model.CityID;
 
                 var result = await UserManager.UpdateAsync(user);
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Manage", "Account");
                 }
                 else
                 {

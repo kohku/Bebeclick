@@ -12,7 +12,7 @@ namespace Bebeclick
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryUI").Include(
-                        "~/Scripts/jquery-ui-*"));
+                        "~/Scripts/jquery-ui-1.10.4.*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

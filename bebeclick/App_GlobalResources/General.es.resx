@@ -126,6 +126,12 @@
   <data name="EnterpriseLink" xml:space="preserve">
     <value>Empresas</value>
   </data>
+  <data name="Female" xml:space="preserve">
+    <value>Femenino</value>
+  </data>
+  <data name="GenderSelect" xml:space="preserve">
+    <value>Selecciona un género</value>
+  </data>
   <data name="GoButton" xml:space="preserve">
     <value>Ir</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="LogoutLink" xml:space="preserve">
     <value>Salir</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Masculino</value>
   </data>
   <data name="ManageTitle" xml:space="preserve">
     <value>Administra tu cuenta</value>

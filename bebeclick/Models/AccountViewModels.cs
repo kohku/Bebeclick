@@ -8,6 +8,9 @@ namespace Bebeclick.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
+        private const string GenderMale = "male";
+        private const string GenderFemale = "female";
+
         public string Name { get; set; }
 
         [Display(Name = "FirstName", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
@@ -46,8 +49,8 @@ namespace Bebeclick.Models
             {
                 var genders = new List<GenderDistinction>();
 
-                genders.Add(new GenderDistinction { Id = "male", Name = "male" });
-                genders.Add(new GenderDistinction { Id = "female", Name = "female" });
+                genders.Add(new GenderDistinction { Id = GenderMale, Name = Resources.General.Male });
+                genders.Add(new GenderDistinction { Id = GenderFemale, Name = Resources.General.Female });
 
                 return genders.Select(gender => new System.Web.Mvc.SelectListItem
                             {
@@ -72,6 +75,26 @@ namespace Bebeclick.Models
             }
         }
 
+        public IEnumerable<System.Web.Mvc.SelectListItem> Cities
+        {
+            get
+            {
+                var state = StateEntity.Load(this.StateID);
+
+                if (state == null)
+                    return Enumerable.Empty<System.Web.Mvc.SelectListItem>();
+
+                var cities = from city in Province.GetProvinces(this.StateID)
+                             select new System.Web.Mvc.SelectListItem
+                             {
+                                 Value = city.ID.ToString(),
+                                 Text = city.Name
+                             };
+
+                return cities;
+            }
+        }
+
         public class GenderDistinction
         {
             public string Id { get; set; }
@@ -81,6 +104,9 @@ namespace Bebeclick.Models
 
     public class EditProfilelViewModel
     {
+        private const string GenderMale = "male";
+        private const string GenderFemale = "female";
+
         public string Name { get; set; }
 
         [Display(Name = "FirstName", ResourceType = typeof(Bebeclick.WebClient.Resources.Account))]
@@ -119,8 +145,8 @@ namespace Bebeclick.Models
             {
                 var genders = new List<GenderDistinction>();
 
-                genders.Add(new GenderDistinction { Id = "male", Name = "male" });
-                genders.Add(new GenderDistinction { Id = "female", Name = "female" });
+                genders.Add(new GenderDistinction { Id = GenderMale, Name = Resources.General.Male });
+                genders.Add(new GenderDistinction { Id = GenderFemale, Name = Resources.General.Female });
 
                 return genders.Select(gender => new System.Web.Mvc.SelectListItem
                 {
@@ -142,6 +168,25 @@ namespace Bebeclick.Models
                              };
 
                 return states;
+            }
+        }
+        public IEnumerable<System.Web.Mvc.SelectListItem> Cities
+        {
+            get
+            {
+                var state = StateEntity.Load(this.StateID);
+
+                if (state == null)
+                    return Enumerable.Empty<System.Web.Mvc.SelectListItem>();
+
+                var cities = from city in Province.GetProvinces(this.StateID)
+                             select new System.Web.Mvc.SelectListItem
+                             {
+                                 Value = city.ID.ToString(),
+                                 Text = city.Name
+                             };
+
+                return cities;
             }
         }
 
