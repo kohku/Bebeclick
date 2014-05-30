@@ -1,7 +1,7 @@
 ﻿@model Bebeclick.Models.RegisterViewModel
 @using Bebeclick.WebClient.Resources
 @{
-    ViewBag.Title = Account.RegisterTitle;
+    ViewBag.Title = Resources.General.RegisterTitle;
 }
 
 @section AddToHead{
@@ -13,7 +13,7 @@
     {
         @Html.AntiForgeryToken()
         <fieldset>
-            <h1 class="bebeclick">@Account.RegisterTitle</h1>
+            <h1 class="bebeclick">@Resources.General.RegisterTitle</h1>
             @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
             @Html.ValidationMessageFor(m => m.Email)
             @Html.TextBoxFor(m => m.Email, new { id = "__email", required = "required" })

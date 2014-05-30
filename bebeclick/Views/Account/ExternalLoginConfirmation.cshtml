@@ -3,10 +3,10 @@
 @using System.Globalization
 @using System.Linq;
 
-@model ExternalLoginConfirmationViewModel
+@model ProfileViewModel
 
 @{
-    ViewBag.Title = @Account.ExternalLoginTitle;
+    ViewBag.Title = Resources.General.ExternalLoginTitle;
 }
 
 @section AddToHead{
@@ -18,8 +18,8 @@
     {
         @Html.AntiForgeryToken()
         <fieldset>
-            <h1 class="bebeclick">@Account.ExternalLoginTitle</h1>
-            <h3 class="bebeclick">@string.Format(Account.ExternalLoginSubtitle, ViewBag.LoginProvider)</h3>
+            <h1 class="bebeclick">@Resources.General.ExternalLoginTitle</h1>
+            <h3 class="bebeclick">@string.Format(Resources.General.ExternalLoginSubtitle, ViewBag.LoginProvider)</h3>
             <p>
                 Has sido autenticado exitósamente con tu cuenta de <strong>@ViewBag.LoginProvider</strong>. En esta comunidad nos basamos en relaciones personales. Ayuda a otros usuarios a conocerte un poco mejor.
             </p>

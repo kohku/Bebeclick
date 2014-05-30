@@ -15,7 +15,7 @@
             <div id="__socialLoginList">
                 @foreach (AuthenticationDescription p in loginProviders)
                 {
-                    <button type="submit" class="pure-button" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="@string.Format(Account.LoginExternalTitle, p.Caption)">@string.Format(Account.LoginExternalText, p.AuthenticationType)</button>
+                    <button type="submit" class="pure-button" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="@string.Format(Resources.General.LoginExternalTitle, p.Caption)">@string.Format(Account.LoginExternalText, p.AuthenticationType)</button>
                 }
             </div>
         }

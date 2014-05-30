@@ -49,12 +49,12 @@ namespace Bebeclick.Helpers
             return Task.FromResult(0);
         }
 
-        public static ExternalLoginConfirmationViewModel CreateModel(ExternalLoginInfo loginInfo)
+        public static ProfileViewModel CreateModel(ExternalLoginInfo loginInfo)
         {
             if (loginInfo == null)
                 throw new ArgumentNullException("loginInfo");
 
-            var model = new ExternalLoginConfirmationViewModel();
+            var model = new ProfileViewModel();
 
             model.Name = loginInfo.ExternalIdentity.Name;
             model.Email = loginInfo.Email;

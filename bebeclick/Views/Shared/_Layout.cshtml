@@ -10,14 +10,30 @@
     {
         @RenderSection("AddToHead", required: false)
     }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Account/login.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($("#__account .__settings")) {
+                $("#__account .__settings").contextMenu({
+                    menuSelector: "#contextMenu",
+                    menuSelected: function (invokedOn, selectedMenu) {
+                        var msg = "You selected the menu item '" + selectedMenu.text() +
+                            "' on the value '" + invokedOn.text() + "'";
+                        alert(msg);
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
     <div id="__container">
         <div id="__membership">
             <div id="__social"><img src="~/Content/Images/tw_icon.png" /><img src="~/Content/Images/fb_icon.png" /><img src="~/Content/Images/pt_icon.png" /></div>
-            <div id="__account">
-                @{Html.RenderAction("LoginPartial", "Account");}
-            </div>
+            @{Html.RenderAction("LoginPartial", "Account");}
         </div>
         <div id="__menu_bar">
             <div id="__logo"><a class="home" href="@Url.Action("Index", "Home")"></a></div>
@@ -40,8 +56,5 @@
             </div>
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

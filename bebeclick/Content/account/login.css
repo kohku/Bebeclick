@@ -40,20 +40,14 @@
     clear: both;
     margin-bottom: 20px;
 }
+#__register_user{
+    display: block;
+    float: left;
+}
 #__register_socialLoginForm{
     border-top: solid 1px #000000;
     height: 120px;
 
-}
-#__register_user, #__register_user:hover, #__register_user:visited, #__register_user:active {
-    display: block;
-    margin: .5em .25em 1em 0;
-    float: left;
-    color: #000000;
-    font-family: Roboto;
-    font-weight: bold;
-    font-size: 110%;
-    text-decoration: none;
 }
 #__external_login{
     display: block;

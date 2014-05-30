@@ -4,22 +4,31 @@
 
 @model LoginPartialViewMode
 
-@if (Request.IsAuthenticated)
-{
-    foreach (var login in Model.Logins) 
-    { 
-        <img class="__settings" src="@Url.Content("~/Content/images/config_icon.png")" alt="@login.Name" />
-        <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="@Url.Action("Manage", "Account")">
-            <img class="__avatar" src="@string.Format("{0}?height=28&width=28", login.Picture != null ? login.Picture.ToString() : Url.Content("~/Content/images/usuario_icon.jpg"))" alt="@login.Name" />
-        </a>
-        <span class="__rbt58b">&nbsp;&nbsp;</span>
-        <a class="__rbt58b">@login.FirstName</a>
+<div id="__account">
+    @if (Request.IsAuthenticated)
+    {
+        foreach (var login in Model.Logins)
+        {
+            <img class="__settings" src="@Url.Content("~/Content/images/config_icon.png")" alt="@login.Name" />
+            <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <a href="@Url.Action("Manage", "Account")">
+                <img class="__avatar" src="@string.Format("{0}?height=28&width=28", login.Picture != null ? login.Picture.ToString() : Url.Content("~/Content/images/usuario_icon.jpg"))" alt="@login.Name" />
+            </a>
+            <span class="__rbt58b">&nbsp;&nbsp;</span>
+            <a class="__rbt58b">@login.FirstName</a>
+        }
+        <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none">
+            <li><a tabindex="-1" href="#">Action</a></li>
+            <li><a tabindex="-1" href="#">Another action</a></li>
+            <li><a tabindex="-1" href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#">Separated link</a></li>
+        </ul>
     }
-}
-else
-{
-    @Html.ActionLink(Resources.General.LoginLink, "Login", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })
-    <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-    @Html.ActionLink(Resources.General.RegisterLink, "Register", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })
-}
+    else
+    {
+        @Html.ActionLink(Resources.General.LoginLink, "Login", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })
+        <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        @Html.ActionLink(Resources.General.RegisterLink, "Register", "Account", routeValues: null, htmlAttributes: new { @class = "__rbt58b" })
+    }
+</div>

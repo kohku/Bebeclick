@@ -1,0 +1,29 @@
+﻿@using Bebeclick.Models
+
+@model WelcomeViewModel
+
+@{
+    ViewBag.Title = Resources.General.WelcomeTitle;
+}
+
+@section AddToHead{
+    <link href="@Url.Content("~/Content/account/welcome.css")" rel="stylesheet" type="text/css" />
+}
+
+<div id="__welcome">
+    <h1 class="bebeclick">@Resources.General.WelcomeTitle</h1>
+    <p>
+        Ahora ya puedes recomendar productos y servicios confiables.
+    </p>
+    <div class="__options">
+        <div class="__search">
+            
+                <img src="~/Content/images/buscaRec_icon.png" /><br />
+            <a class="__action" href="@Url.Action("Index", "Recommend")">Busca y recomienda</a>
+        </div>
+        <div class="__profile">
+            <img src="~/Content/images/perfil_icon.png" /><br />
+            <a class="__action" href="@Url.Action("EditProfile", "Account")">Completa tu perfil</a>
+        </div>
+    </div>
+</div>

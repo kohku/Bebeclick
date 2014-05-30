@@ -79,11 +79,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complete your profile..
+        /// </summary>
+        internal static string EditProfileTitle {
+            get {
+                return ResourceManager.GetString("EditProfileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enterprise.
         /// </summary>
         internal static string EnterpriseLink {
             get {
                 return ResourceManager.GetString("EnterpriseLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Associate your {0} account..
+        /// </summary>
+        internal static string ExternalLoginSubtitle {
+            get {
+                return ResourceManager.GetString("ExternalLoginSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        internal static string ExternalLoginTitle {
+            get {
+                return ResourceManager.GetString("ExternalLoginTitle", resourceCulture);
             }
         }
         
@@ -142,11 +169,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log in with your {0} account..
+        /// </summary>
+        internal static string LoginExternalTitle {
+            get {
+                return ResourceManager.GetString("LoginExternalTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         internal static string LoginLink {
             get {
                 return ResourceManager.GetString("LoginLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        internal static string LoginTitle {
+            get {
+                return ResourceManager.GetString("LoginTitle", resourceCulture);
             }
         }
         
@@ -223,6 +268,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        internal static string RegisterTitle {
+            get {
+                return ResourceManager.GetString("RegisterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         internal static string SearchLink {
@@ -264,6 +318,15 @@ namespace Resources {
         internal static string StateSelect {
             get {
                 return ResourceManager.GetString("StateSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome!.
+        /// </summary>
+        internal static string WelcomeTitle {
+            get {
+                return ResourceManager.GetString("WelcomeTitle", resourceCulture);
             }
         }
     }

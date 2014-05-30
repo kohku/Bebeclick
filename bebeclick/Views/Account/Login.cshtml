@@ -4,7 +4,7 @@
 @model LoginViewModel
 
 @{
-    ViewBag.Title = @Account.LoginTitle;
+    ViewBag.Title = Resources.General.LoginTitle;
 }
 
 @section AddToHead{
@@ -16,7 +16,7 @@
     {
         @Html.AntiForgeryToken()
         <fieldset>
-            <h3 class="bebeclick">@Account.LoginTitle</h3>
+            <h3 class="bebeclick">@Resources.General.LoginTitle</h3>
             @Html.LabelFor(m => m.Email, new { @class = "__control_label" })
             @Html.ValidationMessageFor(m => m.Email)
             @Html.TextBoxFor(m => m.Email, new { id = "__email", type = "email", placeholder = Account.EmailPlaceHolder, required = "required" })
@@ -33,7 +33,7 @@
         </fieldset>
     }
     <div id="__register_socialLoginForm">
-        @Html.ActionLink(@Account.RegisterNewUser, "Register", "Account", null, new { id = "__register_user" })
+        @Html.ActionLink(@Account.RegisterNewUser, "Register", "Account", null, new { id = "__register_user", @class = "__action" })
         @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
     </div>
 </div>

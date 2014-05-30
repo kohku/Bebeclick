@@ -222,10 +222,12 @@
     <Content Include="Content\account\manage.css" />
     <Content Include="Content\account\register.css" />
     <Content Include="Content\account\login.css" />
+    <Content Include="Content\account\welcome.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\fonts.css" />
+    <Content Include="Content\images\buscaRec_icon.png" />
     <Content Include="Content\images\home\01.jpg" />
     <Content Include="Content\images\home\02.jpg" />
     <Content Include="Content\images\home\03.jpg" />
@@ -240,6 +242,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\lupa.png" />
     <Content Include="Content\images\mail.png" />
+    <Content Include="Content\images\perfil_icon.png" />
     <Content Include="Content\images\pt_icon.png" />
     <Content Include="Content\images\shop.png" />
     <Content Include="Content\images\tw_icon.png" />
@@ -341,6 +344,7 @@
     <Content Include="Content\fonts\robotocondensed-regular-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Account\login.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fonts\opensans-bold-webfont.eot" />
@@ -490,10 +494,10 @@
     <Content Include="Views\Home\Terms.cshtml" />
     <Content Include="Views\Account\LoginPartial.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
+    <Content Include="Views\Account\Welcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Account\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>

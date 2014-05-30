@@ -6,25 +6,28 @@
     <link type="text/css" rel="stylesheet" href="Content/default.css" />
     <link type="text/css" rel="stylesheet" href="Content/home/index.css" />
     <link type="text/css" rel="stylesheet" href="Content/account/externalLogin.css" />
+    <link type="text/css" rel="stylesheet" href="Content/bootstrap.css" />
     <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="Scripts/jquery-ui-datepicker-es.js"></script>
     <script type="text/javascript" src="Scripts/modernizr-2.6.2.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="Scripts/Account/login.js"></script>
     <script type="text/javascript">
-            /* localizing calendar content to spanish language */
-            $(document).ready(function () {
-                var datefields = $("input[type='date']");
+        /* localizing calendar content to spanish language */
+        $(document).ready(function () {
+            var datefields = $("input[type='date']");
 
-                if (!Modernizr.inputtypes.date) {
-                    datefields
-                        .datepicker()
-                        .each(function () {
-                            this.type = "text";
-                        });
-                }
+            if (!Modernizr.inputtypes.date) {
+                datefields
+                    .datepicker()
+                    .each(function () {
+                        this.type = "text";
+                    });
+            }
 
-                $('#__birthDay').datepicker($.datepicker.regional["es"]);
-            });
+            $('#__birthDay').datepicker($.datepicker.regional["es"]);
+        });
     </script>
 </head>
 <body>
@@ -34,7 +37,7 @@
             <div id="__account">
                 <img class="__settings" src="Content/images/config_icon.png" alt="Daniel" />
                 <span class="__rbt58b">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                <img class="__avatar" src="Content/images/usuario_icon.jpg" Alt="Daniel" />
+                <img class="__avatar" src="Content/images/usuario_icon.jpg" alt="Daniel" />
                 <a class="__rbt58b">Daniel</a>
             </div>
         </div>
@@ -80,5 +83,24 @@
             </div>
         </div>
     </div>
+    <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none">
+        <li><a tabindex="-1" href="#">Action</a></li>
+        <li><a tabindex="-1" href="#">Another action</a></li>
+        <li><a tabindex="-1" href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#">Separated link</a></li>
+    </ul>
+    <script type="text/javascript">
+        $(function(){
+            $("#__account .__settings").contextMenu({
+                menuSelector: "#contextMenu",
+                menuSelected: function (invokedOn, selectedMenu) {
+                    var msg = "You selected the menu item '" + selectedMenu.text() +
+                        "' on the value '" + invokedOn.text() + "'";
+                    alert(msg);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

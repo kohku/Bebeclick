@@ -141,9 +141,6 @@
   <data name="EditProfile" xml:space="preserve">
     <value>Actualizar</value>
   </data>
-  <data name="EditProfileTitle" xml:space="preserve">
-    <value>Complete your profile.</value>
-  </data>
   <data name="EditProfileValidationSummary" xml:space="preserve">
     <value>Update failed.</value>
   </data>
@@ -155,12 +152,6 @@
   </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>* Required field.</value>
-  </data>
-  <data name="ExternalLoginSubtitle" xml:space="preserve">
-    <value>Associate your {0} account.</value>
-  </data>
-  <data name="ExternalLoginTitle" xml:space="preserve">
-    <value>Register</value>
   </data>
   <data name="ExternalLoginValidationSummary" xml:space="preserve">
     <value>Register failure.</value>
@@ -198,12 +189,6 @@
   <data name="LoginExternalText" xml:space="preserve">
     <value>Log in with {0}</value>
   </data>
-  <data name="LoginExternalTitle" xml:space="preserve">
-    <value>Log in with your {0} account.</value>
-  </data>
-  <data name="LoginTitle" xml:space="preserve">
-    <value>Log in</value>
-  </data>
   <data name="LoginValidationSummary" xml:space="preserve">
     <value>Login failure.</value>
   </data>
@@ -227,9 +212,6 @@
   </data>
   <data name="RegisterNewUser" xml:space="preserve">
     <value>Register new user</value>
-  </data>
-  <data name="RegisterTitle" xml:space="preserve">
-    <value>Create a new account</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me?</value>

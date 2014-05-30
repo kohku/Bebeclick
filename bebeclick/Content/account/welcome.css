@@ -1,0 +1,35 @@
+﻿@import url("http://yui.yahooapis.com/pure/0.4.2/pure-min.css");
+
+#__welcome {
+    border-radius: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 400px;
+}
+#__welcome .__options{
+    display: block;
+    width: 600px;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#__welcome .__options .__search{
+    display: block;
+    float: left;
+    background-color: #D4E7F5;
+    padding: 20px 40px 0px 40px;
+    text-align: center;
+    width: 200px;
+}
+#__welcome .__options .__profile{
+    display: block;
+    float: right;
+    background-color: #D4E7F5;
+    padding: 20px 40px 0px 40px;
+    text-align: center;
+    width: 200px;
+}

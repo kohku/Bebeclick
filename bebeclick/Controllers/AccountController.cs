@@ -123,6 +123,13 @@ namespace Bebeclick.Controllers
             return View(model);
         }
 
+        public ActionResult Welcome()
+        {
+            var model = new WelcomeViewModel();
+
+            return View(model);
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -147,7 +154,7 @@ namespace Bebeclick.Controllers
 
         public ActionResult EditProfile()
         {
-            var model = new EditProfilelViewModel();
+            var model = new ProfileViewModel();
 
             var userId = User.Identity.GetUserId();
 
@@ -168,7 +175,7 @@ namespace Bebeclick.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditProfile(EditProfilelViewModel model)
+        public async Task<ActionResult> EditProfile(ProfileViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -438,14 +445,14 @@ namespace Bebeclick.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
 
-                ExternalLoginConfirmationViewModel model = null;
+                ProfileViewModel model = null;
 
                 if (loginInfo.Login.LoginProvider == "Facebook")
                 {
                     model = FacebookHelper.CreateModel(loginInfo);
                 }
 
-                return View("ExternalLoginConfirmation", model ?? new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                return View("ExternalLoginConfirmation", model ?? new ProfileViewModel { Email = loginInfo.Email });
             }
         }
 
@@ -490,7 +497,7 @@ namespace Bebeclick.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(ProfileViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Manage");

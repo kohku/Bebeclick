@@ -3,10 +3,10 @@
 @using System.Globalization
 @using System.Linq;
 
-@model EditProfilelViewModel
+@model ProfileViewModel
 
 @{
-    ViewBag.Title = @Account.EditProfileTitle;
+    ViewBag.Title = Resources.General.EditProfileTitle;
 }
 
 @section AddToHead{
@@ -18,7 +18,7 @@
     {
         @Html.AntiForgeryToken()
         <fieldset>
-            <h1 class="bebeclick">@Account.EditProfileTitle</h1>
+            <h1 class="bebeclick">@Resources.General.EditProfileTitle</h1>
             <p>
                 En esta comunidad nos basamos en relaciones personales. Ayuda a otros usuarios a conocerte un poco mejor.
             </p>

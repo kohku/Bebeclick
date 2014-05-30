@@ -151,6 +151,15 @@ a:hover.__rbtUpWh {
     border-top: solid 3px #a1d510;
     margin-top: -3px;
 }
+a.__action, a:hover.__action, a:visited.__action, a:active.__action {
+    display: inline-block;
+    margin: .5em .25em 1em 0;
+    color: #000000;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
 #_ctrl_home {
     background-image: url(images/home.png);
 }

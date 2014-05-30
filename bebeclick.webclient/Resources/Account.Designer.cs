@@ -133,15 +133,6 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Complete your profile..
-        /// </summary>
-        public static string EditProfileTitle {
-            get {
-                return ResourceManager.GetString("EditProfileTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Update failed..
         /// </summary>
         public static string EditProfileValidationSummary {
@@ -174,24 +165,6 @@ namespace Bebeclick.WebClient.Resources {
         public static string EmailRequired {
             get {
                 return ResourceManager.GetString("EmailRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Associate your {0} account..
-        /// </summary>
-        public static string ExternalLoginSubtitle {
-            get {
-                return ResourceManager.GetString("ExternalLoginSubtitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Register.
-        /// </summary>
-        public static string ExternalLoginTitle {
-            get {
-                return ResourceManager.GetString("ExternalLoginTitle", resourceCulture);
             }
         }
         
@@ -304,24 +277,6 @@ namespace Bebeclick.WebClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log in with your {0} account..
-        /// </summary>
-        public static string LoginExternalTitle {
-            get {
-                return ResourceManager.GetString("LoginExternalTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Log in.
-        /// </summary>
-        public static string LoginTitle {
-            get {
-                return ResourceManager.GetString("LoginTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Login failure..
         /// </summary>
         public static string LoginValidationSummary {
@@ -390,15 +345,6 @@ namespace Bebeclick.WebClient.Resources {
         public static string RegisterNewUser {
             get {
                 return ResourceManager.GetString("RegisterNewUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create a new account.
-        /// </summary>
-        public static string RegisterTitle {
-            get {
-                return ResourceManager.GetString("RegisterTitle", resourceCulture);
             }
         }
         
