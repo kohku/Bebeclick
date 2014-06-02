@@ -216,6 +216,15 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Manage your account.
         /// </summary>
+        internal static string ManageLink {
+            get {
+                return ResourceManager.GetString("ManageLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage your account.
+        /// </summary>
         internal static string ManageTitle {
             get {
                 return ResourceManager.GetString("ManageTitle", resourceCulture);

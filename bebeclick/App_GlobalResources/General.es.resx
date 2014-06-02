@@ -168,6 +168,9 @@
   <data name="Male" xml:space="preserve">
     <value>Masculino</value>
   </data>
+  <data name="ManageLink" xml:space="preserve">
+    <value>Administra tu cuenta</value>
+  </data>
   <data name="ManageTitle" xml:space="preserve">
     <value>Administra tu cuenta</value>
   </data>

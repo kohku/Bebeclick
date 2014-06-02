@@ -18,11 +18,14 @@
             <a class="__rbt58b">@login.FirstName</a>
         }
         <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none">
-            <li><a tabindex="-1" href="#">Action</a></li>
-            <li><a tabindex="-1" href="#">Another action</a></li>
-            <li><a tabindex="-1" href="#">Something else here</a></li>
+            <li><a tabindex="-1" href="@Url.Action("Manage", "Account")">@Resources.General.ManageLink</a></li>
             <li class="divider"></li>
-            <li><a tabindex="-1" href="#">Separated link</a></li>
+            <li>@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a tabindex="-1" href="#" onclick="javascript:$('#logoutForm').submit();">@Resources.General.LogoutLink</a>
+                }
+            </li>
         </ul>
     }
     else
